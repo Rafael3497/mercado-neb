@@ -88,12 +88,99 @@ nav ul li a:hover::after {
 footer { background: white; padding: 40px; text-align: center; border-top: 1px solid #e2e8f0; color: #64748b; }
 
 /* Responsividade */
-@media (max-width: 1024px) { .grid-offers { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 650px) { 
-    .grid-offers { grid-template-columns: 1fr; } 
-    .slide-content h1 { font-size: 2rem; }
-    .carousel { height: 300px; }
+/* --- AJUSTE DO HEADER PARA TELAS PEQUENAS --- */
 
+header { 
+    background: white; 
+    padding: 0.8rem 0; /* Diminuído para ganhar espaço vertical */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+}
+
+.header-content { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    flex-wrap: wrap; /* Permite que o menu desça se não houver espaço */
+    gap: 10px;
+}
+
+.logo { 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    font-size: 1.2rem; /* Fonte reduzida para mobile */
+    font-weight: 800; 
+    color: var(--primary); 
+    white-space: nowrap; /* Impede que o nome quebre em duas linhas */
+}
+
+nav ul { 
+    display: flex; 
+    list-style: none; 
+    gap: 10px; /* Espaço reduzido entre links no mobile */
+}
+
+nav a { 
+    text-decoration: none; 
+    color: var(--text); 
+    font-weight: 600; 
+    font-size: 0.85rem; /* Fonte menor para caber tudo */
+    padding: 5px;
+}
+
+/* --- MEDIA QUERIES ESPECÍFICAS (A partir de 375px) --- */
+
+@media (max-width: 480px) {
+    .header-content {
+        justify-content: center; /* Centraliza tudo no celular */
+    }
+    
+    .logo {
+        font-size: 1.1rem;
+        margin-bottom: 5px; /* Dá um respiro antes do menu */
+    }
+
+    nav ul {
+        gap: 8px;
+    }
+
+    nav a {
+        font-size: 0.8rem; /* Fonte compacta para telas de 375px */
+    }
+
+    /* Ajuste do Carrossel para não ficar gigante no celular */
+    .carousel { 
+        height: 250px; 
+    }
+    
+    .slide-content h1 { 
+        font-size: 1.5rem; 
+    }
+    
+    .slide-content p {
+        font-size: 0.9rem !important;
+    }
+
+    /* Ajuste dos Cards: 1 coluna bem definida */
+    .grid-offers { 
+        grid-template-columns: 1fr; 
+        gap: 20px;
+        padding: 0 10px;
+    }
+}
+
+/* Ajuste fino para telas muito estreitas (abaixo de 360px) */
+@media (max-width: 360px) {
+    .logo span {
+        font-size: 1rem;
+    }
+    nav a {
+        font-size: 0.75rem;
+    }
+}
     /* Efeito de Zoom Suave em todos os botões interativos */
 .btn-buy, .prev, .next, .nav-whatsapp, .dot {
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s;
