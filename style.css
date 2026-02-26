@@ -1,0 +1,150 @@
+:root {
+    --primary: #1d4ed8;
+    --secondary: #f8fafc;
+    --accent: #fbbf24;
+    --text: #0f172a;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: var(--text); scroll-behavior: smooth; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+header { background: white; padding: 1rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+.header-content { display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+nav ul { display: flex; list-style: none; gap: 20px; }
+nav a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.9rem; }
+
+/* Estilo base para os links do menu */
+nav ul li a {
+    display: inline-block; /* Necessário para o transform (zoom) funcionar */
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efeito elástico */
+}
+
+/* Efeito de Zoom e Cor ao passar o mouse (Hover) */
+nav ul li a:hover {
+    transform: scale(1.15); /* Aumenta 15% o tamanho */
+    color: var(--primary);  /* Muda para o azul principal */
+}
+
+/* Efeito específico para o link do WhatsApp no menu (mantendo o verde) */
+.nav-whatsapp:hover {
+    color: #128c7e !important; /* Um verde um pouco mais escuro no hover */
+    transform: scale(1.15);
+}
+
+/* Adicionando uma pequena linha embaixo (opcional, fica bem moderno) */
+nav ul li a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width .3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Ajuste para o link do WhatsApp não ter a linha azul, mas sim verde */
+.nav-whatsapp::after {
+    background: #25d366 !important;
+}
+
+.carousel { position: relative; height: 400px; overflow: hidden; background: #000; }
+.slide { position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.8s ease-in-out; }
+.slide.active { opacity: 1; }
+.slide-content { text-align: center; color: white; padding: 20px; }
+.slide-content h1 { font-size: 3rem; font-weight: 800; margin-bottom: 10px; }
+
+.prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.2); border: none; color: white; padding: 15px; cursor: pointer; border-radius: 50%; z-index: 10; font-size: 1.2rem; }
+.next { right: 30px; } .prev { left: 30px; }
+.dots { position: absolute; bottom: 20px; width: 100%; text-align: center; }
+.dot { height: 10px; width: 10px; background: rgba(255,255,255,0.4); display: inline-block; border-radius: 50%; cursor: pointer; margin: 0 5px; }
+.dot.active { background: white; width: 25px; border-radius: 10px; }
+
+.search-section { margin: 40px auto; }
+.search-box { background: white; display: flex; align-items: center; padding: 18px 30px; border-radius: 15px; box-shadow: var(--shadow); border: 1px solid #e2e8f0; }
+.search-box i { color: #94a3b8; font-size: 1.2rem; }
+.search-box input { border: none; outline: none; width: 100%; margin-left: 15px; font-size: 1.1rem; }
+
+.grid-offers { display: grid; gap: 30px; grid-template-columns: repeat(4, 1fr); margin-bottom: 60px; }
+.card { background: white; border-radius: 16px; overflow: hidden; transition: 0.4s; border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
+.card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+.card-img img { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid #f1f5f9; }
+.card-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+.card-info h3 { font-size: 1.1rem; margin-bottom: 8px; font-weight: 700; height: 2.6rem; overflow: hidden; }
+.card-info p { font-size: 0.85rem; color: #64748b; margin-bottom: 20px; flex-grow: 1; }
+.btn-buy { background: var(--primary); color: white; text-decoration: none; padding: 14px; border-radius: 10px; text-align: center; font-weight: 700; transition: 0.3s; }
+.btn-buy:hover { background: #1e40af; letter-spacing: 0.5px; }
+
+footer { background: white; padding: 40px; text-align: center; border-top: 1px solid #e2e8f0; color: #64748b; }
+
+/* Responsividade */
+@media (max-width: 1024px) { .grid-offers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 650px) { 
+    .grid-offers { grid-template-columns: 1fr; } 
+    .slide-content h1 { font-size: 2rem; }
+    .carousel { height: 300px; }
+
+    /* Efeito de Zoom Suave em todos os botões interativos */
+.btn-buy, .prev, .next, .nav-whatsapp, .dot {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s;
+}
+
+.slide-content p {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+    .slide-content p {
+        font-size: 1.1rem !important; /* Ajusta o tamanho no celular */
+        padding: 0 10px;
+    }
+}
+
+/* Aplicando o Zoom (1.1 significa 10% de aumento) */
+.btn-buy:hover, .nav-whatsapp:hover {
+    transform: scale(1.1);
+}
+
+/* Zoom nos botões de navegação do carrossel */
+.prev:hover, .next:hover {
+    transform: translateY(-50%) scale(1.2); /* Mantém o alinhamento vertical e dá zoom */
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Zoom nos indicadores (pontinhos) do carrossel */
+.dot:hover {
+    transform: scale(1.5);
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02); /* Sobe um pouco e dá um zoom de 2% */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+/* Zoom apenas na imagem do produto ao passar o mouse no card */
+.card:hover .card-img img {
+    transform: scale(1.1);
+}
+
+.card-img {
+    overflow: hidden; /* Garante que a imagem não saia dos limites do card ao dar zoom */
+}
+
+.card-img img {
+    transition: transform 0.5s ease; /* Transição mais lenta para a imagem ficar elegante */
+}
+
+}
+

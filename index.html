@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado NEB | As Melhores Ofertas</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧺</text></svg>">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-shopping-basket"></i>
+                <span>Mercado NEB</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#ofertas">Ofertas</a></li>
+                    <li>
+                        <a href="https://w.app/mercadoneb" target="_blank" class="nav-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Contato
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="carousel">
+        <div class="carousel-inner">
+            <div class="slide active" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6);">
+                <div class="slide-content">
+                    <h1>As melhores ofertas do dia</h1>
+                    <p>Economize mais, compre melhor no Mercado NEB.</p>
+                </div>
+            </div>
+            <div class="slide" style="background: linear-gradient(135deg, #059669, #10b981);">
+                <div class="slide-content">
+                    <h1>Apoie nosso projeto</h1>
+                    <p style="font-size: 1.5rem; font-weight: 600;">Comprando pelo link você auxilia o núcleo</p>
+                </div>
+            </div>
+            <div class="slide" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">
+                <div class="slide-content">
+                    <h1>Promoções em Tecnologia</h1>
+                    <p>Gadgets e acessórios com preços imbatíveis.</p>
+                </div>
+            </div>
+        </div>
+        
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        
+        <div class="dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+    </section>
+
+    <section class="search-section container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Pesquisar ofertas (ex: iPhone, Alexa...)" onkeyup="filterOffers()">
+        </div>
+    </section>
+
+    <main id="ofertas" class="container">
+        <div class="grid-offers" id="offersGrid">
+            
+            <div class="card" data-name="Panela Pipoqueira">
+                <div class="card-img"><img src="img/panela.png" alt="panela"></div>
+                <div class="card-info">
+                    <h3>Panela Pipoqueira</h3>
+                    <p>Tramontina profissional.</p>
+                    <a href="https://meli.la/1xQkhGK" target="_blank" class="btn-buy">Comprar agora</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="Smart Speaker Alexa Echo Dot">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1589492477829-5e65395b66cc?w=500&q=80" alt="Alexa"></div>
+                <div class="card-info">
+                    <h3>Echo Dot 5ª Geração</h3>
+                    <p>Sua casa inteligente começa com a Alexa.</p>
+                    <a href="#" target="_blank" class="btn-buy">Comprar agora</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="Fone Sony WH-1000XM5">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="Sony"></div>
+                <div class="card-info">
+                    <h3>Fone Sony XM5</h3>
+                    <p>Cancelamento de ruído líder da indústria.</p>
+                    <a href="#" target="_blank" class="btn-buy">Comprar agora</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="Cadeira Gamer Pro">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1598550476439-6847785fce6a?w=500&q=80" alt="Cadeira"></div>
+                <div class="card-info">
+                    <h3>Cadeira Gamer Premium</h3>
+                    <p>Ergonomia e conforto para horas de uso.</p>
+                    <a href="#" target="_blank" class="btn-buy">Comprar agora</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="Apple Watch Series 9">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80" alt="Watch"></div>
+                <div class="card-info">
+                    <h3>Apple Watch S9</h3>
+                    <p>Monitore sua saúde com estilo e precisão.</p>
+                    <a href="#" target="_blank" class="btn-buy">Comprar agora</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="Cafeteira Nespresso">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=500&q=80" alt="Café"></div>
+                <div class="card-info">
+                    <h3>Cafeteira Nespresso</h3>
+                    <p>O café perfeito ao toque de um botão.</p>
+                    <a href="#" target="_blank" class="btn-buy">Comprar agora</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="Notebook Macbook Air M2">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80" alt="Macbook"></div>
+                <div class="card-info">
+                    <h3>Macbook Air M2</h3>
+                    <p>Potência incrível e bateria para o dia todo.</p>
+                    <a href="#" target="_blank" class="btn-buy">Comprar agora</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="PlayStation 5 Slim">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1606813907291-d86ebb9474ad?w=500&q=80" alt="PS5"></div>
+                <div class="card-info">
+                    <h3>PlayStation 5 Slim</h3>
+                    <p>A nova geração de jogos em alta definição.</p>
+                    <a href="#" target="_blank" class="btn-buy">Comprar agora</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="Tênis Corrida Performance">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80" alt="Tenis"></div>
+                <div class="card-info">
+                    <h3>Tênis Performance</h3>
+                    <p>Ideal para treinos intensos e corridas.</p>
+                    <a href="#" target="_blank" class="btn-buy">Comprar agora</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="Monitor Curvo 34 Ultrawide">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&q=80" alt="Monitor"></div>
+                <div class="card-info">
+                    <h3>Monitor Ultrawide 34'</h3>
+                    <p>Imersão total para trabalho ou games.</p>
+                    <a href="#" target="_blank" class="btn-buy">Comprar agora</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Mercado NEB - Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
