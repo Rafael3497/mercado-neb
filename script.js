@@ -2,6 +2,16 @@
    BANCO DE DADOS DE PRODUTOS
    ========================================== */
 const meusProdutos = [
+
+    {
+        nome: "Medidor de Pressão Digital",
+        desc: "O tensiômetro digital G-Tech BSP11 possui uma capacidade de memória total de 120 medições, ideal para monitorar a saúde cardiovascular.",
+        preco: "99,00",
+        categoria: "saude",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_635620-MLU73673867017_122023-O.webp",
+        link: "https://meli.la/2HvbdrX"
+    },
     {
         nome: "Mesa Dobravel Camping",
         desc: "Maleta Portatil 1.80m Com Alça Jardim Branco e Preto",
