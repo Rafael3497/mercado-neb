@@ -2,7 +2,6 @@
    BANCO DE DADOS DE PRODUTOS
    ========================================== */
 const meusProdutos = [
-
     {
         nome: "Medidor de Pressão Digital",
         desc: "O tensiômetro digital G-Tech BSP11 possui uma capacidade de memória total de 120 medições, ideal para monitorar a saúde cardiovascular.",
@@ -228,6 +227,9 @@ function carregarProdutos() {
                     <span class="price-label">R$</span>
                     <span class="price-value">${p.preco}</span>
                 </div>
+                <div class="price-disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i> O valor poderá alterar a qualquer momento!
+                </div>
                 <div class="card-actions">
                     <a href="${p.link}" target="_blank" class="btn-buy">Comprar ${artigo} ${lojaNome}</a>
                     <button class="btn-share" onclick="compartilhar('${p.nome}', '${p.link}')" title="Compartilhar">
@@ -243,14 +245,14 @@ function carregarProdutos() {
    SISTEMA DE FILTRO POR CATEGORIA
    ========================================== */
 function filtrarCategoria(cat) {
-    // 1. Atualiza visual dos botões
     const botoes = document.querySelectorAll('.filter-btn');
     botoes.forEach(btn => btn.classList.remove('active'));
     
-    // Adiciona classe active no botão clicado
-    event.target.classList.add('active');
+    // Identifica o botão clicado
+    if (event) {
+        event.target.classList.add('active');
+    }
 
-    // 2. Filtra os cards
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
         const categoriaCard = card.getAttribute('data-category');
