@@ -214,7 +214,7 @@ function showSlides() {
     slides[slideIndex - 1].style.opacity = "1";
     slides[slideIndex - 1].classList.add("active");
     
-    setTimeout(showSlides, 8000);
+    setTimeout(showSlides, 6000);
 }
 
 /* ==========================================
