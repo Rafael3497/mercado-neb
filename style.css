@@ -96,8 +96,8 @@ nav ul li a:hover::after { width: calc(100% - 24px); }
 
 .slide-content p { font-size: 1.2rem; line-height: 1.4; opacity: 0.9; }
 
-/* --- BUSCA --- */
-.search-section { margin: 40px auto; }
+/* --- BUSCA E CATEGORIAS --- */
+.search-section { margin: 40px auto 20px; }
 
 .search-box { 
     background: white; 
@@ -111,8 +111,41 @@ nav ul li a:hover::after { width: calc(100% - 24px); }
 }
 
 .search-box:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1); }
-
 .search-box input { border: none; outline: none; width: 100%; margin-left: 15px; font-size: 1.1rem; color: var(--text); }
+
+/* Filtro de Categorias Horizontal */
+.filter-wrapper {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 15px 0;
+    scrollbar-width: none; /* Firefox */
+}
+.filter-wrapper::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+.filter-btn {
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 8px 18px;
+    border-radius: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: var(--transition);
+    color: var(--text-light);
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.filter-btn:hover:not(.active) {
+    background: #f8fafc;
+    border-color: var(--primary);
+}
 
 /* --- GRID E CARDS --- */
 .grid-offers { 
@@ -134,7 +167,6 @@ nav ul li a:hover::after { width: calc(100% - 24px); }
 
 .card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15); }
 
-/* Área da Imagem */
 .card-img { 
     width: 100%;
     height: 220px; 
@@ -206,7 +238,7 @@ nav ul li a:hover::after { width: calc(100% - 24px); }
     text-shadow: 0 2px 10px rgba(46, 125, 50, 0.2);
 }
 
-/* --- BOTÕES DE AÇÃO (COMPRAR + COMPARTILHAR) --- */
+/* --- BOTÕES DE AÇÃO --- */
 .card-actions {
     display: flex;
     gap: 10px;
@@ -240,7 +272,6 @@ nav ul li a:hover::after { width: calc(100% - 24px); }
     align-items: center;
     justify-content: center;
 }
-
 .btn-share:hover { background: #e2e8f0; color: var(--primary); transform: scale(1.1); }
 
 /* --- FOOTER --- */
@@ -259,4 +290,5 @@ footer { background: white; padding: 40px; text-align: center; border-top: 1px s
     .carousel { height: 280px; }
     .grid-offers { grid-template-columns: 1fr; padding: 0 10px; }
     .btn-share { padding: 16px; }
+    .filter-btn { font-size: 0.8rem; padding: 6px 14px; }
 }
