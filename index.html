@@ -84,16 +84,29 @@
             <i class="fas fa-search"></i>
             <input type="text" id="searchInput" placeholder="Pesquisar ofertas (ex: iPhone, Alexa...)" onkeyup="filterOffers()">
         </div>
+
+        <div class="filter-wrapper">
+            <button class="filter-btn active" onclick="filtrarCategoria('todos')">Todos</button>
+            <button class="filter-btn" onclick="filtrarCategoria('eletronicos')">Eletrônicos</button>
+            <button class="filter-btn" onclick="filtrarCategoria('casa')">Casa</button>
+            <button class="filter-btn" onclick="filtrarCategoria('saude')">Saúde</button>
+            <button class="filter-btn" onclick="filtrarCategoria('moda')">Moda</button>
+            <button class="filter-btn" onclick="filtrarCategoria('livros')">Livros</button>
+            <button class="filter-btn" onclick="filtrarCategoria('fitness')">Fitness</button>
+            <button class="filter-btn" onclick="filtrarCategoria('escritorio')">Escritório</button>
+        </div>
     </section>
 
     <main id="ofertas" class="container">
         <div class="grid-offers" id="offersGrid">
-            
-            
+            </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Mercado NEB - Todos os direitos reservados.</p>
+        <div class="container">
+            <p>&copy; 2026 Mercado NEB - Todos os direitos reservados.</p>
+            <small>Ao comprar através de nossos links, podemos receber uma comissão sem custo adicional para você.</small>
+        </div>
     </footer>
 
     <script src="script.js"></script>
