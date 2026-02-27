@@ -2,6 +2,33 @@
    BANCO DE DADOS DE PRODUTOS
    ========================================== */
 const meusProdutos = [
+     {
+        nome: "Tênis Adidas",
+        desc: "TênisAdventage Base 2.0 Adidas",
+        preco: "209,75",
+        categoria: "moda",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_779352-MLB107654833669_022026-O-tnis-advantage-base-20-adidas.webp",
+        link: " https://meli.la/1kCbmwi"
+    },
+     {
+        nome: "Aparador De Pelos Super Groom 10 Mondial 6W Bivolt",
+        desc: "5 Cabeças Aparadoras, 4 Pentes de Corte, 1 Pente Ajustável, 1 Óleo Lubrificante, Carregador, Base Carregadora e Manual",
+        preco: "102,71",
+        categoria: "eletronicos",
+        loja: "mercadolivre",
+        img: " https://http2.mlstatic.com/D_NQ_NP_981084-MLA99522140924_122025-O.webp",
+        link: "https://meli.la/1HP8xZD"
+    },
+     {
+        nome: "Galaxy Tab A11",
+        desc: "64gb, 4gb Ram, Tela De 8.7 , Bateria 5.100mah, Câmera Frontal 5mp, Câmera Traseira 8mp, Wifi Prata",
+        preco: "899,00",
+        categoria: "eletronicos",
+        loja: "mercadolivre",
+        img: " https://http2.mlstatic.com/D_NQ_NP_892318-MLA99419882190_112025-O.webp",
+        link: "https://meli.la/31KwJHn"
+    },
     {
         nome: "Medidor de Pressão Digital",
         desc: "O tensiômetro digital G-Tech BSP11 possui uma capacidade de memória total de 120 medições, ideal para monitorar a saúde cardiovascular.",
