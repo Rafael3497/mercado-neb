@@ -2,8 +2,7 @@
    BANCO DE DADOS DE PRODUTOS
    ========================================== */
 const meusProdutos = [
-
-       {
+    {
         nome: "Mesa Dobravel Camping",
         desc: "Maleta Portatil 1.80m Com Alça Jardim Branco e Preto",
         preco: "261,04",
@@ -11,15 +10,15 @@ const meusProdutos = [
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_776852-MLB106988205071_022026-F.webp",
         link: "https://meli.la/1LZmkNP"
     },
-       {
-        nome: "O Pequeno Príncipe ",
-        desc: "Edição de Luxo Almofadada ",
+    {
+        nome: "O Pequeno Príncipe",
+        desc: "Edição de Luxo Almofadada",
         preco: "12,90",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/71IiouhdpAL._SL1500_.jpg",
         link: "https://amzn.to/4bbmQj0"
     },
-        {
+    {
         nome: "Escrivaninha Trevalla Kuadra",
         desc: "Me150-E10 Industrial 150cm Preto Onix",
         preco: "240,86",
@@ -27,9 +26,9 @@ const meusProdutos = [
         img: "https://m.media-amazon.com/images/I/71b3InIEJyL._AC_SX679_.jpg",
         link: "https://amzn.to/4kUrBAK"
     },
-        {
+    {
         nome: "Suporte De Celular Carro 360",
-        desc: "Melhor Ventosa Gruda No Painel Encaixe Giratório Veicular Ajustável Anti Queda Do Vidro Parabrisa Retrovisor Automático Pra Smartphone Gps Universal Articulado Apoio Preto",
+        desc: "Ventosa Giratória Veicular Ajustável Anti Queda",
         preco: "28,08",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_950271-MLA107488132969_022026-F.webp",
@@ -37,7 +36,7 @@ const meusProdutos = [
     },
     {
         nome: "Base Suporte Para PC Notebook",
-        desc: "Alumínio Portátil Articulado Dobrável Tablet Laptop Mesa Davely Cor Prateado",
+        desc: "Alumínio Portátil Articulado Dobrável Tablet Laptop",
         preco: "25,90",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_862425-MLA95804056004_102025-F.webp",
@@ -67,8 +66,8 @@ const meusProdutos = [
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_603676-MLB106109346865_012026-F-tenis-branco-feminino-esportivo-vili-olimp-academia-treino.webp",
         link: "https://meli.la/15n5AjN"
     },
-        {
-        nome: "Geladeira Electrolux Frost Free Duplex",
+    {
+        nome: "Geladeira Electrolux Frost Free",
         desc: "Efficient com AutoSense Branca 390L (IF43) 220V",
         preco: "2.299,00",
         loja: "amazon",
@@ -77,7 +76,7 @@ const meusProdutos = [
     },
     {
         nome: "Bandeja de Bambu",
-        desc: "Marrom Natural 20cm - Mesa Posta - Organização - Utensílios de Cozinha - Enxoval - Decoração - Travessa Retangular - Petisqueira - Utilidades Domésticas",
+        desc: "Marrom Natural 20cm - Mesa Posta e Decoração",
         preco: "17,51",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/61q2ZyGUf6L._AC_SX679_.jpg",
@@ -85,7 +84,7 @@ const meusProdutos = [
     },
     {
         nome: "TCL QLED SMART TV 40",
-        desc: "CL QLED SMART TV 40” 40S5K FHD GOOGLE TV com Wi-Fi e Bluetooth integrados, HDMI, HDR10, DOLBY AUDIO, GOOGLECAST INTEGRADO",
+        desc: "FHD GOOGLE TV com Wi-Fi e Bluetooth, HDR10",
         preco: "1.357,03",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/61Tyj-tyTtL._AC_SX569_.jpg",
@@ -93,7 +92,7 @@ const meusProdutos = [
     },
     {
         nome: "Furadeira Parafusadeira 48v",
-        desc: "2 Baterias Recarregáveis Maleta Mandril 10mm Torque 32n.m 0-400/0-1400 Rpm Velocidade Variável Reversível Kit Brocas Bits Soquetes Carregador Bivolt Mackie Ferramentas",
+        desc: "2 Baterias Recarregáveis com Maleta e Kit Brocas",
         preco: "129,00",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_903566-MLA103486375178_012026-F.webp",
@@ -165,42 +164,43 @@ const meusProdutos = [
     },
     {
         nome: "Downy Amaciante",
-        desc: "Concentrado Brisa Intenso 3L, Rende 12L, Perfume Intenso com Notas de Rosas e Frutas Vermelhas",
+        desc: "Concentrado Brisa Intenso 3L, Rende 12L",
         preco: "49,44",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/61a1dtQPN5L._AC_SX679_.jpg",
         link: "https://amzn.to/4aOVU7i"
-    },
-
+    }
 ];
 
 /* ==========================================
    FUNÇÃO PARA RENDERIZAR PRODUTOS
    ========================================== */
 function carregarProdutos() {
-    
     const grid = document.getElementById('offersGrid');
     if (!grid) return;
 
-    // Criamos o HTML para cada produto da lista
-    const htmlProdutos = meusProdutos.map(p => `
+    grid.innerHTML = meusProdutos.map(p => {
+        const éAmazon = p.loja === 'amazon';
+        const lojaNome = éAmazon ? 'Amazon' : 'Mercado Livre';
+        const artigo = éAmazon ? 'na' : 'no';
+        
+        return `
         <div class="card" data-name="${p.nome}">
             <div class="card-img">
+                <span class="badge-loja ${p.loja}">${lojaNome}</span>
                 <img src="${p.img}" alt="${p.nome}" loading="lazy">
             </div>
             <div class="card-info">
                 <h3>${p.nome}</h3>
                 <p>${p.desc}</p>
-                <div class="price-container" style="margin: 10px 0; color: #2e7d32; font-weight: 800;">
-                    <span style="font-size: 0.9rem;">R$</span>
-                    <span style="font-size: 1.4rem;">${p.preco}</span>
+                <div class="price-container">
+                    <span class="price-label">R$</span>
+                    <span class="price-value">${p.preco}</span>
                 </div>
-                <a href="${p.link}" target="_blank" class="btn-buy">Comprar agora</a>
+                <a href="${p.link}" target="_blank" class="btn-buy">Comprar ${artigo} ${lojaNome}</a>
             </div>
         </div>
-    `).join('');
-
-    grid.innerHTML = htmlProdutos;
+    `}).join('');
 }
 
 /* ==========================================
@@ -239,36 +239,9 @@ function filterOffers() {
 }
 
 /* ==========================================
-   INICIALIZAÇÃO AO CARREGAR A PÁGINA
+   INICIALIZAÇÃO
    ========================================== */
 window.onload = function() {
     carregarProdutos();
     showSlides();
 };
-
-function carregarProdutos() {
-    const grid = document.getElementById('offersGrid');
-    if (!grid) return;
-
-    grid.innerHTML = meusProdutos.map(p => {
-        // Define o nome de exibição da loja
-        const lojaNome = p.loja === 'amazon' ? 'Amazon' : 'Mercado Livre';
-        
-        return `
-        <div class="card" data-name="${p.nome}">
-            <div class="card-img">
-                <span class="badge-loja ${p.loja}">${lojaNome}</span>
-                <img src="${p.img}" alt="${p.nome}" loading="lazy">
-            </div>
-            <div class="card-info">
-                <h3>${p.nome}</h3>
-                <p>${p.desc}</p>
-                <div class="price-container">
-                    <span class="price-label">R$</span>
-                    <span class="price-value">${p.preco}</span>
-                </div>
-                <a href="${p.link}" target="_blank" class="btn-buy">Comprar na ${lojaNome}</a>
-            </div>
-        </div>
-    `}).join('');
-}
