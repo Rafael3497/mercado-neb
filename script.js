@@ -3,7 +3,15 @@
    ========================================== */
 const meusProdutos = [
 
-            {
+       {
+        nome: "Mesa Dobravel Camping",
+        desc: "Maleta Portatil 1.80m Com Alça Jardim Branco e Preto",
+        preco: "261,04",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_776852-MLB106988205071_022026-F.webp",
+        link: "https://meli.la/1LZmkNP"
+    },
+       {
         nome: "O Pequeno Príncipe ",
         desc: "Edição de Luxo Almofadada ",
         preco: "12,90",
