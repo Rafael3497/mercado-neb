@@ -197,10 +197,33 @@ function carregarProdutos() {
                     <span class="price-label">R$</span>
                     <span class="price-value">${p.preco}</span>
                 </div>
-                <a href="${p.link}" target="_blank" class="btn-buy">Comprar ${artigo} ${lojaNome}</a>
+                <div class="card-actions">
+                    <a href="${p.link}" target="_blank" class="btn-buy">Comprar ${artigo} ${lojaNome}</a>
+                    <button class="btn-share" onclick="compartilhar('${p.nome}', '${p.link}')" title="Compartilhar">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
             </div>
         </div>
     `}).join('');
+}
+
+/* ==========================================
+   FUNÇÃO DE COMPARTILHAMENTO
+   ========================================== */
+function compartilhar(nome, link) {
+    const texto = `🔥 *Oferta no Mercado NEB!*\n\n*${nome}*\n\nConfira aqui: ${link}`;
+    
+    if (navigator.share) {
+        navigator.share({
+            title: 'Mercado NEB',
+            text: texto,
+            url: link
+        }).catch(console.error);
+    } else {
+        const urlZap = `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
+        window.open(urlZap, '_blank');
+    }
 }
 
 /* ==========================================
@@ -227,7 +250,7 @@ function showSlides() {
 
 /* ==========================================
    SISTEMA DE BUSCA
-   ========================================== */
+   ========================================= */
 function filterOffers() {
     let input = document.getElementById('searchInput').value.toLowerCase();
     let cards = document.getElementsByClassName('card');
@@ -239,7 +262,7 @@ function filterOffers() {
 }
 
 /* ==========================================
-   INICIALIZAÇÃO
+   INICIALIZAÇÃO AO CARREGAR A PÁGINA
    ========================================== */
 window.onload = function() {
     carregarProdutos();
