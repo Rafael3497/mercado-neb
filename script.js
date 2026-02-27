@@ -212,7 +212,7 @@ function carregarProdutos() {
    FUNÇÃO DE COMPARTILHAMENTO
    ========================================== */
 function compartilhar(nome, link) {
-    const texto = `🔥 *Oferta no Mercado NEB!*\n\n*${nome}*\n\nConfira aqui: ${link}`;
+    const texto = `🌟 *Oferta no Mercado NEB!*\n\n*${nome}*\n\nConfira aqui: ${link}`;
     
     if (navigator.share) {
         navigator.share({
