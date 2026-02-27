@@ -1,270 +1,262 @@
-/* ==========================================
-   BANCO DE DADOS DE PRODUTOS
-   ========================================== */
-const meusProdutos = [
-    {
-        nome: "Mesa Dobravel Camping",
-        desc: "Maleta Portatil 1.80m Com Alça Jardim Branco e Preto",
-        preco: "261,04",
-        loja: "mercadolivre",
-        img: "https://http2.mlstatic.com/D_NQ_NP_2X_776852-MLB106988205071_022026-F.webp",
-        link: "https://meli.la/1LZmkNP"
-    },
-    {
-        nome: "O Pequeno Príncipe",
-        desc: "Edição de Luxo Almofadada",
-        preco: "12,90",
-        loja: "amazon",
-        img: "https://m.media-amazon.com/images/I/71IiouhdpAL._SL1500_.jpg",
-        link: "https://amzn.to/4bbmQj0"
-    },
-    {
-        nome: "Escrivaninha Trevalla Kuadra",
-        desc: "Me150-E10 Industrial 150cm Preto Onix",
-        preco: "240,86",
-        loja: "amazon",
-        img: "https://m.media-amazon.com/images/I/71b3InIEJyL._AC_SX679_.jpg",
-        link: "https://amzn.to/4kUrBAK"
-    },
-    {
-        nome: "Suporte De Celular Carro 360",
-        desc: "Ventosa Giratória Veicular Ajustável Anti Queda",
-        preco: "28,08",
-        loja: "mercadolivre",
-        img: "https://http2.mlstatic.com/D_NQ_NP_2X_950271-MLA107488132969_022026-F.webp",
-        link: "https://meli.la/1huEcfg"
-    },
-    {
-        nome: "Base Suporte Para PC Notebook",
-        desc: "Alumínio Portátil Articulado Dobrável Tablet Laptop",
-        preco: "25,90",
-        loja: "mercadolivre",
-        img: "https://http2.mlstatic.com/D_NQ_NP_2X_862425-MLA95804056004_102025-F.webp",
-        link: "https://meli.la/2hbQFNN"
-    },
-    {
-        nome: "Creatina Monohidratada 250g",
-        desc: "Growth Supplements - Sem sabor em Pó",
-        preco: "39,90",
-        loja: "mercadolivre",
-        img: "https://http2.mlstatic.com/D_NQ_NP_2X_662415-MLA97812910758_112025-F.webp",
-        link: "https://meli.la/1hCrFuS"
-    },
-    {
-        nome: "Quadro Decorativo Com Prateleira",
-        desc: "Dupla Nicho Moldura Luxo",
-        preco: "35,69",
-        loja: "mercadolivre",
-        img: "https://http2.mlstatic.com/D_NQ_NP_2X_739043-MLB100377785271_122025-F.webp",
-        link: "https://meli.la/26B1nGJ"
-    },
-    {
-        nome: "Tenis Branco Feminino",
-        desc: "Esportivo Vili Olimp Academia Treino",
-        preco: "96,52",
-        loja: "mercadolivre",
-        img: "https://http2.mlstatic.com/D_NQ_NP_2X_603676-MLB106109346865_012026-F-tenis-branco-feminino-esportivo-vili-olimp-academia-treino.webp",
-        link: "https://meli.la/15n5AjN"
-    },
-    {
-        nome: "Geladeira Electrolux Frost Free",
-        desc: "Efficient com AutoSense Branca 390L (IF43) 220V",
-        preco: "2.299,00",
-        loja: "amazon",
-        img: "https://m.media-amazon.com/images/I/31ZqPaGUjRL._AC_SX679_.jpg",
-        link: "https://amzn.to/4b8NlWh"
-    },
-    {
-        nome: "Bandeja de Bambu",
-        desc: "Marrom Natural 20cm - Mesa Posta e Decoração",
-        preco: "17,51",
-        loja: "amazon",
-        img: "https://m.media-amazon.com/images/I/61q2ZyGUf6L._AC_SX679_.jpg",
-        link: "https://amzn.to/4cN6qyr"
-    },
-    {
-        nome: "TCL QLED SMART TV 40",
-        desc: "FHD GOOGLE TV com Wi-Fi e Bluetooth, HDR10",
-        preco: "1.357,03",
-        loja: "amazon",
-        img: "https://m.media-amazon.com/images/I/61Tyj-tyTtL._AC_SX569_.jpg",
-        link: "https://amzn.to/4l7FcEX"
-    },
-    {
-        nome: "Furadeira Parafusadeira 48v",
-        desc: "2 Baterias Recarregáveis com Maleta e Kit Brocas",
-        preco: "129,00",
-        loja: "mercadolivre",
-        img: "https://http2.mlstatic.com/D_NQ_NP_2X_903566-MLA103486375178_012026-F.webp",
-        link: "https://meli.la/2akLXF8"
-    },
-    {
-        nome: "Panela Pipoqueira",
-        desc: "Tramontina profissional em alumínio.",
-        preco: "120,21",
-        loja: "mercadolivre",
-        img: "img/panela.png",
-        link: "https://meli.la/1xQkhGK"
-    },
-    {
-        nome: "Tábua De Passar Roupa",
-        desc: "Reforçada Com Porta Ferro 3 Alturas.",
-        preco: "78,97",
-        loja: "mercadolivre",
-        img: "https://http2.mlstatic.com/D_NQ_NP_2X_860360-MLA98972660483_112025-F.webp",
-        link: "https://meli.la/1nWFot7"
-    },
-    {
-        nome: "Panela de Pressão Elétrica",
-        desc: "Electrolux Digital 6L silenciosa e segura.",
-        preco: "502,55",
-        loja: "amazon",
-        img: "img/PanelaEletrica.png",
-        link: "https://amzn.to/4bcD1wo"
-    },
-    {
-        nome: "Ventilador WAP de Coluna",
-        desc: "50cm FLOW TURBO, silencioso e potente.",
-        preco: "221,81",
-        loja: "amazon",
-        img: "img/ventiladorpe.jpeg",
-        link: "https://amzn.to/46pQONx"
-    },
-    {
-        nome: "Pipoqueira Elétrica Mondial",
-        desc: "Pipoca pronta em 3 minutos sem usar óleo.",
-        preco: "149,99",
-        loja: "mercadolivre",
-        img: "img/pipoqueiraeletrica.jpeg",
-        link: "https://meli.la/2y41pzb"
-    },
-    {
-        nome: "DOMEZ Tábua de Corte Inox",
-        desc: "Tábua de corte em aço inox, higiênica e durável.",
-        preco: "74,76",
-        loja: "amazon",
-        img: "https://m.media-amazon.com/images/I/71t1xnPvyTL._AC_SX679_.jpg",
-        link: "https://amzn.to/4kYeHS9"
-    },
-    {
-        nome: "Umidificador De Ar Ultrassônico",
-        desc: "Umi Pop Health 2,3l Dellamed Cor Branco.",
-        preco: "87,09",
-        loja: "mercadolivre",
-        img: "https://http2.mlstatic.com/D_NQ_NP_2X_900915-MLA84476647173_052025-F.webp",
-        link: "https://meli.la/2TQSZUx"
-    },
-    {
-        nome: "Veganpro Baunilha - 450g",
-        desc: "À base de proteínas de arroz e ervilha.",
-        preco: "131,58",
-        loja: "amazon",
-        img: "https://m.media-amazon.com/images/I/81R8-IDpwAL._AC_SX679_.jpg",
-        link: "https://amzn.to/4cPO0NA"
-    },
-    {
-        nome: "Downy Amaciante",
-        desc: "Concentrado Brisa Intenso 3L, Rende 12L",
-        preco: "49,44",
-        loja: "amazon",
-        img: "https://m.media-amazon.com/images/I/61a1dtQPN5L._AC_SX679_.jpg",
-        link: "https://amzn.to/4aOVU7i"
-    }
-];
-
-/* ==========================================
-   FUNÇÃO PARA RENDERIZAR PRODUTOS
-   ========================================== */
-function carregarProdutos() {
-    const grid = document.getElementById('offersGrid');
-    if (!grid) return;
-
-    grid.innerHTML = meusProdutos.map(p => {
-        const éAmazon = p.loja === 'amazon';
-        const lojaNome = éAmazon ? 'Amazon' : 'Mercado Livre';
-        const artigo = éAmazon ? 'na' : 'no';
-        
-        return `
-        <div class="card" data-name="${p.nome}">
-            <div class="card-img">
-                <span class="badge-loja ${p.loja}">${lojaNome}</span>
-                <img src="${p.img}" alt="${p.nome}" loading="lazy">
-            </div>
-            <div class="card-info">
-                <h3>${p.nome}</h3>
-                <p>${p.desc}</p>
-                <div class="price-container">
-                    <span class="price-label">R$</span>
-                    <span class="price-value">${p.preco}</span>
-                </div>
-                <div class="card-actions">
-                    <a href="${p.link}" target="_blank" class="btn-buy">Comprar ${artigo} ${lojaNome}</a>
-                    <button class="btn-share" onclick="compartilhar('${p.nome}', '${p.link}')" title="Compartilhar">
-                        <i class="fas fa-share-alt"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    `}).join('');
+/* --- VARIÁVEIS E BASE --- */
+:root {
+    --primary: #1d4ed8;
+    --primary-dark: #1e40af;
+    --secondary: #f8fafc;
+    --accent: #fbbf24;
+    --success: #2e7d32;
+    --text: #0f172a;
+    --text-light: #64748b;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ==========================================
-   FUNÇÃO DE COMPARTILHAMENTO
-   ========================================== */
-function compartilhar(nome, link) {
-    const texto = `🔥 *Oferta no Mercado NEB!*\n\n*${nome}*\n\nConfira aqui: ${link}`;
-    
-    if (navigator.share) {
-        navigator.share({
-            title: 'Mercado NEB',
-            text: texto,
-            url: link
-        }).catch(console.error);
-    } else {
-        const urlZap = `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
-        window.open(urlZap, '_blank');
-    }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: var(--text); scroll-behavior: smooth; overflow-x: hidden; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* --- HEADER --- */
+header { 
+    background: white; 
+    padding: 1rem 0; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
 }
 
-/* ==========================================
-   CARROSSEL AUTOMÁTICO
-   ========================================== */
-let slideIndex = 0;
-function showSlides() {
-    let slides = document.getElementsByClassName("slide");
-    if (slides.length === 0) return;
+.header-content { display: flex; justify-content: space-between; align-items: center; }
 
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.opacity = "0";
-        slides[i].classList.remove("active");
-    }
-    
-    slideIndex++;
-    if (slideIndex > slides.length) { slideIndex = 1; }
-    
-    slides[slideIndex - 1].style.opacity = "1";
-    slides[slideIndex - 1].classList.add("active");
-    
-    setTimeout(showSlides, 6000);
+.logo { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    font-size: 1.6rem; 
+    font-weight: 800; 
+    color: var(--primary); 
+    white-space: nowrap;
 }
 
-/* ==========================================
-   SISTEMA DE BUSCA
-   ========================================= */
-function filterOffers() {
-    let input = document.getElementById('searchInput').value.toLowerCase();
-    let cards = document.getElementsByClassName('card');
-    
-    for (let i = 0; i < cards.length; i++) {
-        let name = cards[i].getAttribute('data-name').toLowerCase();
-        cards[i].style.display = name.includes(input) ? "" : "none";
-    }
+nav ul { display: flex; list-style: none; gap: 15px; align-items: center; }
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    position: relative;
+    transition: var(--transition);
 }
 
-/* ==========================================
-   INICIALIZAÇÃO AO CARREGAR A PÁGINA
-   ========================================== */
-window.onload = function() {
-    carregarProdutos();
-    showSlides();
-};
+nav ul li a:hover { color: var(--primary); transform: scale(1.05); }
+
+/* Linha animada embaixo do menu */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after { width: calc(100% - 24px); }
+
+.nav-whatsapp { color: #25d366 !important; }
+.nav-whatsapp:hover { color: #128c7e !important; }
+.nav-whatsapp::after { background: #25d366 !important; }
+
+/* --- CARROSSEL --- */
+.carousel { position: relative; height: 400px; overflow: hidden; background: #000; }
+
+.slide { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0; 
+    transition: opacity 1.2s ease-in-out; 
+}
+
+.slide.active { opacity: 1; }
+
+.slide-content { text-align: center; color: white; padding: 0 25px; max-width: 900px; }
+
+.slide-content h1 { 
+    font-size: 3rem; 
+    font-weight: 800; 
+    margin-bottom: 15px; 
+    line-height: 1.1; 
+}
+
+.slide-content p { font-size: 1.2rem; line-height: 1.4; opacity: 0.9; }
+
+/* --- BUSCA --- */
+.search-section { margin: 40px auto; }
+
+.search-box { 
+    background: white; 
+    display: flex; 
+    align-items: center; 
+    padding: 15px 25px; 
+    border-radius: 15px; 
+    box-shadow: var(--shadow); 
+    border: 1px solid #e2e8f0; 
+    transition: var(--transition);
+}
+
+.search-box:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1); }
+
+.search-box input { border: none; outline: none; width: 100%; margin-left: 15px; font-size: 1.1rem; color: var(--text); }
+
+/* --- GRID E CARDS --- */
+.grid-offers { 
+    display: grid; 
+    gap: 30px; 
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+    margin-bottom: 60px; 
+}
+
+.card { 
+    background: white; 
+    border-radius: 16px; 
+    overflow: hidden; 
+    transition: var(--transition); 
+    border: 1px solid #e2e8f0; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15); }
+
+/* Área da Imagem */
+.card-img { 
+    width: 100%;
+    height: 220px; 
+    padding: 20px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid #f1f5f9;
+    position: relative;
+}
+
+.card-img img { 
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; 
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img img { transform: scale(1.1); }
+
+/* --- ETIQUETAS DE LOJA --- */
+.badge-loja {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: white;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.badge-loja.amazon { background: #ff9900; color: #000; }
+.badge-loja.mercadolivre { background: #fff159; color: #333; }
+
+.card-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+
+.card-info h3 { 
+    font-size: 1.1rem; 
+    margin-bottom: 8px; 
+    font-weight: 700; 
+    min-height: 2.8rem; 
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-info p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px; flex-grow: 1; }
+
+/* --- PREÇO E ANIMAÇÃO --- */
+.price-container { margin-bottom: 15px; color: var(--success); font-weight: 800; display: inline-flex; align-items: baseline; gap: 4px; transition: all 0.3s ease; transform-origin: left center; }
+.price-label { font-size: 0.9rem; }
+.price-value { font-size: 1.5rem; transition: all 0.3s ease; }
+
+@keyframes pricePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); color: #1b5e20; }
+    100% { transform: scale(1.15); color: #1b5e20; }
+}
+
+.card:hover .price-container {
+    animation: pricePulse 0.4s forwards;
+    text-shadow: 0 2px 10px rgba(46, 125, 50, 0.2);
+}
+
+/* --- BOTÕES DE AÇÃO (COMPRAR + COMPARTILHAR) --- */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: auto;
+}
+
+.btn-buy { 
+    flex-grow: 1;
+    background: var(--primary); 
+    color: white; 
+    text-decoration: none; 
+    padding: 14px; 
+    border-radius: 12px; 
+    text-align: center; 
+    font-weight: 700; 
+    transition: var(--transition); 
+}
+
+.btn-buy:hover { background: var(--primary-dark); transform: scale(1.02); }
+
+.btn-share {
+    background: #f1f5f9;
+    color: #64748b;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-share:hover { background: #e2e8f0; color: var(--primary); transform: scale(1.1); }
+
+/* --- FOOTER --- */
+footer { background: white; padding: 40px; text-align: center; border-top: 1px solid #e2e8f0; color: var(--text-light); }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .grid-offers { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+}
+
+@media (max-width: 480px) {
+    .header-content { justify-content: center; flex-direction: column; gap: 15px; }
+    .logo { font-size: 1.3rem; }
+    nav ul { gap: 8px; }
+    nav ul li a { font-size: 0.8rem; padding: 5px 8px; }
+    .carousel { height: 280px; }
+    .grid-offers { grid-template-columns: 1fr; padding: 0 10px; }
+    .btn-share { padding: 16px; }
+}
