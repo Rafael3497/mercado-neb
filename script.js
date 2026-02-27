@@ -6,6 +6,7 @@ const meusProdutos = [
         nome: "Mesa Dobravel Camping",
         desc: "Maleta Portatil 1.80m Com Alça Jardim Branco e Preto",
         preco: "261,04",
+        categoria: "casa",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_776852-MLB106988205071_022026-F.webp",
         link: "https://meli.la/1LZmkNP"
@@ -14,6 +15,7 @@ const meusProdutos = [
         nome: "O Pequeno Príncipe",
         desc: "Edição de Luxo Almofadada",
         preco: "12,90",
+        categoria: "livros",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/71IiouhdpAL._SL1500_.jpg",
         link: "https://amzn.to/4bbmQj0"
@@ -22,6 +24,7 @@ const meusProdutos = [
         nome: "Escrivaninha Trevalla Kuadra",
         desc: "Me150-E10 Industrial 150cm Preto Onix",
         preco: "240,86",
+        categoria: "escritorio",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/71b3InIEJyL._AC_SX679_.jpg",
         link: "https://amzn.to/4kUrBAK"
@@ -30,6 +33,7 @@ const meusProdutos = [
         nome: "Suporte De Celular Carro 360",
         desc: "Ventosa Giratória Veicular Ajustável Anti Queda",
         preco: "28,08",
+        categoria: "eletronicos",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_950271-MLA107488132969_022026-F.webp",
         link: "https://meli.la/1huEcfg"
@@ -38,6 +42,7 @@ const meusProdutos = [
         nome: "Base Suporte Para PC Notebook",
         desc: "Alumínio Portátil Articulado Dobrável Tablet Laptop",
         preco: "25,90",
+        categoria: "escritorio",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_862425-MLA95804056004_102025-F.webp",
         link: "https://meli.la/2hbQFNN"
@@ -46,6 +51,7 @@ const meusProdutos = [
         nome: "Creatina Monohidratada 250g",
         desc: "Growth Supplements - Sem sabor em Pó",
         preco: "39,90",
+        categoria: "fitness",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_662415-MLA97812910758_112025-F.webp",
         link: "https://meli.la/1hCrFuS"
@@ -54,6 +60,7 @@ const meusProdutos = [
         nome: "Quadro Decorativo Com Prateleira",
         desc: "Dupla Nicho Moldura Luxo",
         preco: "35,69",
+        categoria: "casa",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_739043-MLB100377785271_122025-F.webp",
         link: "https://meli.la/26B1nGJ"
@@ -62,6 +69,7 @@ const meusProdutos = [
         nome: "Tenis Branco Feminino",
         desc: "Esportivo Vili Olimp Academia Treino",
         preco: "96,52",
+        categoria: "moda",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_603676-MLB106109346865_012026-F-tenis-branco-feminino-esportivo-vili-olimp-academia-treino.webp",
         link: "https://meli.la/15n5AjN"
@@ -70,6 +78,7 @@ const meusProdutos = [
         nome: "Geladeira Electrolux Frost Free",
         desc: "Efficient com AutoSense Branca 390L (IF43) 220V",
         preco: "2.299,00",
+        categoria: "casa",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/31ZqPaGUjRL._AC_SX679_.jpg",
         link: "https://amzn.to/4b8NlWh"
@@ -78,6 +87,7 @@ const meusProdutos = [
         nome: "Bandeja de Bambu",
         desc: "Marrom Natural 20cm - Mesa Posta e Decoração",
         preco: "17,51",
+        categoria: "casa",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/61q2ZyGUf6L._AC_SX679_.jpg",
         link: "https://amzn.to/4cN6qyr"
@@ -86,6 +96,7 @@ const meusProdutos = [
         nome: "TCL QLED SMART TV 40",
         desc: "FHD GOOGLE TV com Wi-Fi e Bluetooth, HDR10",
         preco: "1.357,03",
+        categoria: "eletronicos",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/61Tyj-tyTtL._AC_SX569_.jpg",
         link: "https://amzn.to/4l7FcEX"
@@ -94,6 +105,7 @@ const meusProdutos = [
         nome: "Furadeira Parafusadeira 48v",
         desc: "2 Baterias Recarregáveis com Maleta e Kit Brocas",
         preco: "129,00",
+        categoria: "casa",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_903566-MLA103486375178_012026-F.webp",
         link: "https://meli.la/2akLXF8"
@@ -102,6 +114,7 @@ const meusProdutos = [
         nome: "Panela Pipoqueira",
         desc: "Tramontina profissional em alumínio.",
         preco: "120,21",
+        categoria: "casa",
         loja: "mercadolivre",
         img: "img/panela.png",
         link: "https://meli.la/1xQkhGK"
@@ -110,6 +123,7 @@ const meusProdutos = [
         nome: "Tábua De Passar Roupa",
         desc: "Reforçada Com Porta Ferro 3 Alturas.",
         preco: "78,97",
+        categoria: "casa",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_860360-MLA98972660483_112025-F.webp",
         link: "https://meli.la/1nWFot7"
@@ -118,6 +132,7 @@ const meusProdutos = [
         nome: "Panela de Pressão Elétrica",
         desc: "Electrolux Digital 6L silenciosa e segura.",
         preco: "502,55",
+        categoria: "casa",
         loja: "amazon",
         img: "img/PanelaEletrica.png",
         link: "https://amzn.to/4bcD1wo"
@@ -126,6 +141,7 @@ const meusProdutos = [
         nome: "Ventilador WAP de Coluna",
         desc: "50cm FLOW TURBO, silencioso e potente.",
         preco: "221,81",
+        categoria: "casa",
         loja: "amazon",
         img: "img/ventiladorpe.jpeg",
         link: "https://amzn.to/46pQONx"
@@ -134,6 +150,7 @@ const meusProdutos = [
         nome: "Pipoqueira Elétrica Mondial",
         desc: "Pipoca pronta em 3 minutos sem usar óleo.",
         preco: "149,99",
+        categoria: "casa",
         loja: "mercadolivre",
         img: "img/pipoqueiraeletrica.jpeg",
         link: "https://meli.la/2y41pzb"
@@ -142,6 +159,7 @@ const meusProdutos = [
         nome: "DOMEZ Tábua de Corte Inox",
         desc: "Tábua de corte em aço inox, higiênica e durável.",
         preco: "74,76",
+        categoria: "casa",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/71t1xnPvyTL._AC_SX679_.jpg",
         link: "https://amzn.to/4kYeHS9"
@@ -150,6 +168,7 @@ const meusProdutos = [
         nome: "Umidificador De Ar Ultrassônico",
         desc: "Umi Pop Health 2,3l Dellamed Cor Branco.",
         preco: "87,09",
+        categoria: "saude",
         loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_900915-MLA84476647173_052025-F.webp",
         link: "https://meli.la/2TQSZUx"
@@ -158,6 +177,7 @@ const meusProdutos = [
         nome: "Veganpro Baunilha - 450g",
         desc: "À base de proteínas de arroz e ervilha.",
         preco: "131,58",
+        categoria: "saude",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/81R8-IDpwAL._AC_SX679_.jpg",
         link: "https://amzn.to/4cPO0NA"
@@ -166,6 +186,7 @@ const meusProdutos = [
         nome: "Downy Amaciante",
         desc: "Concentrado Brisa Intenso 3L, Rende 12L",
         preco: "49,44",
+        categoria: "casa",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/61a1dtQPN5L._AC_SX679_.jpg",
         link: "https://amzn.to/4aOVU7i"
@@ -185,7 +206,7 @@ function carregarProdutos() {
         const artigo = éAmazon ? 'na' : 'no';
         
         return `
-        <div class="card" data-name="${p.nome}">
+        <div class="card" data-name="${p.nome}" data-category="${p.categoria}">
             <div class="card-img">
                 <span class="badge-loja ${p.loja}">${lojaNome}</span>
                 <img src="${p.img}" alt="${p.nome}" loading="lazy">
@@ -206,6 +227,29 @@ function carregarProdutos() {
             </div>
         </div>
     `}).join('');
+}
+
+/* ==========================================
+   SISTEMA DE FILTRO POR CATEGORIA
+   ========================================== */
+function filtrarCategoria(cat) {
+    // 1. Atualiza visual dos botões
+    const botoes = document.querySelectorAll('.filter-btn');
+    botoes.forEach(btn => btn.classList.remove('active'));
+    
+    // Adiciona classe active no botão clicado
+    event.target.classList.add('active');
+
+    // 2. Filtra os cards
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        const categoriaCard = card.getAttribute('data-category');
+        if (cat === 'todos' || categoriaCard === cat) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
+        }
+    });
 }
 
 /* ==========================================
@@ -249,7 +293,7 @@ function showSlides() {
 }
 
 /* ==========================================
-   SISTEMA DE BUSCA
+   SISTEMA DE BUSCA (POR NOME)
    ========================================= */
 function filterOffers() {
     let input = document.getElementById('searchInput').value.toLowerCase();
