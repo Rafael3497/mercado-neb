@@ -2,6 +2,15 @@
    BANCO DE DADOS DE PRODUTOS (COMPLETO)
    ========================================== */
 const meusProdutos = [
+     {
+        nome: " Kit 2 Pulverizador Spray De Azeite , Vidro, 100ml, , Saladas Prateado",
+        desc: "Mais controle, menos exagero! Esse kit com 2 pulverizadores de vidro (100ml cada) é perfeito para temperar saladas, finalizar pratos e usar no preparo de carnes e legumes sem encharcar tudo de óleo.",
+        preco: "21,80",
+        categoria: "casa",
+        loja: "mercadolivre",
+        img: " https://http2.mlstatic.com/D_NQ_NP_686019-MLA99827429533_112025-O.webp",
+        link: "https://meli.la/2Vqr41E"
+    },
     {
         nome: "Esteira Ergométrica",
         desc: "E41 Elétrica Dobrável 10km Acte Preto - Ideal para treinos em casa.",
