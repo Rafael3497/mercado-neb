@@ -3,6 +3,15 @@
    ========================================== */
 const meusProdutos = [
      {
+        nome: " Tapete de Yoga",
+        desc: " Dupla Camada EVA 6mm Antiderrapante Pilates Fitness Ginástica",
+        preco: "79,90",
+        categoria: "fitness",
+        loja: "amazon",
+        img: " https://www.amazon.com.br/dp/B0F6NVMNY7/ref=cm_sw_r_as_gl_apa_gl_i_DK9Z1FS2D229HAXPQH40?linkCode=ml1&tag=estrelaneb-20&linkId=97b3b9854d0d000da5576c3161e0eeb0#",
+        link: " https://amzn.to/4ceTu4j"
+    },
+     {
         nome: "Tênis Adidas",
         desc: "TênisAdventage Base 2.0 Adidas",
         preco: "209,75",
