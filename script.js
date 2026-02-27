@@ -3,6 +3,26 @@
    ========================================== */
 const meusProdutos = [
      {
+        nome: "Esteira Ergométrica",
+        desc: "E41 Elétrica Dobrável 10km Acte Preto
+",
+        preco: "1.899,99",
+        categoria: "fitness",
+        loja: "mercadolivre",
+        img: " https://http2.mlstatic.com/D_NQ_NP_880987-MLA95682115328_102025-O.webp",
+        link: " https://meli.la/26Zkim4"
+    },
+     {
+        nome: " X7 300g - Atlhetica Nutrition Sabor Mix Berries
+",
+        desc: " Se você está em busca de um pré-treino tecnológico para elevar seu desempenho e foco mental, o pré-treino X7® Original é o seu melhor aliado, independentemente da sua prática esportiva.",
+        preco: "56,99",
+        categoria: "fitness",
+        loja: "mercadolivre",
+        img: " https://http2.mlstatic.com/D_NQ_NP_836886-MLA99378573418_112025-O.webp",
+        link: " https://meli.la/1BDm5y3"
+    },
+     {
         nome: " Tapete de Yoga",
         desc: " Dupla Camada EVA 6mm Antiderrapante Pilates Fitness Ginástica",
         preco: "79,90",
