@@ -1,10 +1,10 @@
 /* ==========================================
-   BANCO DE DADOS DE PRODUTOS
+   BANCO DE DADOS DE PRODUTOS (COMPLETO)
    ========================================== */
 const meusProdutos = [
     {
         nome: "Esteira Ergométrica",
-        desc: "E41 Elétrica Dobrável 10km Acte Preto",
+        desc: "E41 Elétrica Dobrável 10km Acte Preto - Ideal para treinos em casa.",
         preco: "1.899,99",
         categoria: "fitness",
         loja: "mercadolivre",
@@ -13,7 +13,7 @@ const meusProdutos = [
     },
     {
         nome: "X7 300g - Atlhetica Nutrition",
-        desc: "Pré-treino tecnológico para elevar seu desempenho e foco mental.",
+        desc: "Pré-treino Mix Berries para elevar seu desempenho e foco mental.",
         preco: "56,99",
         categoria: "fitness",
         loja: "mercadolivre",
@@ -22,7 +22,7 @@ const meusProdutos = [
     },
     {
         nome: "Tapete de Yoga",
-        desc: "Dupla Camada EVA 6mm Antiderrapante Pilates Fitness Ginástica",
+        desc: "Dupla Camada EVA 6mm Antiderrapante para Pilates e Ginástica.",
         preco: "79,90",
         categoria: "fitness",
         loja: "amazon",
@@ -30,8 +30,8 @@ const meusProdutos = [
         link: "https://amzn.to/4ceTu4j"
     },
     {
-        nome: "Tênis Adidas",
-        desc: "Tênis Advantage Base 2.0 Adidas",
+        nome: "Tênis Adidas Advantage",
+        desc: "Tênis Advantage Base 2.0 Adidas - Estilo e conforto para o dia a dia.",
         preco: "209,75",
         categoria: "moda",
         loja: "mercadolivre",
@@ -40,7 +40,7 @@ const meusProdutos = [
     },
     {
         nome: "Aparador De Pelos Mondial",
-        desc: "Super Groom 10 Mondial 6W Bivolt - 5 Cabeças Aparadoras",
+        desc: "Super Groom 10 Mondial 6W Bivolt - Kit completo com 5 cabeças.",
         preco: "102,71",
         categoria: "eletronicos",
         loja: "mercadolivre",
@@ -48,8 +48,8 @@ const meusProdutos = [
         link: "https://meli.la/1HP8xZD"
     },
     {
-        nome: "Galaxy Tab A11",
-        desc: "64gb, 4gb Ram, Tela De 8.7 , Bateria 5.100mah",
+        nome: "Galaxy Tab A9+",
+        desc: "64gb, 4gb Ram, Tela De 8.7 polegadas, Wifi Prata.",
         preco: "899,00",
         categoria: "eletronicos",
         loja: "mercadolivre",
@@ -58,7 +58,7 @@ const meusProdutos = [
     },
     {
         nome: "Medidor de Pressão Digital",
-        desc: "O tensiômetro digital G-Tech BSP11 para monitorar a saúde.",
+        desc: "Tensiômetro digital G-Tech BSP11 - Memória para 120 medições.",
         preco: "99,00",
         categoria: "saude",
         loja: "mercadolivre",
@@ -67,7 +67,7 @@ const meusProdutos = [
     },
     {
         nome: "Mesa Dobravel Camping",
-        desc: "Maleta Portatil 1.80m Com Alça Jardim Branco e Preto",
+        desc: "Maleta Portatil 1.80m Com Alça Jardim Branco e Preto.",
         preco: "261,04",
         categoria: "casa",
         loja: "mercadolivre",
@@ -76,7 +76,7 @@ const meusProdutos = [
     },
     {
         nome: "O Pequeno Príncipe",
-        desc: "Edição de Luxo Almofadada",
+        desc: "Edição de Luxo Almofadada - Um clássico para sua coleção.",
         preco: "12,90",
         categoria: "livros",
         loja: "amazon",
@@ -85,7 +85,7 @@ const meusProdutos = [
     },
     {
         nome: "Escrivaninha Trevalla Kuadra",
-        desc: "Me150-E10 Industrial 150cm Preto Onix",
+        desc: "Me150-E10 Industrial 150cm Preto Onix.",
         preco: "240,86",
         categoria: "escritorio",
         loja: "amazon",
@@ -94,7 +94,7 @@ const meusProdutos = [
     },
     {
         nome: "Suporte De Celular Carro 360",
-        desc: "Ventosa Giratória Veicular Ajustável Anti Queda",
+        desc: "Ventosa Giratória Veicular Ajustável Anti Queda.",
         preco: "28,08",
         categoria: "eletronicos",
         loja: "mercadolivre",
@@ -103,7 +103,7 @@ const meusProdutos = [
     },
     {
         nome: "Base Suporte Para PC Notebook",
-        desc: "Alumínio Portátil Articulado Dobrável Tablet Laptop",
+        desc: "Alumínio Portátil Articulado Dobrável Tablet Laptop.",
         preco: "25,90",
         categoria: "escritorio",
         loja: "mercadolivre",
@@ -112,7 +112,7 @@ const meusProdutos = [
     },
     {
         nome: "Creatina Monohidratada 250g",
-        desc: "Growth Supplements - Sem sabor em Pó",
+        desc: "Growth Supplements - Creatina pura em pó.",
         preco: "39,90",
         categoria: "fitness",
         loja: "mercadolivre",
@@ -120,16 +120,17 @@ const meusProdutos = [
         link: "https://meli.la/1hCrFuS"
     },
     {
-        nome: "Quadro Decorativo Com Prateleira",
-        desc: "Dupla Nicho Moldura Luxo",
+        nome: "Quadro Decorativo Prateleira",
+        desc: "Dupla Nicho Moldura Luxo para decoração.",
         preco: "35,69",
-        categoria: "casa",        loja: "mercadolivre",
+        categoria: "casa",
+        loja: "mercadolivre",
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_739043-MLB100377785271_122025-F.webp",
         link: "https://meli.la/26B1nGJ"
     },
     {
         nome: "Tenis Branco Feminino",
-        desc: "Esportivo Vili Olimp Academia Treino",
+        desc: "Esportivo Vili Olimp Academia Treino.",
         preco: "96,52",
         categoria: "moda",
         loja: "mercadolivre",
@@ -138,18 +139,127 @@ const meusProdutos = [
     },
     {
         nome: "Geladeira Electrolux Frost Free",
-        desc: "Efficient com AutoSense Branca 390L",
+        desc: "Efficient com AutoSense Branca 390L (IF43).",
         preco: "2.299,00",
         categoria: "casa",
         loja: "amazon",
         img: "https://m.media-amazon.com/images/I/31ZqPaGUjRL._AC_SX679_.jpg",
         link: "https://amzn.to/4b8NlWh"
+    },
+    {
+        nome: "Bandeja de Bambu",
+        desc: "Marrom Natural 20cm - Ideal para Mesa Posta.",
+        preco: "17,51",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61q2ZyGUf6L._AC_SX679_.jpg",
+        link: "https://amzn.to/4cN6qyr"
+    },
+    {
+        nome: "TCL QLED SMART TV 40",
+        desc: "FHD GOOGLE TV com Wi-Fi e Bluetooth integrados.",
+        preco: "1.357,03",
+        categoria: "eletronicos",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61Tyj-tyTtL._AC_SX569_.jpg",
+        link: "https://amzn.to/4l7FcEX"
+    },
+    {
+        nome: "Furadeira Parafusadeira 48v",
+        desc: "2 Baterias Recarregáveis com Maleta e Kit Brocas.",
+        preco: "129,00",
+        categoria: "casa",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_903566-MLA103486375178_012026-F.webp",
+        link: "https://meli.la/2akLXF8"
+    },
+    {
+        nome: "Panela Pipoqueira",
+        desc: "Tramontina profissional em alumínio resistente.",
+        preco: "120,21",
+        categoria: "casa",
+        loja: "mercadolivre",
+        img: "img/panela.png",
+        link: "https://meli.la/1xQkhGK"
+    },
+    {
+        nome: "Tábua De Passar Roupa",
+        desc: "Reforçada Com Porta Ferro 3 Alturas.",
+        preco: "78,97",
+        categoria: "casa",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_860360-MLA98972660483_112025-F.webp",
+        link: "https://meli.la/1nWFot7"
+    },
+    {
+        nome: "Panela de Pressão Elétrica",
+        desc: "Electrolux Digital 6L silenciosa e segura.",
+        preco: "502,55",
+        categoria: "casa",
+        loja: "amazon",
+        img: "img/PanelaEletrica.png",
+        link: "https://amzn.to/4bcD1wo"
+    },
+    {
+        nome: "Ventilador WAP de Coluna",
+        desc: "50cm FLOW TURBO, silencioso e potente.",
+        preco: "221,81",
+        categoria: "casa",
+        loja: "amazon",
+        img: "img/ventiladorpe.jpeg",
+        link: "https://amzn.to/46pQONx"
+    },
+    {
+        nome: "Pipoqueira Elétrica Mondial",
+        desc: "Pipoca pronta em 3 minutos sem usar óleo.",
+        preco: "149,99",
+        categoria: "casa",
+        loja: "mercadolivre",
+        img: "img/pipoqueiraeletrica.jpeg",
+        link: "https://meli.la/2y41pzb"
+    },
+    {
+        nome: "DOMEZ Tábua de Corte Inox",
+        desc: "Tábua de corte em aço inox, higiênica e durável.",
+        preco: "74,76",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/71t1xnPvyTL._AC_SX679_.jpg",
+        link: "https://amzn.to/4kYeHS9"
+    },
+    {
+        nome: "Umidificador De Ar Ultrassônico",
+        desc: "Umi Pop Health 2,3l Dellamed Cor Branco.",
+        preco: "87,09",
+        categoria: "saude",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_900915-MLA84476647173_052025-F.webp",
+        link: "https://meli.la/2TQSZUx"
+    },
+    {
+        nome: "Veganpro Baunilha - 450g",
+        desc: "À base de proteínas de arroz e ervilha.",
+        preco: "131,58",
+        categoria: "saude",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/81R8-IDpwAL._AC_SX679_.jpg",
+        link: "https://amzn.to/4cPO0NA"
+    },
+    {
+        nome: "Downy Amaciante",
+        desc: "Concentrado Brisa Intenso 3L, Rende 12L.",
+        preco: "49,44",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61a1dtQPN5L._AC_SX679_.jpg",
+        link: "https://amzn.to/4aOVU7i"
     }
 ];
 
 /* ==========================================
-   FUNÇÃO PARA RENDERIZAR PRODUTOS
+   FUNÇÕES DO SISTEMA (NÃO ALTERAR)
    ========================================== */
+
 function carregarProdutos() {
     const grid = document.getElementById('offersGrid');
     if (!grid) return;
