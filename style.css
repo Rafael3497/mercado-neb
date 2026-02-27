@@ -1,237 +1,267 @@
+/* --- VARIÁVEIS E BASE --- */
 :root {
     --primary: #1d4ed8;
+    --primary-dark: #1e40af;
     --secondary: #f8fafc;
     --accent: #fbbf24;
+    --success: #2e7d32;
     --text: #0f172a;
+    --text-light: #64748b;
     --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: var(--text); scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: var(--text); scroll-behavior: smooth; overflow-x: hidden; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-header { background: white; padding: 1rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-.header-content { display: flex; justify-content: space-between; align-items: center; }
-.logo { display: flex; align-items: center; gap: 10px; font-size: 1.6rem; font-weight: 800; color: var(--primary); }
-nav ul { display: flex; list-style: none; gap: 20px; }
-nav a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.9rem; }
-
-/* Estilo base para os links do menu */
-nav ul li a {
-    display: inline-block; /* Necessário para o transform (zoom) funcionar */
-    text-decoration: none;
-    color: var(--text);
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 8px 12px;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efeito elástico */
-}
-
-/* Efeito de Zoom e Cor ao passar o mouse (Hover) */
-nav ul li a:hover {
-    transform: scale(1.15); /* Aumenta 15% o tamanho */
-    color: var(--primary);  /* Muda para o azul principal */
-}
-
-/* Efeito específico para o link do WhatsApp no menu (mantendo o verde) */
-.nav-whatsapp:hover {
-    color: #128c7e !important; /* Um verde um pouco mais escuro no hover */
-    transform: scale(1.15);
-}
-
-/* Adicionando uma pequena linha embaixo (opcional, fica bem moderno) */
-nav ul li a::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: width .3s;
-}
-
-nav ul li a:hover::after {
-    width: 100%;
-}
-
-/* Ajuste para o link do WhatsApp não ter a linha azul, mas sim verde */
-.nav-whatsapp::after {
-    background: #25d366 !important;
-}
-
-.carousel { position: relative; height: 400px; overflow: hidden; background: #000; }
-.slide { position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.8s ease-in-out; }
-.slide.active { opacity: 1; }
-.slide-content { text-align: center; color: white; padding: 20px; }
-.slide-content h1 { font-size: 3rem; font-weight: 800; margin-bottom: 10px; }
-
-.prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.2); border: none; color: white; padding: 15px; cursor: pointer; border-radius: 50%; z-index: 10; font-size: 1.2rem; }
-.next { right: 30px; } .prev { left: 30px; }
-.dots { position: absolute; bottom: 20px; width: 100%; text-align: center; }
-.dot { height: 10px; width: 10px; background: rgba(255,255,255,0.4); display: inline-block; border-radius: 50%; cursor: pointer; margin: 0 5px; }
-.dot.active { background: white; width: 25px; border-radius: 10px; }
-
-.search-section { margin: 40px auto; }
-.search-box { background: white; display: flex; align-items: center; padding: 18px 30px; border-radius: 15px; box-shadow: var(--shadow); border: 1px solid #e2e8f0; }
-.search-box i { color: #94a3b8; font-size: 1.2rem; }
-.search-box input { border: none; outline: none; width: 100%; margin-left: 15px; font-size: 1.1rem; }
-
-.grid-offers { display: grid; gap: 30px; grid-template-columns: repeat(4, 1fr); margin-bottom: 60px; }
-.card { background: white; border-radius: 16px; overflow: hidden; transition: 0.4s; border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
-.card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
-.card-img img { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid #f1f5f9; }
-.card-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
-.card-info h3 { font-size: 1.1rem; margin-bottom: 8px; font-weight: 700; height: 2.6rem; overflow: hidden; }
-.card-info p { font-size: 0.85rem; color: #64748b; margin-bottom: 20px; flex-grow: 1; }
-.btn-buy { background: var(--primary); color: white; text-decoration: none; padding: 14px; border-radius: 10px; text-align: center; font-weight: 700; transition: 0.3s; }
-.btn-buy:hover { background: #1e40af; letter-spacing: 0.5px; }
-
-footer { background: white; padding: 40px; text-align: center; border-top: 1px solid #e2e8f0; color: #64748b; }
-
-/* Responsividade */
-/* --- AJUSTE DO HEADER PARA TELAS PEQUENAS --- */
-
+/* --- HEADER --- */
 header { 
     background: white; 
-    padding: 0.8rem 0; /* Diminuído para ganhar espaço vertical */
+    padding: 1rem 0; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
     position: sticky; 
     top: 0; 
     z-index: 1000; 
 }
 
-.header-content { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    flex-wrap: wrap; /* Permite que o menu desça se não houver espaço */
-    gap: 10px;
-}
+.header-content { display: flex; justify-content: space-between; align-items: center; }
 
 .logo { 
     display: flex; 
     align-items: center; 
-    gap: 6px; 
-    font-size: 1.2rem; /* Fonte reduzida para mobile */
+    gap: 10px; 
+    font-size: 1.6rem; 
     font-weight: 800; 
     color: var(--primary); 
-    white-space: nowrap; /* Impede que o nome quebre em duas linhas */
+    white-space: nowrap;
 }
 
-nav ul { 
+nav ul { display: flex; list-style: none; gap: 15px; align-items: center; }
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    position: relative;
+    transition: var(--transition);
+}
+
+nav ul li a:hover { color: var(--primary); transform: scale(1.05); }
+
+/* Linha animada embaixo do menu */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after { width: calc(100% - 24px); }
+
+.nav-whatsapp { color: #25d366 !important; }
+.nav-whatsapp:hover { color: #128c7e !important; }
+.nav-whatsapp::after { background: #25d366 !important; }
+
+/* --- CARROSSEL --- */
+.carousel { position: relative; height: 400px; overflow: hidden; background: #000; }
+
+.slide { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
     display: flex; 
-    list-style: none; 
-    gap: 10px; /* Espaço reduzido entre links no mobile */
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0; 
+    transition: opacity 1.2s ease-in-out; 
 }
 
-nav a { 
+.slide.active { opacity: 1; }
+
+.slide-content { text-align: center; color: white; padding: 0 25px; max-width: 900px; }
+
+.slide-content h1 { 
+    font-size: 3rem; 
+    font-weight: 800; 
+    margin-bottom: 15px; 
+    line-height: 1.1; 
+}
+
+.slide-content p { font-size: 1.2rem; line-height: 1.4; opacity: 0.9; }
+
+/* --- BUSCA --- */
+.search-section { margin: 40px auto; }
+
+.search-box { 
+    background: white; 
+    display: flex; 
+    align-items: center; 
+    padding: 15px 25px; 
+    border-radius: 15px; 
+    box-shadow: var(--shadow); 
+    border: 1px solid #e2e8f0; 
+    transition: var(--transition);
+}
+
+.search-box:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1); }
+
+.search-box input { border: none; outline: none; width: 100%; margin-left: 15px; font-size: 1.1rem; color: var(--text); }
+
+/* --- GRID E CARDS (O SEGREDO DA IMAGEM ESTÁ AQUI) --- */
+.grid-offers { 
+    display: grid; 
+    gap: 30px; 
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+    margin-bottom: 60px; 
+}
+
+.card { 
+    background: white; 
+    border-radius: 16px; 
+    overflow: hidden; 
+    transition: var(--transition); 
+    border: 1px solid #e2e8f0; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15); }
+
+/* Área da Imagem Ajustada */
+.card-img { 
+    width: 100%;
+    height: 220px; 
+    padding: 20px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.card-img img { 
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* GARANTE QUE NÃO DÊ ZOOM/CORTE */
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img img { transform: scale(1.1); }
+
+.card-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+
+.card-info h3 { 
+    font-size: 1.1rem; 
+    margin-bottom: 8px; 
+    font-weight: 700; 
+    min-height: 2.8rem; 
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-info p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px; flex-grow: 1; }
+
+/* --- PREÇO E BOTÃO --- */
+.price-container { margin-bottom: 15px; color: var(--success); font-weight: 800; display: flex; align-items: baseline; gap: 4px; }
+.price-label { font-size: 0.9rem; }
+.price-value { font-size: 1.5rem; }
+
+.btn-buy { 
+    background: var(--primary); 
+    color: white; 
     text-decoration: none; 
-    color: var(--text); 
-    font-weight: 600; 
-    font-size: 0.85rem; /* Fonte menor para caber tudo */
-    padding: 5px;
+    padding: 14px; 
+    border-radius: 12px; 
+    text-align: center; 
+    font-weight: 700; 
+    transition: var(--transition); 
 }
 
-/* --- MEDIA QUERIES ESPECÍFICAS (A partir de 375px) --- */
+.btn-buy:hover { background: var(--primary-dark); transform: scale(1.05); }
+
+/* --- FOOTER --- */
+footer { background: white; padding: 40px; text-align: center; border-top: 1px solid #e2e8f0; color: var(--text-light); }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .grid-offers { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .slide-content h1 { font-size: 2rem; }
+}
 
 @media (max-width: 480px) {
-    .header-content {
-        justify-content: center; /* Centraliza tudo no celular */
-    }
+    .header-content { justify-content: center; flex-direction: column; gap: 15px; }
+    .logo { font-size: 1.3rem; }
+    nav ul { gap: 8px; }
+    nav ul li a { font-size: 0.8rem; padding: 5px 8px; }
     
-    .logo {
-        font-size: 1.1rem;
-        margin-bottom: 5px; /* Dá um respiro antes do menu */
-    }
-
-    nav ul {
-        gap: 8px;
-    }
-
-    nav a {
-        font-size: 0.8rem; /* Fonte compacta para telas de 375px */
-    }
-
-    /* Ajuste do Carrossel para não ficar gigante no celular */
-    .carousel { 
-        height: 250px; 
-    }
+    .carousel { height: 280px; }
+    .slide-content h1 { font-size: 1.6rem; }
+    .slide-content p { font-size: 0.95rem !important; }
     
-    .slide-content h1 { 
-        font-size: 1.5rem; 
-    }
-    
-    .slide-content p {
-        font-size: 0.9rem !important;
-    }
-
-    /* Ajuste dos Cards: 1 coluna bem definida */
-    .grid-offers { 
-        grid-template-columns: 1fr; 
-        gap: 20px;
-        padding: 0 10px;
-    }
+    .grid-offers { grid-template-columns: 1fr; padding: 0 10px; }
+    .card-img { height: 180px; }
 }
 
-/* Ajuste fino para telas muito estreitas (abaixo de 360px) */
-@media (max-width: 360px) {
-    .logo span {
-        font-size: 1rem;
-    }
-    nav a {
-        font-size: 0.75rem;
-    }
-}
-    /* Efeito de Zoom Suave em todos os botões interativos */
-.btn-buy, .prev, .next, .nav-whatsapp, .dot {
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s;
-}
-
-.slide-content p {
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.4;
-}
-
-@media (max-width: 600px) {
-    .slide-content p {
-        font-size: 1.1rem !important; /* Ajusta o tamanho no celular */
-        padding: 0 10px;
-    }
-}
-
-/* Aplicando o Zoom (1.1 significa 10% de aumento) */
-.btn-buy:hover, .nav-whatsapp:hover {
-    transform: scale(1.1);
-}
-
-/* Zoom nos botões de navegação do carrossel */
-.prev:hover, .next:hover {
-    transform: translateY(-50%) scale(1.2); /* Mantém o alinhamento vertical e dá zoom */
-    background: rgba(0, 0, 0, 0.5);
-}
-
-/* Zoom nos indicadores (pontinhos) do carrossel */
-.dot:hover {
-    transform: scale(1.5);
-}
-
-.card:hover {
-    transform: translateY(-10px) scale(1.02); /* Sobe um pouco e dá um zoom de 2% */
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
-}
-
-/* Zoom apenas na imagem do produto ao passar o mouse no card */
-.card:hover .card-img img {
-    transform: scale(1.1);
-}
-
+/* --- ETIQUETAS DE LOJA --- */
 .card-img {
-    overflow: hidden; /* Garante que a imagem não saia dos limites do card ao dar zoom */
+    position: relative; /* Necessário para posicionar a etiqueta */
 }
 
-.card-img img {
-    transition: transform 0.5s ease; /* Transição mais lenta para a imagem ficar elegante */
+.badge-loja {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: white;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.badge-loja.amazon {
+    background: #ff9900; /* Laranja Amazon */
+    color: #000;
+}
 
+.badge-loja.mercadolivre {
+    background: #fff159; /* Amarelo Mercado Livre */
+    color: #333;
+}
 
+/* --- EFEITO NO PREÇO AO PASSAR O MOUSE --- */
+
+/* 1. Definimos a animação de pulsação */
+@keyframes pricePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); color: #1b5e20; } /* Fica um verde mais escuro e cresce */
+    100% { transform: scale(1.15); color: #1b5e20; }
+}
+
+.price-container {
+    transition: all 0.3s ease;
+    display: inline-block; /* Necessário para o transform funcionar bem */
+    transform-origin: left center; /* O zoom começa da esquerda para a direita */
+}
+
+/* Quando passar o mouse no CARD, o PREÇO reage */
+.card:hover .price-container {
+    animation: pricePulse 0.4s forwards; /* Aplica a pulsação */
+    text-shadow: 0 2px 10px rgba(46, 125, 50, 0.2); /* Adiciona um brilho verde suave */
+}
+
+.price-value {
+    transition: all 0.3s ease;
+}

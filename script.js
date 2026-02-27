@@ -1,41 +1,266 @@
-let currentIdx = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
+/* ==========================================
+   BANCO DE DADOS DE PRODUTOS
+   ========================================== */
+const meusProdutos = [
 
-function showSlide(index) {
-    if (index >= slides.length) currentIdx = 0;
-    else if (index < 0) currentIdx = slides.length - 1;
-    else currentIdx = index;
+            {
+        nome: "O Pequeno Príncipe ",
+        desc: "Edição de Luxo Almofadada ",
+        preco: "12,90",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/71IiouhdpAL._SL1500_.jpg",
+        link: "https://amzn.to/4bbmQj0"
+    },
+        {
+        nome: "Escrivaninha Trevalla Kuadra",
+        desc: "Me150-E10 Industrial 150cm Preto Onix",
+        preco: "240,86",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/71b3InIEJyL._AC_SX679_.jpg",
+        link: "https://amzn.to/4kUrBAK"
+    },
+        {
+        nome: "Suporte De Celular Carro 360",
+        desc: "Melhor Ventosa Gruda No Painel Encaixe Giratório Veicular Ajustável Anti Queda Do Vidro Parabrisa Retrovisor Automático Pra Smartphone Gps Universal Articulado Apoio Preto",
+        preco: "28,08",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_950271-MLA107488132969_022026-F.webp",
+        link: "https://meli.la/1huEcfg"
+    },
+    {
+        nome: "Base Suporte Para PC Notebook",
+        desc: "Alumínio Portátil Articulado Dobrável Tablet Laptop Mesa Davely Cor Prateado",
+        preco: "25,90",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_862425-MLA95804056004_102025-F.webp",
+        link: "https://meli.la/2hbQFNN"
+    },
+    {
+        nome: "Creatina Monohidratada 250g",
+        desc: "Growth Supplements - Sem sabor em Pó",
+        preco: "39,90",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_662415-MLA97812910758_112025-F.webp",
+        link: "https://meli.la/1hCrFuS"
+    },
+    {
+        nome: "Quadro Decorativo Com Prateleira",
+        desc: "Dupla Nicho Moldura Luxo",
+        preco: "35,69",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_739043-MLB100377785271_122025-F.webp",
+        link: "https://meli.la/26B1nGJ"
+    },
+    {
+        nome: "Tenis Branco Feminino",
+        desc: "Esportivo Vili Olimp Academia Treino",
+        preco: "96,52",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_603676-MLB106109346865_012026-F-tenis-branco-feminino-esportivo-vili-olimp-academia-treino.webp",
+        link: "https://meli.la/15n5AjN"
+    },
+        {
+        nome: "Geladeira Electrolux Frost Free Duplex",
+        desc: "Efficient com AutoSense Branca 390L (IF43) 220V",
+        preco: "2.299,00",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/31ZqPaGUjRL._AC_SX679_.jpg",
+        link: "https://amzn.to/4b8NlWh"
+    },
+    {
+        nome: "Bandeja de Bambu",
+        desc: "Marrom Natural 20cm - Mesa Posta - Organização - Utensílios de Cozinha - Enxoval - Decoração - Travessa Retangular - Petisqueira - Utilidades Domésticas",
+        preco: "17,51",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61q2ZyGUf6L._AC_SX679_.jpg",
+        link: "https://amzn.to/4cN6qyr"
+    },
+    {
+        nome: "TCL QLED SMART TV 40",
+        desc: "CL QLED SMART TV 40” 40S5K FHD GOOGLE TV com Wi-Fi e Bluetooth integrados, HDMI, HDR10, DOLBY AUDIO, GOOGLECAST INTEGRADO",
+        preco: "1.357,03",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61Tyj-tyTtL._AC_SX569_.jpg",
+        link: "https://amzn.to/4l7FcEX"
+    },
+    {
+        nome: "Furadeira Parafusadeira 48v",
+        desc: "2 Baterias Recarregáveis Maleta Mandril 10mm Torque 32n.m 0-400/0-1400 Rpm Velocidade Variável Reversível Kit Brocas Bits Soquetes Carregador Bivolt Mackie Ferramentas",
+        preco: "129,00",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_903566-MLA103486375178_012026-F.webp",
+        link: "https://meli.la/2akLXF8"
+    },
+    {
+        nome: "Panela Pipoqueira",
+        desc: "Tramontina profissional em alumínio.",
+        preco: "120,21",
+        loja: "mercadolivre",
+        img: "img/panela.png",
+        link: "https://meli.la/1xQkhGK"
+    },
+    {
+        nome: "Tábua De Passar Roupa",
+        desc: "Reforçada Com Porta Ferro 3 Alturas.",
+        preco: "78,97",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_860360-MLA98972660483_112025-F.webp",
+        link: "https://meli.la/1nWFot7"
+    },
+    {
+        nome: "Panela de Pressão Elétrica",
+        desc: "Electrolux Digital 6L silenciosa e segura.",
+        preco: "502,55",
+        loja: "amazon",
+        img: "img/PanelaEletrica.png",
+        link: "https://amzn.to/4bcD1wo"
+    },
+    {
+        nome: "Ventilador WAP de Coluna",
+        desc: "50cm FLOW TURBO, silencioso e potente.",
+        preco: "221,81",
+        loja: "amazon",
+        img: "img/ventiladorpe.jpeg",
+        link: "https://amzn.to/46pQONx"
+    },
+    {
+        nome: "Pipoqueira Elétrica Mondial",
+        desc: "Pipoca pronta em 3 minutos sem usar óleo.",
+        preco: "149,99",
+        loja: "mercadolivre",
+        img: "img/pipoqueiraeletrica.jpeg",
+        link: "https://meli.la/2y41pzb"
+    },
+    {
+        nome: "DOMEZ Tábua de Corte Inox",
+        desc: "Tábua de corte em aço inox, higiênica e durável.",
+        preco: "74,76",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/71t1xnPvyTL._AC_SX679_.jpg",
+        link: "https://amzn.to/4kYeHS9"
+    },
+    {
+        nome: "Umidificador De Ar Ultrassônico",
+        desc: "Umi Pop Health 2,3l Dellamed Cor Branco.",
+        preco: "87,09",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_900915-MLA84476647173_052025-F.webp",
+        link: "https://meli.la/2TQSZUx"
+    },
+    {
+        nome: "Veganpro Baunilha - 450g",
+        desc: "À base de proteínas de arroz e ervilha.",
+        preco: "131,58",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/81R8-IDpwAL._AC_SX679_.jpg",
+        link: "https://amzn.to/4cPO0NA"
+    },
+    {
+        nome: "Downy Amaciante",
+        desc: "Concentrado Brisa Intenso 3L, Rende 12L, Perfume Intenso com Notas de Rosas e Frutas Vermelhas",
+        preco: "49,44",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61a1dtQPN5L._AC_SX679_.jpg",
+        link: "https://amzn.to/4aOVU7i"
+    },
 
-    slides.forEach(s => s.classList.remove('active'));
-    dots.forEach(d => d.classList.remove('active'));
+];
+
+/* ==========================================
+   FUNÇÃO PARA RENDERIZAR PRODUTOS
+   ========================================== */
+function carregarProdutos() {
     
-    slides[currentIdx].classList.add('active');
-    dots[currentIdx].classList.add('active');
+    const grid = document.getElementById('offersGrid');
+    if (!grid) return;
+
+    // Criamos o HTML para cada produto da lista
+    const htmlProdutos = meusProdutos.map(p => `
+        <div class="card" data-name="${p.nome}">
+            <div class="card-img">
+                <img src="${p.img}" alt="${p.nome}" loading="lazy">
+            </div>
+            <div class="card-info">
+                <h3>${p.nome}</h3>
+                <p>${p.desc}</p>
+                <div class="price-container" style="margin: 10px 0; color: #2e7d32; font-weight: 800;">
+                    <span style="font-size: 0.9rem;">R$</span>
+                    <span style="font-size: 1.4rem;">${p.preco}</span>
+                </div>
+                <a href="${p.link}" target="_blank" class="btn-buy">Comprar agora</a>
+            </div>
+        </div>
+    `).join('');
+
+    grid.innerHTML = htmlProdutos;
 }
 
-function moveSlide(step) {
-    showSlide(currentIdx + step);
+/* ==========================================
+   CARROSSEL AUTOMÁTICO
+   ========================================== */
+let slideIndex = 0;
+function showSlides() {
+    let slides = document.getElementsByClassName("slide");
+    if (slides.length === 0) return;
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.opacity = "0";
+        slides[i].classList.remove("active");
+    }
+    
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1; }
+    
+    slides[slideIndex - 1].style.opacity = "1";
+    slides[slideIndex - 1].classList.add("active");
+    
+    setTimeout(showSlides, 8000);
 }
 
-function currentSlide(index) {
-    showSlide(index);
-}
-
-// Auto Play a cada 5 segundos
-setInterval(() => moveSlide(1), 5000);
-
-// Filtro de Busca Inteligente
+/* ==========================================
+   SISTEMA DE BUSCA
+   ========================================== */
 function filterOffers() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
-    const cards = document.querySelectorAll('.card');
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let cards = document.getElementsByClassName('card');
+    
+    for (let i = 0; i < cards.length; i++) {
+        let name = cards[i].getAttribute('data-name').toLowerCase();
+        cards[i].style.display = name.includes(input) ? "" : "none";
+    }
+}
 
-    cards.forEach(card => {
-        const name = card.getAttribute('data-name').toLowerCase();
-        if (name.includes(input)) {
-            card.style.display = "flex";
-        } else {
-            card.style.display = "none";
-        }
-    });
+/* ==========================================
+   INICIALIZAÇÃO AO CARREGAR A PÁGINA
+   ========================================== */
+window.onload = function() {
+    carregarProdutos();
+    showSlides();
+};
+
+function carregarProdutos() {
+    const grid = document.getElementById('offersGrid');
+    if (!grid) return;
+
+    grid.innerHTML = meusProdutos.map(p => {
+        // Define o nome de exibição da loja
+        const lojaNome = p.loja === 'amazon' ? 'Amazon' : 'Mercado Livre';
+        
+        return `
+        <div class="card" data-name="${p.nome}">
+            <div class="card-img">
+                <span class="badge-loja ${p.loja}">${lojaNome}</span>
+                <img src="${p.img}" alt="${p.nome}" loading="lazy">
+            </div>
+            <div class="card-info">
+                <h3>${p.nome}</h3>
+                <p>${p.desc}</p>
+                <div class="price-container">
+                    <span class="price-label">R$</span>
+                    <span class="price-value">${p.preco}</span>
+                </div>
+                <a href="${p.link}" target="_blank" class="btn-buy">Comprar na ${lojaNome}</a>
+            </div>
+        </div>
+    `}).join('');
 }
