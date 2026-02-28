@@ -3,6 +3,26 @@
    ========================================== */
 const meusProdutos = [
     {
+        nome: "Finish Detergente para Lava Louças em pó 700g",
+        desc: "Finish Power Powder Advanced é o seu detergente lava louças em pó que oferece limpeza profunda na dose certa.",
+        preco: "32,69",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61rDfENoVVL._AC_SX679_.jpg",
+        link: "https://amzn.to/4cSTN4Y"
+    },
+    {
+        nome: "Kit Com 4 Toalhas Banhão Gigante Alta Absorção Sublime 70x150cm",
+        desc: "Quantidade de Peças: 4 Toalhas Banhão Gigante Medidas 70cm x 150cm, Peso Unitário 350 Gramas Gramatura 330g/m2, Material100% Algodão Qualidade Premium",
+        preco: "98,99",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/81Arq7i+7ML._AC_SX679_.jpg",
+        link: "https://amzn.to/4rEcjCH"
+    },
+
+
+    {
         nome: "Heinz Ketchup Tradicional 1,033KG",
         desc: "Tomate, açúcar, vinagre, sal, cebola e aroma natural. NÃO CONTÉM GLÚTEN.",
         preco: "23,50",
