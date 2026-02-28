@@ -295,7 +295,7 @@ function carregarProdutos() {
                     <i class="fas fa-exclamation-triangle"></i> O valor poderá alterar a qualquer momento!
                 </div>
                 <div class="card-actions">
-                    <a href="${p.link}" target="_blank" class="btn-buy">Comprar ${artigo} ${lojaNome}</a>
+                    <a href="${p.link}" target="_blank" class="btn-buy" onclick="registrarClique('${p.nome}', '${lojaNome}')">Comprar ${artigo} ${lojaNome}</a>
                     <button class="btn-share" onclick="compartilhar('${p.nome}', '${p.link}')" title="Compartilhar">
                         <i class="fas fa-share-alt"></i>
                     </button>
@@ -303,6 +303,17 @@ function carregarProdutos() {
             </div>
         </div>
     `}).join('');
+}
+
+// NOVA FUNÇÃO PARA O ANALYTICS
+function registrarClique(produto, loja) {
+    if (typeof gtag === 'function') {
+        gtag('event', 'clique_produto', {
+            'event_category': 'vendas',
+            'event_label': produto,
+            'loja_destino': loja
+        });
+    }
 }
 
 function filtrarCategoria(cat) {
