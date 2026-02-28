@@ -3,6 +3,26 @@
    ========================================== */
 const meusProdutos = [
     {
+        nome: "Johnson's Baby Sabonete Líquido Recém Nascido, 200ml",
+        desc: "A espuma leve e aveludada como algodão deixa o toque mais suave e delicado",
+        preco: "20,40",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61RtxYSf-dL._AC_SX679_.jpg",
+        link: "https://amzn.to/4aWaHgF"
+    },
+    {
+        nome: "Teclado USB Com Fio B-Max BM-T02 ABNT2",
+        desc: "Teclado B-Max BM-T02 é um teclado com fio, padrão ABNT2, com conexão USB e compatível com Windows XP/Vista/7/8/10. Ele possui teclas macias e silenciosas, design ergonômico e é resistente a salpicos, USB 2.0, com conexão estável e sem necessidade de pilhas ou baterias.",
+        preco: "29,90",
+        categoria: "escritorio",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_958827-MLA106956089830_022026-F.webp",
+        link: "https://meli.la/1UECRDK"
+    },
+
+
+    {
         nome: "DOWNY Amaciante Concentrado Brisa de Verão 1.6L, Rende 6.4L",
         desc: "VISTA-SE DE PERFUME O DIA TODO: com o amaciante Downy Concentrado. Esse amaciante concentrado é perfeito para manter suas roupas com aquele perfume gostoso por muito tempo.",
         preco: "27,22",
