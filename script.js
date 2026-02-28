@@ -20,8 +20,6 @@ const meusProdutos = [
         img: "https://m.media-amazon.com/images/I/51-AezVhnAL._AC_SX679_.jpg",
         link: "https://amzn.to/4cTzyEg"
     },
-
-
     {
         nome: "Johnson's Baby Sabonete Líquido Recém Nascido, 200ml",
         desc: "A espuma leve e aveludada como algodão deixa o toque mais suave e delicado",
@@ -40,8 +38,6 @@ const meusProdutos = [
         img: "https://http2.mlstatic.com/D_NQ_NP_2X_958827-MLA106956089830_022026-F.webp",
         link: "https://meli.la/1UECRDK"
     },
-
-
     {
         nome: "DOWNY Amaciante Concentrado Brisa de Verão 1.6L, Rende 6.4L",
         desc: "VISTA-SE DE PERFUME O DIA TODO: com o amaciante Downy Concentrado. Esse amaciante concentrado é perfeito para manter suas roupas com aquele perfume gostoso por muito tempo.",
@@ -60,8 +56,6 @@ const meusProdutos = [
         img: "https://m.media-amazon.com/images/I/51JaTQ4FFaL._AC_SX569_.jpg",
         link: "https://amzn.to/4aWTkfI"
     },
-
-
     {
         nome: "Finish Detergente para Lava Louças em pó 700g",
         desc: "Finish Power Powder Advanced é o seu detergente lava louças em pó que oferece limpeza profunda na dose certa.",
@@ -80,8 +74,6 @@ const meusProdutos = [
         img: "https://m.media-amazon.com/images/I/81Arq7i+7ML._AC_SX679_.jpg",
         link: "https://amzn.to/4rEcjCH"
     },
-
-
     {
         nome: "Heinz Ketchup Tradicional 1,033KG",
         desc: "Tomate, açúcar, vinagre, sal, cebola e aroma natural. NÃO CONTÉM GLÚTEN.",
@@ -91,7 +83,7 @@ const meusProdutos = [
         img: "https://m.media-amazon.com/images/I/51653ltvYsL._AC_SY300_SX300_QL70_ML2_.jpg",
         link: "https://amzn.to/3MVIBdd"
     },
-     {
+    {
         nome: "Finish Secante para Lava-Louças e Abrilhantador 250ml",
         desc: "Finish Secante e Abrilhantador é o líquido secante para máquina lava louças que deixa a louça seca e perfeitamente brilhante, pronta para o uso.",
         preco: "30,39",
@@ -100,7 +92,7 @@ const meusProdutos = [
         img: "https://m.media-amazon.com/images/I/71M8mqH9RrL._AC_SX679_.jpg",
         link: "https://amzn.to/4tYjkQo"
     },
-     {
+    {
         nome: " Kit 2 Pulverizador Spray De Azeite , Vidro, 100ml, , Saladas Prateado",
         desc: "Mais controle, menos exagero! Esse kit com 2 pulverizadores de vidro (100ml cada) é perfeito para temperar saladas, finalizar pratos e usar no preparo de carnes e legumes sem encharcar tudo de óleo.",
         preco: "21,80",
@@ -394,7 +386,7 @@ function carregarProdutos() {
                 </div>
                 <div class="card-actions">
                     <a href="${p.link}" target="_blank" class="btn-buy" onclick="registrarClique('${p.nome}', '${lojaNome}')">Comprar ${artigo} ${lojaNome}</a>
-                    <button class="btn-share" onclick="compartilhar('${p.nome}', '${p.link}')" title="Compartilhar">
+                    <button class="btn-share" onclick="compartilharOferta('${p.nome}', '${p.preco}')" title="Compartilhar">
                         <i class="fas fa-share-alt"></i>
                     </button>
                 </div>
