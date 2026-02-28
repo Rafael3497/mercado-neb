@@ -2,6 +2,24 @@
    BANCO DE DADOS DE PRODUTOS (COMPLETO)
    ========================================== */
 const meusProdutos = [
+    {
+        nome: "Heinz Ketchup Tradicional 1,033KG",
+        desc: "Tomate, açúcar, vinagre, sal, cebola e aroma natural. NÃO CONTÉM GLÚTEN.",
+        preco: "23,50",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/51653ltvYsL._AC_SY300_SX300_QL70_ML2_.jpg",
+        link: "https://amzn.to/3MVIBdd"
+    },
+     {
+        nome: "Finish Secante para Lava-Louças e Abrilhantador 250ml",
+        desc: "Finish Secante e Abrilhantador é o líquido secante para máquina lava louças que deixa a louça seca e perfeitamente brilhante, pronta para o uso.",
+        preco: "30,39",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/71M8mqH9RrL._AC_SX679_.jpg",
+        link: "https://amzn.to/4tYjkQo"
+    },
      {
         nome: " Kit 2 Pulverizador Spray De Azeite , Vidro, 100ml, , Saladas Prateado",
         desc: "Mais controle, menos exagero! Esse kit com 2 pulverizadores de vidro (100ml cada) é perfeito para temperar saladas, finalizar pratos e usar no preparo de carnes e legumes sem encharcar tudo de óleo.",
