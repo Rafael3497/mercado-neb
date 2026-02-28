@@ -429,10 +429,10 @@ function compartilharOferta(titulo, preco) {
     // Montagem da mensagem com formatação para WhatsApp
     // _texto_ deixa em itálico no WhatsApp
     const texto = `🛍️ *OFERTA NO MERCADO NEB* \n\n` +
-                  `📦 *Produto:* *${titulo}*\n\n` +
-                  `💰 *Preço:* R$ ${preco}\n\n` +
-                  `🚚 _Frete Grátis_ \n\n` + 
-                  `🔗 *Confira os detalhes e compre pelo site:* \n` +
+                  `📦 *Produto:* *${titulo} 📦*\n\n` +
+                  `*Por apenas:* *R$ ${preco} 💰*\n\n` +
+                  `_Frete Grátis_ 🚚\n\n` + 
+                  `🔗 *Confira os detalhes e compre pelo Mercado NEB:* \n` +
                   `${urlSite}`;
 
     // Codifica para URL e abre o compartilhamento
