@@ -3,6 +3,26 @@
    ========================================== */
 const meusProdutos = [
     {
+        nome: "Balança Digital De Vidro Corporal Temperado Até 180 Kg",
+        desc: "A Balança Digital Comica é ideal para quem procura precisão, praticidade e um design moderno para o dia a dia. Desenvolvida em vidro temperado e com sensores de alta precisão, proporciona pesagens confiáveis e rápidas.",
+        preco: "35,99",
+        categoria: "fitness",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_716290-MLA96186710666_102025-F.webp",
+        link: "https://meli.la/2eyo2JC"
+    },
+    {
+        nome: "Top Puma Sem Costura Microfibra de Poliamida Feminino Adulto",
+        desc: "Top Academia Puma Alta Sustentação Sem Bojo Sem Costura,Conforto Inigualável: Design anatômico sem bojo, feito para se ajustar perfeitamente ao corpo",
+        preco: "48,99",
+        categoria: "fitness",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/51-AezVhnAL._AC_SX679_.jpg",
+        link: "https://amzn.to/4cTzyEg"
+    },
+
+
+    {
         nome: "Johnson's Baby Sabonete Líquido Recém Nascido, 200ml",
         desc: "A espuma leve e aveludada como algodão deixa o toque mais suave e delicado",
         preco: "20,40",
