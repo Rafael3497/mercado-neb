@@ -430,14 +430,20 @@ function filtrarCategoria(cat) {
     });
 }
 
-function compartilhar(nome, link) {
-    const texto = `🌟 *Oferta no Mercado NEB!*\n\n*${nome}*\n\nConfira aqui: ${link}`;
-    if (navigator.share) {
-        navigator.share({ title: 'Mercado NEB', text: texto, url: link }).catch(console.error);
-    } else {
-        const urlZap = `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
-        window.open(urlZap, '_blank');
-    }
+function compartilharOferta(titulo, preco) {
+    // URL oficial do Mercado NEB no Netlify
+    const urlSite = "https://mercadoneb.netlify.app/"; 
+    
+    // Montagem da mensagem com formatação para WhatsApp
+    const texto = `🛍️ *OFERTA NO MERCADO NEB* \n\n` +
+                  `📦 *Produto:* ${titulo}\n` +
+                  `💰 *Preço:* R$ ${preco}\n\n` +
+                  `🔗 *Confira os detalhes e compre pelo site:* \n` +
+                  `${urlSite}`;
+
+    // Codifica para URL e abre o compartilhamento
+    const mensagemFinal = encodeURIComponent(texto);
+    window.open(`https://api.whatsapp.com/send?text=${mensagemFinal}`, '_blank');
 }
 
 let slideIndex = 0;
