@@ -3,6 +3,26 @@
    ========================================== */
 const meusProdutos = [
     {
+        nome: "DOWNY Amaciante Concentrado Brisa de Verão 1.6L, Rende 6.4L",
+        desc: "VISTA-SE DE PERFUME O DIA TODO: com o amaciante Downy Concentrado. Esse amaciante concentrado é perfeito para manter suas roupas com aquele perfume gostoso por muito tempo.",
+        preco: "27,22",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61qzAq1p+pL._AC_SX679_.jpg",
+        link: "https://amzn.to/4rm3dd7"
+    },
+    {
+        nome: "Ar Condicionado Split Dual Inverter 9000 Btus Lg Compact + Ia Frio S3nq09aaqak.eb2gam1-220v",
+        desc: "AI - Inteligência Artificial, Refrigeração até 30% mais rápida, Até 60% de economia de energia",
+        preco: "1.999,00",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/51JaTQ4FFaL._AC_SX569_.jpg",
+        link: "https://amzn.to/4aWTkfI"
+    },
+
+
+    {
         nome: "Finish Detergente para Lava Louças em pó 700g",
         desc: "Finish Power Powder Advanced é o seu detergente lava louças em pó que oferece limpeza profunda na dose certa.",
         preco: "32,69",
