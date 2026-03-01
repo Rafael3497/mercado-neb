@@ -311,3 +311,159 @@ footer { background: white; padding: 40px; text-align: center; border-top: 1px s
     .btn-share { padding: 16px; }
     .filter-btn { font-size: 0.8rem; padding: 6px 14px; }
 }
+
+/* Efeito de carregamento (Skeleton) */
+.skeleton {
+    background: #e2e8f0;
+    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+    border-radius: 8px;
+    background-size: 200% 100%;
+    animation: shine 1.5s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+/* Tamanhos dos espaços reservados */
+.skeleton-img { width: 100%; height: 200px; margin-bottom: 10px; }
+.skeleton-title { width: 80%; height: 20px; margin-bottom: 10px; }
+.skeleton-text { width: 100%; height: 15px; margin-bottom: 5px; }
+
+/* --- CONTAINER DO FILTRO RETRÁTIL --- */
+
+.price-filter-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    margin: 10px 0 30px; /* Margem ajustada para não colar no grid */
+    position: relative;
+}
+
+.btn-filter-toggle {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    z-index: 101;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-filter-toggle:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Botão de Favoritos (Padrão) */
+.btn-fav-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Botão de Favoritos (Padrão) */
+.btn-fav-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+/* O coração SEMPRE vermelho */
+.btn-fav-filter i {
+    color: #ef4444 !important; /* Força o vermelho */
+    transition: var(--transition);
+}
+
+/* ESTADO ATIVO: Quando o filtro de favoritos está ligado (Fundo Azul) */
+.btn-fav-filter.active {
+    background: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+}
+
+/* Garante que o ícone continue vermelho quando ativo */
+.btn-fav-filter.active i {
+    color: #ef4444 !important;
+    /* >>> NOVA LEVE SOMBRA BRANCA EM VOLTA (EFEITO GLOW) <<< */
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+}
+.price-panel {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 280px;
+    position: absolute; 
+    top: 50px; 
+    right: 0;
+    z-index: 100;
+    border: 1px solid #e2e8f0;
+}
+
+.price-panel p {
+    text-align: left;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+#priceRange {
+    width: 100%;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+/* Garante que o painel suma corretamente */
+.price-panel.hidden {
+    display: none !important;
+}
+
+/* CORAÇAO DE FAVORITO Container da imagem precisa ser relativo para o coração "grudar" nele */
+.card-img {
+    position: relative; 
+}
+
+.btn-favorite {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: var(--transition);
+    z-index: 10;
+    color: #cbd5e1; /* Cor cinza quando não favoritado */
+}
+
+.btn-favorite:hover {
+    transform: scale(1.2);
+}
+
+/* Classe que será aplicada via JS quando o produto for favoritado */
+.btn-favorite.active {
+    color: #ef4444; /* Vermelho vibrante */
+    animation: heartBeat 0.3s ease-in-out;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1.2); }
+}

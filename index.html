@@ -28,6 +28,7 @@
             <div class="logo">
                 <i class="fas fa-shopping-basket"></i>
                 <span>Mercado NEB</span>
+                
             </div>
             <nav>
                 <ul>
@@ -92,11 +93,23 @@
     <section class="search-section container">
         <div class="search-box">
             <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Pesquisar ofertas (ex: iPhone, Alexa...)" onkeyup="filterOffers()">
+            <input type="text" id="searchInput" placeholder="Pesquisar ofertas (ex: Camisa, Alexa...)" onkeyup="filterOffers()">
         </div>
+
+        <div class="price-filter-wrapper">
+    <button id="togglePriceFilter" class="btn-filter-toggle">
+        <i class="fas fa-filter"></i> Filtrar Preço
+    </button>
+    
+    <div id="priceFilterPanel" class="price-panel hidden">
+        <p>Máximo: <strong>R$ <span id="priceValue">---</span></strong></p>
+        <input type="range" id="priceRange" min="0" step="10">
+   </div>
+</div>
 
         <div class="filter-wrapper">
             <button class="filter-btn active" onclick="filtrarCategoria('todos')">Todos</button>
+            <button class="filter-btn btn-fav-filter" onclick="filtrarFavoritos()"><i class="fas fa-heart"></i> Favoritos</button>
             <button class="filter-btn" onclick="filtrarCategoria('eletronicos')">Eletrônicos</button>
             <button class="filter-btn" onclick="filtrarCategoria('casa')">Casa</button>
             <button class="filter-btn" onclick="filtrarCategoria('saude')">Saúde</button>
@@ -104,6 +117,7 @@
             <button class="filter-btn" onclick="filtrarCategoria('livros')">Livros</button>
             <button class="filter-btn" onclick="filtrarCategoria('fitness')">Fitness</button>
             <button class="filter-btn" onclick="filtrarCategoria('escritorio')">Escritório</button>
+           
         </div>
     </section>
 
