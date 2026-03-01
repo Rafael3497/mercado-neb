@@ -592,7 +592,7 @@ function filtrarFavoritos() {
 
 function compartilharOferta(titulo, preco) {
     const urlSite = "https://mercadoneb.netlify.app/"; 
-    const texto = `🛍️ *OFERTA NO MERCADO NEB* \n\n*${titulo} 📦*\n\n*Por apenas:* *R$ ${preco} 💰*\n\n_Frete Grátis_ 🚚\n\n🔗 *Confira os detalhes:* \n${urlSite}`;
+    const texto = `🌟 *OFERTA NO MERCADO NEB* \n\n*${titulo} 📦*\n\n*Por apenas:* *R$ ${preco} 💰*\n\n_Frete Grátis_ 🚚\n\n🛒 *Link da compra:* \n${urlSite}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`, '_blank');
 }
 
