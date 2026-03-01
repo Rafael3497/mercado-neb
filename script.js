@@ -3,6 +3,16 @@
    ========================================== */
 const meusProdutos = [
      {
+        id: "p41",
+        nome: "Kit 12 Pares Meia Masculina Cano Curto Conforto",
+        desc: "Descubra o conforto e a qualidade das Meias Masculinas Cano Curto da marca MEN. Com uma composição em elastano, poliéster e viscose, estas meias oferecem uma sensação agradável ao toque e ótima respirabilidade.",
+        preco: "37,92",
+        categoria: "moda",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_653668-MLB104699259616_012026-O.webp",
+        link: "https://meli.la/2sVzoV5"
+    },
+     {
         id: "p40",
         nome: "Bota Botina Coturno Adventure",
         desc: "Como o conforto é imprescindível, possui parte interna do cabedal confeccionada em tecido macio e respirável, além de ser acolchoada, diminuindo o atrito.",
