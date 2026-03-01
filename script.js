@@ -6,7 +6,7 @@ const meusProdutos = [
       id: "p42",
       nome: "Kit 12 Pares Meia Soquete Cano Curto Unissex Adulto Premium",
       desc: "Ideais para tênis, caminhadas, academia e uso diário, com ajuste firme que não aperta e não escorrega. É aquele tipo de kit para ter sempre à mão: prático, durável e versátil.",
-      preco: 26.90,
+      preco: "26,90",
       categoria: "moda",
       loja: "mercadolivre",
       img: "https://http2.mlstatic.com/D_NQ_NP_893559-MLB98742398254_112025-O-kit-12-pares-meia-soquete-cano-curto-unissex-adulto-premium.webp",
