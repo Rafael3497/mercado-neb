@@ -2,6 +2,16 @@
    BANCO DE DADOS DE PRODUTOS (CORRIGIDO COM ID)
    ========================================== */
 const meusProdutos = [
+     {
+        id: "p40",
+        nome: "Bota Botina Coturno Adventure",
+        desc: "Como o conforto é imprescindível, possui parte interna do cabedal confeccionada em tecido macio e respirável, além de ser acolchoada, diminuindo o atrito.",
+        preco: "152,99",
+        categoria: "moda",
+        loja: "mercadolivre",
+        img: " https://http2.mlstatic.com/D_NQ_NP_627023-MLB79722421769_102024-O-bota-botina-coturno-adventure-bico-pvc-trabalho-couro-12hrs.webp",
+        link: "https://meli.la/1KJW1nZ"
+    },
     {
         id: "p1",
         nome: "Balança Digital De Vidro Corporal Temperado Até 180 Kg",
