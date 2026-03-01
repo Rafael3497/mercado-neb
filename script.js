@@ -410,6 +410,20 @@ function verificarStatusFavorito(produtoId) {
     return listaFavoritosNEB.includes(String(produtoId));
 }
 
+function mostrarNotificacao(mensagem) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<i class="fas fa-heart"></i> ${mensagem}`;
+    
+    container.appendChild(toast);
+
+    // Remove do HTML depois que a animação de sumir acabar
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
 function toggleFavorito(event, produtoId) {
     if (event) {
         event.preventDefault();
@@ -433,7 +447,22 @@ function toggleFavorito(event, produtoId) {
     if (btnAtivo) {
         filtrarFavoritos(); 
     }
+    // Ache essa parte no seu toggleFavorito e adicione a linha da notificação:
+    if (index === -1) {
+    listaFavoritosNEB.push(String(produtoId));
+    btn.classList.add('active');
+    if(icone) { icone.classList.remove('far'); icone.classList.add('fas'); }
+    
+    mostrarNotificacao("Salvo nos favoritos! ❤️"); // <--- ADICIONE AQUI
+    } else {
+    listaFavoritosNEB.splice(index, 1);
+    btn.classList.remove('active');
+    if(icone) { icone.classList.remove('fas'); icone.classList.add('far'); }
+    
+    mostrarNotificacao("Removido dos favoritos."); // <--- ADICIONE AQUI
+    }
 }
+
 
 /* ==========================================
    FUNÇÕES DO SISTEMA
