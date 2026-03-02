@@ -2,6 +2,26 @@
    BANCO DE DADOS DE PRODUTOS (CORRIGIDO COM ID)
    ========================================== */
 const meusProdutos = [
+{
+  id: "p45",
+  nome: " Buba Pote Termico C/Colher Degrade Azul",
+  desc: "O Pote Térmico Gumy da Buba acompanha talher e é ideal para refeições fora de casa, pois ajuda a conservar a temperatura dos alimentos (quentes ou frios) por mais de 5 horas.",
+  preco: "89,91",
+  categoria: "casa",
+  loja: "amazon",
+  img: " https://m.media-amazon.com/images/I/514yQd52YoL._AC_UF894,1000_QL80_FMwebp_.jpg",
+  link: "https://amzn.to/4r2ZLDO"
+},
+{
+  id: "p44",
+  nome: " Pote Termico C/Colher - Gumy Verde, Buba, Verde",
+  desc: "O Pote Térmico Gumy da Buba acompanha talher e é ideal para refeições fora de casa, pois ajuda a conservar a temperatura dos alimentos (quentes ou frios) por mais de 5 horas.",
+  preco: "95,30",
+  categoria: "casa",
+  loja: "amazon",
+  img: " https://m.media-amazon.com/images/I/41D0T4KyttS._AC_UF894,1000_QL80_FMwebp_.jpg",
+  link: " https://amzn.to/4cVEMzo"
+},
    {
       id: "p43",
       nome: "Lanterna T9",
