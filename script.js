@@ -3,6 +3,16 @@
    ========================================== */
 const meusProdutos = [
 {
+        id: "p47",
+        nome: "Megafone Amplificador De Voz Portátil C/ Microfone Usb Rádio",
+        desc: "Megafone Amplificador de Voz Recarregável com Rádio FM, USB, Micro SD e Power Bank – Ideal para Professores, Palestras, Eventos, Guias de Turismo e Escolas",
+        preco: "68,78",
+        categoria: "eletronicos",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_700426-MLB92051578723_092025-O.webp",
+        link: "https://meli.la/2ynMFjf"
+    },
+{
         id: "p46",
         nome: "Garrafa Térmica 1 Litro Com Termômetro Led Para Chás / Café",
         desc: " Cabo de Madeira Confortável: O cabo em madeira proporciona uma pegada ergonômica e elegante, além de oferecer um visual clássico e requintado.",
