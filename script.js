@@ -6,7 +6,7 @@ const meusProdutos = [
         id: "p46",
         nome: " Garrafa Térmica 1 Litro Com Termômetro Led Para Chás / Café",
         desc: " Cabo de Madeira Confortável: O cabo em madeira proporciona uma pegada ergonômica e elegante, além de oferecer um visual clássico e requintado.",
-        preco: "41,93",
+        preco: "46,93",
         categoria: "casa",
         loja: "mercadolivre",
         img: " https://http2.mlstatic.com/D_NQ_NP_658148-MLB89993492671_082025-O-garrafa-termica-1-litro-com-termmetro-led-para-chas-cafe.webp",
