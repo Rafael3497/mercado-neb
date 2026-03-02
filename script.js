@@ -3,6 +3,16 @@
    ========================================== */
 const meusProdutos = [
    {
+      id: "p43",
+      nome: "Lanterna T9",
+      desc: "A lanterna Apfer T9 é a escolha ideal para quem busca potência e versatilidade em aventuras ao ar livre.",
+      preco: 49.99,
+  categoria: "eletronico",
+      loja: "mercadolivre",
+      img: "https://http2.mlstatic.com/D_NQ_NP_953370-MLA107171490859_022026-O.webp",
+      link: "https://meli.la/2cqma9Y"
+   },
+   {
       id: "p42",
       nome: "Kit 12 Pares Meia Soquete Cano Curto Unissex Adulto Premium",
       desc: "Ideais para tênis, caminhadas, academia e uso diário, com ajuste firme que não aperta e não escorrega. É aquele tipo de kit para ter sempre à mão: prático, durável e versátil.",
