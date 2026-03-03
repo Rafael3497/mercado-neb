@@ -5,8 +5,7 @@ const meusProdutos = [
 {
         id: "p51",
         nome: "24 Colheres De Sopa Aço Inox Cabo Plástico Vermelho Luna Vermelho.",
-        desc: "As colheres de mesa da linha Luna são um conjunto elegante
-e funcional para qualquer ocasião.",
+        desc: "As colheres de mesa da linha Luna são um conjunto elegantee funcional para qualquer ocasião.",
         preco: "44,90",
         categoria: "casa",
         loja: "mercadolivre",
