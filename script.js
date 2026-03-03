@@ -21,8 +21,7 @@ const meusProdutos = [
     loja: "mercadolivre",
     img: "https://http2.mlstatic.com/D_NQ_NP_663318-MLB82423808068_022025-O.webp",
     link: "https://meli.la/2q896tP"
-},
-
+    },
 {
         id: "p49",
         nome: "Mochila Masculina Faculdade Impermeável Notebook Entrada Usb",
