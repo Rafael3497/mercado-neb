@@ -3,6 +3,16 @@
    ========================================== */
 const meusProdutos = [
 {
+        id: "p49",
+        nome: "Mochila Masculina Faculdade Impermeável Notebook Entrada Usb",
+        desc: "Com dimensões de 46 cm de altura, 31 cm de largura e 17 cm de profundidade, esta mochila é leve, pesando apenas 300 g. Possui dois bolsos, um bolso para garrafa e uma entrada USB, permitindo que você carregue seus dispositivos móveis com facilidade.",
+        preco: "78,90",
+        categoria: "moda",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_932274-MLB104125679132_012026-O-mochila-masculina-faculdade-impermeavel-notebook-entrada-usb.webp",
+        link: "https://meli.la/2kfHCrL"
+    },
+{
         id: "p48",
         nome: "A fantástica fábrica de chocolate (Edição especial)",
         desc: "A Fantástica Fábrica de Chocolate, clássico da literatura mundial em uma edição com capa inédita de Isadora Zeferino.",
