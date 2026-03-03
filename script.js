@@ -3,6 +3,16 @@
    ========================================== */
 const meusProdutos = [
 {
+        id: "p48",
+        nome: "A fantástica fábrica de chocolate (Edição especial)",
+        desc: "A Fantástica Fábrica de Chocolate, clássico da literatura mundial em uma edição com capa inédita de Isadora Zeferino.",
+        preco: "30,18",
+        categoria: "livros",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/81BX9xwJ1jL._AC_UF1000,1000_QL80_FMwebp_.jpg",
+        link: "https://amzn.to/4aL7LVf"
+    },
+{
         id: "p47",
         nome: "Megafone Amplificador De Voz Portátil C/ Microfone Usb Rádio",
         desc: "Megafone Amplificador de Voz Recarregável com Rádio FM, USB, Micro SD e Power Bank – Ideal para Professores, Palestras, Eventos, Guias de Turismo e Escolas",
