@@ -3,6 +3,56 @@
    ========================================== */
 const meusProdutos = [
 {
+        id: "p56",
+        nome: "Best Vegan - Pote 500g - Proteína Vegana - Atlhetica Nutrit Sabor Leite",
+        desc: "É um suplemento alimentar de alta qualidade, desenvolvido especialmente para quem busca uma alimentação 100% vegetal sem abrir mão de nutrientes essenciais. Com uma fórmula rica em proteínas vegetais, vitaminas e minerais, é ideal para veganos, vegetarianos e aqueles que desejam adotar uma alimentação mais saudável e equilibrada.",
+        preco: "129,77",
+        categoria: "saude",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_789213-MLU78239361549_082024-F.webp",
+        link: "https://meli.la/29U6MSe"
+    },
+{
+        id: "p55",
+        nome: "Best Vegan Atlhetica Nutrition 500g Bolo de Banana",
+        desc: "É um suplemento alimentar de alta qualidade, desenvolvido especialmente para quem busca uma alimentação 100% vegetal sem abrir mão de nutrientes essenciais. Com uma fórmula rica em proteínas vegetais, vitaminas e minerais, é ideal para veganos, vegetarianos e aqueles que desejam adotar uma alimentação mais saudável e equilibrada.",
+        preco: "118,00",
+        categoria: "saude",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_714987-MLA99402296932_112025-F.webp",
+        link: "https://meli.la/29U6MSe"
+    },
+{
+        id: "p54",
+        nome: "Faixa de Graduação Infantil Karate Jiu Jitsu Judô Branca Haganah M3",
+        desc: "A Faixa de Graduação Elite Haganah oferece a oportunidade de vestir as cores da tradição e excelência das artes marciais, acompanhando-o em sua jornada de aprendizado e evolução.",
+        preco: "35,49",
+        categoria: "fitness",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_681541-MLA99600105554_122025-F.webp",
+        link: "https://meli.la/1vNTakV"
+    },
+{
+        id: "p53",
+        nome: "Jogo War Edição Especial Grow",
+        desc: "O melhor jogo de estratégia de todos os tempos, agora em versão de luxo! Jogue com miniaturas de soldados e tanques representando os exércitos em um tabuleiro maior que o convencional.",
+        preco: "138,13",
+        categoria: "casa",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_954039-MLA99943624993_112025-F.webp",
+        link: "https://meli.la/2yFsd6u"
+    },
+{
+        id: "p52",
+        nome: "Vichy Dercos Energy+, Shampoo Estimulante, Tratamento Antiqueda para Cabelos Fracos e Quebradiços.",
+        desc: "Fortalece os Fios com Aminexil, Niacinamida e Vitamina E, 400g.",
+        preco: "99,90",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/51b74hm3qrL._AC_SX342_SY445_QL70_ML2_.jpg",
+        link: "https://amzn.to/4aNpIT3"
+    },
+{
         id: "p51",
         nome: "24 Colheres De Sopa Aço Inox Cabo Plástico Vermelho Luna Vermelho.",
         desc: "As colheres de mesa da linha Luna são um conjunto elegante e funcional para qualquer ocasião.",
@@ -86,8 +136,8 @@ const meusProdutos = [
       id: "p43",
       nome: "Lanterna T9",
       desc: "A lanterna Apfer T9 é a escolha ideal para quem busca potência e versatilidade em aventuras ao ar livre.",
-      preco: "49.99",
-  categoria: "eletronico",
+      preco: "49,99",
+  categoria: "eletronicos",
       loja: "mercadolivre",
       img: "https://http2.mlstatic.com/D_NQ_NP_953370-MLA107171490859_022026-O.webp",
       link: "https://meli.la/2cqma9Y"
