@@ -3,6 +3,47 @@
    ========================================== */
 const meusProdutos = [
 {
+        id: "p51",
+        nome: "24 Colheres De Sopa Aço Inox Cabo Plástico Vermelho Luna Vermelho.",
+        desc: "As colheres de mesa da linha Luna são um conjunto elegante e funcional para qualquer ocasião.",
+        preco: "44,90",
+        categoria: "casa",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_906495-MLB106591516242_022026-O.webp",
+        link: "https://meli.la/1Kv9Mgv"
+    },
+{
+    id: "p50",
+    nome: "Kit 2 Telas Mosquiteiro Protetora de Alimentos 36cm - Bolos e Pães",
+    desc: "Mantenha seus pratos protegidos de insetos com praticidade. Esta tela retrátil de 36cm é ideal para cobrir bolos, pães e frutas em piqueniques ou no uso diário, garantindo higiene total com um design leve e ventilado.",
+    preco: "28,10",
+    categoria: "casa",
+    loja: "mercadolivre",
+    img: "https://http2.mlstatic.com/D_NQ_NP_663318-MLB82423808068_022025-O.webp",
+    link: "https://meli.la/2q896tP"
+},
+
+{
+        id: "p49",
+        nome: "Mochila Masculina Faculdade Impermeável Notebook Entrada Usb",
+        desc: "Com dimensões de 46 cm de altura, 31 cm de largura e 17 cm de profundidade, esta mochila é leve, pesando apenas 300 g. Possui dois bolsos, um bolso para garrafa e uma entrada USB, permitindo que você carregue seus dispositivos móveis com facilidade.",
+        preco: "78,90",
+        categoria: "moda",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_932274-MLB104125679132_012026-O-mochila-masculina-faculdade-impermeavel-notebook-entrada-usb.webp",
+        link: "https://meli.la/2kfHCrL"
+    },
+{
+        id: "p48",
+        nome: "A fantástica fábrica de chocolate (Edição especial)",
+        desc: "A Fantástica Fábrica de Chocolate, clássico da literatura mundial em uma edição com capa inédita de Isadora Zeferino.",
+        preco: "30,18",
+        categoria: "livros",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/81BX9xwJ1jL._AC_UF1000,1000_QL80_FMwebp_.jpg",
+        link: "https://amzn.to/4aL7LVf"
+    },
+{
         id: "p47",
         nome: "Megafone Amplificador De Voz Portátil C/ Microfone Usb Rádio",
         desc: "Megafone Amplificador de Voz Recarregável com Rádio FM, USB, Micro SD e Power Bank – Ideal para Professores, Palestras, Eventos, Guias de Turismo e Escolas",
