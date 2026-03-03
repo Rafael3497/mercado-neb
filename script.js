@@ -3,6 +3,17 @@
    ========================================== */
 const meusProdutos = [
 {
+        id: "p51",
+        nome: "24 Colheres De Sopa Aço Inox Cabo Plástico Vermelho Luna Vermelho",  
+desc: "As colheres de mesa da linha Luna são um conjunto elegante
+e funcional para qualquer ocasião.",
+        preco: "44,90",
+        categoria: "casa",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_906495-MLB106591516242_022026-O.webp",
+        link: "https://meli.la/1Kv9Mgv"
+    },
+{
     id: "p50",
     nome: "Kit 2 Telas Mosquiteiro Protetora de Alimentos 36cm - Bolos e Pães",
     desc: "Mantenha seus pratos protegidos de insetos com praticidade. Esta tela retrátil de 36cm é ideal para cobrir bolos, pães e frutas em piqueniques ou no uso diário, garantindo higiene total com um design leve e ventilado.",
