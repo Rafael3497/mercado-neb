@@ -7,7 +7,7 @@ const meusProdutos = [
     nome: "Kit 2 Telas Mosquiteiro Protetora de Alimentos 36cm - Bolos e Pães",
     desc: "Mantenha seus pratos protegidos de insetos com praticidade. Esta tela retrátil de 36cm é ideal para cobrir bolos, pães e frutas em piqueniques ou no uso diário, garantindo higiene total com um design leve e ventilado.",
     preco: "28,10",
-    categoria: "cozinha",
+    categoria: "casa",
     loja: "mercadolivre",
     img: "https://http2.mlstatic.com/D_NQ_NP_663318-MLB82423808068_022025-O.webp",
     link: "https://meli.la/2q896tP"
