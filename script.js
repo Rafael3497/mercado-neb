@@ -46,7 +46,7 @@ const meusProdutos = [
       id: "p43",
       nome: "Lanterna T9",
       desc: "A lanterna Apfer T9 é a escolha ideal para quem busca potência e versatilidade em aventuras ao ar livre.",
-      preco: 49.99,
+      preco: "49.99",
   categoria: "eletronico",
       loja: "mercadolivre",
       img: "https://http2.mlstatic.com/D_NQ_NP_953370-MLA107171490859_022026-O.webp",
@@ -758,3 +758,4 @@ window.onload = function() {
         showSlides();
     }, 1500);
 };
+
