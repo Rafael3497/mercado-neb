@@ -3,17 +3,6 @@
    ========================================== */
 const meusProdutos = [
 {
-        id: "p50",
-        nome: "Kit 2 Telas Mosquiteiro Protetora Alimentos 36cm Bolos Pães
-",
-        desc: "Mantenha seus alimentos protegidos e livres de insetos com a tela protetora para alimentos. Prática e eficiente, esta tela é perfeita para refeições ao ar livre, eventos ou para uso diário na cozinha, garantindo higiene e segurança para sua família.",
-        preco: "28,10",
-        categoria: "cozinha",
-        loja: "mercadolivre",
-        img: "https://http2.mlstatic.com/D_NQ_NP_663318-MLB82423808068_022025-O.webp",
-        link: "https://meli.la/2q896tP"
-    },
-{
         id: "p49",
         nome: "Mochila Masculina Faculdade Impermeável Notebook Entrada Usb",
         desc: "Com dimensões de 46 cm de altura, 31 cm de largura e 17 cm de profundidade, esta mochila é leve, pesando apenas 300 g. Possui dois bolsos, um bolso para garrafa e uma entrada USB, permitindo que você carregue seus dispositivos móveis com facilidade.",
