@@ -3,6 +3,88 @@
    ========================================== */
 const meusProdutos = [
 {
+        id: "p64",
+        nome: "Widi Care Condicionador Hidro-Nutritivo Condicionando a Juba 500ml",
+        desc: "O CONDICIONANDO A JUBA é um condicionador hidro-nutritivo que promove alta emoliência aos fios ondulados, cacheados e crespos! Sua incrível fórmula proporciona desembaraço, maciez e brilho aos fios! Com ativos hidratantes e nutritivos, sua inteligente composição, possui poder 2 em 1, hidrata e nutre toda a fibra, em uma única aplicação!",
+        preco: "47,93",
+        categoria: "beleza",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61vC4QpsWeL._AC_SX569_.jpg",
+        link: "https://amzn.to/40JWSgq"
+    },
+{
+        id: "p63",
+        nome: "Widi Care Shampoo Higienizando a Juba 1l",
+        desc: "Um shampoo com tecnologia única, afinal ele tem o poder de limpar, fazer espuma e não embolar. O único shampoo que foi feito pensado especialmente nas curvaturas.",
+        preco: "67,13",
+        categoria: "beleza",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61o7C1gKmkL._AC_SX569_.jpg",
+        link: "https://amzn.to/4u62jnq"
+    },
+{
+        id: "p62",
+        nome: "Widi Care Gelatina Super Definição Estilizando a Juba 500g",
+        desc: "Estilizando a Juba Gelatina SUPERDEFINIÇÃO chegou para salvar quem ama uma finalização com alta fixação e tratamento dos fios. Sua fórmula enriquecida com Ácido Hialurônico, Óleo de Semente de Linhaça e a inovadora tecnologia Biofix 3D.",
+        preco: "44,52",
+        categoria: "beleza",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61vLM3nDwsL._AC_SX569_.jpg",
+        link: "https://amzn.to/4u6nhT4"
+    },
+
+{
+        id: "p61",
+        nome: "Widi Care Creme de Pentear Encrespando a Juba 1l",
+        desc: "Define, nutre, hidrata e empodera suas madeixas com auxílio dos ativos; Manteiga de Murumuru Orgânica, Óleo de Linhaça Dourada e Extrato de Avelã.",
+        preco: "80,57",
+        categoria: "beleza",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61xOe-C4YcL._AC_SX569_.jpg",
+        link: "https://amzn.to/409Q9ME"
+    },
+
+{
+        id: "p60",
+        nome: "Head & Shoulders Shampoo Anticaspa Fragrância Poderosa Old Spice 650 ml",
+        desc: "O Shampoo Head & Shoulders Fragrância Poderosa com Old Spice é uma experiência refrescante e cheirosa para seu banho: Ele limpa, remove a oleosidade e até 100% das impurezas dos seus cabelos.",
+        preco: "27,07",
+        categoria: "beleza",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61WP6x7IH2L._AC_SX569_.jpg",
+        link: "https://amzn.to/4b5Sehy"
+    },
+{
+        id: "p59",
+        nome: "FERRIX (Ferro infantil) 30ml - Flora Nativa Sabor:Morango",
+        desc: "Auxilia na formação de células vermelhas do sangue e transporte de oxigênio, prevenindo e tratando anemia por deficiência de ferro.",
+        preco: "45,50",
+        categoria: "saude",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61ojG3zh6tL._AC_SY879_.jpg",
+        link: "https://amzn.to/406NDXB"
+    },
+{
+        id: "p58",
+        nome: "Porta Condimento Temperos Giratório 9 Potes Vidro Com Tampa Cor Preto",
+        desc: "Acompanha um suporte giratório, que facilita o acesso aos seus condimentos favoritos. Com dimensões de 19 cm de altura, 17 cm de comprimento e 17 cm de largura, este produto é ideal para otimizar o espaço da sua cozinha.",
+        preco: "39,90",
+        categoria: "casa",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_622745-MLA99601426052_122025-O.webp",
+        link: "https://meli.la/28S1Z9S"
+    },
+{
+        id: "p57",
+        nome: "Monitor Samsung 32 FHD,75 Hz,Freesync, HDMI, DP,Preto, S3",
+        desc: "Uma experiência de entretenimento super fluida. O AMD FreeSync mantém a taxa de atualização do monitor e da placa de vídeo sincronizadas para reduzir a distorção de imagem. Assista a filmes e jogue sem interrupções mesmo em cenas rápidas.",
+        preco: "1.015,77",
+        categoria: "eletronicos",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_628691-MLA100012890031_122025-O.webp",
+        link: "https://meli.la/2fTYYh3"
+    },
+{
         id: "p56",
         nome: "Best Vegan - Pote 500g - Proteína Vegana - Atlhetica Nutrit Sabor Leite",
         desc: "É um suplemento alimentar de alta qualidade, desenvolvido especialmente para quem busca uma alimentação 100% vegetal sem abrir mão de nutrientes essenciais. Com uma fórmula rica em proteínas vegetais, vitaminas e minerais, é ideal para veganos, vegetarianos e aqueles que desejam adotar uma alimentação mais saudável e equilibrada.",
