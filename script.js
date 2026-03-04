@@ -3,6 +3,16 @@
    ========================================== */
 const meusProdutos = [
 {
+        id: "p65",
+        nome: "Balança Digital De Precisão 10kg.",
+        desc: "Balança Digital De Precisão 10kg Davely Cook Cozinha Para Uso Domestico E Profissional Fitness Ideal Para Dietas Treinos.",
+        preco: "19,90",
+        categoria: "casa",
+        loja: "mercadolivre",
+        img: "https://http2.mlstatic.com/D_NQ_NP_977172-MLA107049793514_022026-O.webp",
+        link: "https://meli.la/2Qr9fgF"
+    },
+{
         id: "p64",
         nome: "Widi Care Condicionador Hidro-Nutritivo Condicionando a Juba 500ml",
         desc: "O CONDICIONANDO A JUBA é um condicionador hidro-nutritivo que promove alta emoliência aos fios ondulados, cacheados e crespos! Sua incrível fórmula proporciona desembaraço, maciez e brilho aos fios! Com ativos hidratantes e nutritivos, sua inteligente composição, possui poder 2 em 1, hidrata e nutre toda a fibra, em uma única aplicação!",
