@@ -3,6 +3,16 @@
    ========================================== */
 const meusProdutos = [
 {
+    id: "p72",
+    nome: "Tênis Adidas Grand Court Base 3.0 Masculino Leve e Confortável",
+    desc: "O Adidas Grand Court Base 3.0 é o tênis ideal para quem busca estilo clássico com conforto no dia a dia. Leve, versátil e perfeito para compor looks casuais.",
+    preco: "239,99",
+    categoria: "moda",
+    loja: "mercadolivre",
+    img: "https://http2.mlstatic.com/D_NQ_NP_658087-MLB107966974771_032026-O-tnis-adidas-grand-court-base-30-masculino-leve-confortavel.webp",
+    link: "https://meli.la/1TGYFva"
+},
+{
         id: "p71",
         nome: "Álbum de fotos Ical, encadernação fotolivro autocolante, folhas de papel rígido branco, para 20 fotos",
         desc: "15x21cm vertical - linha Instalivro - modelo marrom com textura - 760.",
