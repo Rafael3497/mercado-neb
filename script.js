@@ -3,6 +3,16 @@
    ========================================== */
 const meusProdutos = [
 {
+    id: "p73",
+    nome: "Cesto De Roupa Suja com Alças em Bambu com Tampa Forrado para Banheiro, Lavanderia ou Quarto",
+    desc: "Design dobrável: o cesto de bambu é facilmente dobrável, facilitando o armazenamento quando não estiver em uso e ocupando pouco espaço.",
+    preco: "45,90",
+    categoria: "casa",
+    loja: "amazon",
+    img: "https://m.media-amazon.com/images/I/61tRlxwLNwL._AC_UF894,1000_QL80_FMwebp_.jpg",
+    link: "https://amzn.to/47ldsqz"
+},
+{
     id: "p72",
     nome: "Tênis Adidas Grand Court Base 3.0 Masculino Leve e Confortável",
     desc: "O Adidas Grand Court Base 3.0 é o tênis ideal para quem busca estilo clássico com conforto no dia a dia. Leve, versátil e perfeito para compor looks casuais.",
