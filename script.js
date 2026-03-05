@@ -3,6 +3,16 @@
    ========================================== */
 const meusProdutos = [
 {
+    id: "p74",
+    nome: "i2GO Cabo Magnetic Lightning Homologado MFI 60W, 3A, 1,2m",
+    desc: "O i2GO Cabo Magnetic Lightning é a solução perfeita para consumidores que buscam um cabo resistente, eficiente e certificado pela Apple (MFI). Com 1,2 metros de comprimento.",
+    preco: "45,90",
+    categoria: "casa",
+    loja: "amazon",
+    img: "https://m.media-amazon.com/images/I/71eJwpNG2VL._AC_UF1000,1000_QL80_FMwebp_.jpg",
+    link: "https://amzn.to/4rOsCgj"
+},
+{
     id: "p73",
     nome: "Cesto De Roupa Suja com Alças em Bambu com Tampa Forrado para Banheiro, Lavanderia ou Quarto",
     desc: "Design dobrável: o cesto de bambu é facilmente dobrável, facilitando o armazenamento quando não estiver em uso e ocupando pouco espaço.",
