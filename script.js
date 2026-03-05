@@ -6,7 +6,7 @@ const meusProdutos = [
     id: "p74",
     nome: "i2GO Cabo Magnetic Lightning Homologado MFI 60W, 3A, 1,2m",
     desc: "O i2GO Cabo Magnetic Lightning é a solução perfeita para consumidores que buscam um cabo resistente, eficiente e certificado pela Apple (MFI). Com 1,2 metros de comprimento.",
-    preco: "45,90",
+    preco: "46,80",
     categoria: "casa",
     loja: "amazon",
     img: "https://m.media-amazon.com/images/I/71eJwpNG2VL._AC_UF1000,1000_QL80_FMwebp_.jpg",
