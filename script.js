@@ -3,6 +3,67 @@
    ========================================== */
 const meusProdutos = [
 {
+        id: "p71",
+        nome: "Álbum de fotos Ical, encadernação fotolivro autocolante, folhas de papel rígido branco, para 20 fotos",
+        desc: "15x21cm vertical - linha Instalivro - modelo marrom com textura - 760.",
+        preco: "80,92",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/91cM7ZPC0rL._AC_SX679_.jpg",
+        link: "https://amzn.to/3MGWqMQ"
+    },
+{
+        id: "p70",
+        nome: "Álbum de fotos Ical, encadernação tradicional, para 80 fotos 15x21cm - envelope plástico transparente",
+        desc: "linha Cores - modelo azul-escuro texturizado - 167.",
+        preco: "38,24",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61e8pf71UkL._AC_SX679_.jpg",
+        link: "https://amzn.to/479bZ6M"
+    },
+{
+        id: "p69",
+        nome: "Álbum de Fotos 10x15/ 512 Fotos, Capa Fosca Lisa, Colorido (PRETO)",
+        desc: "CAPACIDADE: Álbum com espaço para armazenar 512 fotos no formato 10x15 cm, ideal para organizar suas memórias familiares.",
+        preco: "49,90",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/51d--CxEz4L._AC_SX679_.jpg",
+        link: "https://amzn.to/3NiAess"
+    },
+{
+        id: "p68",
+        nome: "Kit com 3 Esponja para Rodo,sendo 2 Lava Azulejo Color e 1 Unidade de Esponja Lava Vidros",
+        desc: "Limpeza de Azulejos, Vidros e Superfícies, Remoção Eficiente de Poeira e Manchas Piso Porcelananto - TYDA.",
+        preco: "39,47",
+        categoria: "casa",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/61C+m4ePsxL._AC_SX679_.jpg",
+        link: "https://amzn.to/4cMDHKr"
+    },
+
+{
+        id: "p67",
+        nome: "Assim eu Aprendo Caligrafia: 4",
+        desc: "A Coleção Assim Eu Aprendo – Caligrafia foi reformulada e agora conta com 5 volumes. Seus temas foram baseados nos conteúdos da disciplina de Língua Portuguesa do livro integrado da mesma coleção.",
+        preco: "88,24",
+        categoria: "livros",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/71nvcGDAiwL._SY466_.jpg",
+        link: "https://amzn.to/4aPNT3h"
+    },
+{
+        id: "p66",
+        nome: "Vamos trabalhar - Raciocínio lógico e treino mental - 4º Ano - Ensino fundamental",
+        desc: "Vamos Trabalhar – Raciocínio lógico e treino mental desenvolve o letramento matemático por meio de atividades que despertam o interesse, a curiosidade e o raciocínio rápido dos alunos.",
+        preco: "90,84",
+        categoria: "livros",
+        loja: "amazon",
+        img: "https://m.media-amazon.com/images/I/71xZQr2MWvL._SY342_.jpg",
+        link: "https://amzn.to/46HC6S7"
+    },
+{
         id: "p65",
         nome: "Balança Digital De Precisão 10kg.",
         desc: "Balança Digital De Precisão 10kg Davely Cook Cozinha Para Uso Domestico E Profissional Fitness Ideal Para Dietas Treinos.",
