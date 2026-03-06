@@ -3,6 +3,16 @@
    ========================================== */
 export const meusProdutos = [
 {
+    id: "p76",
+    nome: "Lixeira Pia Cozinha Ou Trium sem Pedal Saco Invisível 2.5L preto 16x17cm",
+    desc: "A Lixeira Para Pia De Cozinha Trium 2,5 Litros é perfeita para quem procura funcionalidade e beleza sobre a pia, pois permite a organização de forma versátil além de otimizar o espaço do ambiente.",
+    preco: "29,60",
+    categoria: "casa",
+    loja: "mercadolivre",
+    img: "https://http2.mlstatic.com/D_NQ_NP_635607-MLA99833663779_112025-O.webp",
+    link: "https://meli.la/1FXwCnS"
+},
+{
     id: "p75",
     nome: "Varal De Chão Grande De Roupas 3 Andares Dobrável Cor Azul Kontuz 1.70 cm",
     desc: "Dimensões Comprimento (Aberto): 76cm Largura (Aberto): 64cm Altura (Aberto): 1.7m.",
