@@ -3,6 +3,16 @@
    ========================================== */
 export const meusProdutos = [
 {
+    id: "p75",
+    nome: "Varal De Chão Grande De Roupas 3 Andares Dobrável Cor Azul Kontuz 1.70 cm",
+    desc: "Dimensões Comprimento (Aberto): 76cm Largura (Aberto): 64cm Altura (Aberto): 1.7m.",
+    preco: "69,90",
+    categoria: "casa",
+    loja: "mercadolivre",
+    img: "https://http2.mlstatic.com/D_NQ_NP_968619-MLA99977372933_112025-O.webp",
+    link: "https://meli.la/2LxDYWF"
+},
+{
     id: "p74",
     nome: "i2GO Cabo Magnetic Lightning Homologado MFI 60W, 3A, 1,2m",
     desc: "O i2GO Cabo Magnetic Lightning é a solução perfeita para consumidores que buscam um cabo resistente, eficiente e certificado pela Apple (MFI). Com 1,2 metros de comprimento.",
