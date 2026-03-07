@@ -274,7 +274,7 @@ window.registrarClique = function(produto, loja) {
 window.compartilharOferta = function(id, titulo, preco) {
     const urlBase = window.location.href.split('#')[0]; 
     const urlComAncora = `${urlBase}#${id}`;
-    const texto = `🌟 *OFERTA NO MERCADO NEB*\n\n*${titulo}*\n*R$ ${preco}*\n\n🛒 *Link da Oferta:* ${urlComAncora}`;
+    const texto = `🌟 *OFERTA NO MERCADO NEB*\n\n*${titulo}📦*\n*Por apenas: R$ ${preco}*\n\n*_Frete Grátis_ 🚚*\n\n🛒 *Link da Oferta:* ${urlComAncora}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`, '_blank');
 }
 
