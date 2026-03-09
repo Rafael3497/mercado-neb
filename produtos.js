@@ -3,6 +3,16 @@
    ========================================== */
 export const meusProdutos = [
 {
+    id: "p81",
+    nome: "MONDIAL Micro-Ondas, Preto, 1200W, 220V - MO-01-21-B",
+    desc: "CAPACIDADE DE 21 LITROS: Espaço suficiente para as suas receitas favoritas.",
+    preco: "434,84",
+    categoria: "casa",
+    loja: "amazon",
+    img: "https://m.media-amazon.com/images/I/81404mzgwXL._AC_UF894,1000_QL80_FMwebp_.jpg",
+    link: "https://amzn.to/46QwyF7"
+},
+{
     id: "p80",
     nome: "Batedeira Planetária, Mondial, Preto, 700W, 220V - BP-03-B",
     desc: "12 VELOCIDADES: Possibilita a escolha ideal de velocidade, conforme o tipo de receita a ser preparada, alta capacidade, tigela com 4,5 litros para preparar receitas com grande quantidade de ingredientes.",
