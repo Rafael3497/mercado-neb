@@ -3,6 +3,16 @@
    ========================================== */
 export const meusProdutos = [
 {
+    id: "p80",
+    nome: "Batedeira Planetária, Mondial, Preto, 700W, 220V - BP-03-B",
+    desc: "12 VELOCIDADES: Possibilita a escolha ideal de velocidade, conforme o tipo de receita a ser preparada, alta capacidade, tigela com 4,5 litros para preparar receitas com grande quantidade de ingredientes.",
+    preco: "289,00",
+    categoria: "casa",
+    loja: "amazon",
+    img: "https://m.media-amazon.com/images/I/511jk8D3duS._AC_UF894,1000_QL80_FMwebp_.jpg",
+    link: "https://amzn.to/4ur9arV"
+},
+{
     id: "p79",
     nome: "Tesoura De Poda Tramontina Profissional 17mm Aço Carbono",
     desc: "A Tesoura de Poda Plantas Tramontina é o acessório ideal para profissionais que realizam atividades de poda.",
