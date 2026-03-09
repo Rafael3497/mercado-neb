@@ -3,6 +3,16 @@
    ========================================== */
 export const meusProdutos = [
 {
+    id: "p79",
+    nome: "Tesoura De Poda Tramontina Profissional 17mm Aço Carbono",
+    desc: "A Tesoura de Poda Plantas Tramontina é o acessório ideal para profissionais que realizam atividades de poda.",
+    preco: "44,73",
+    categoria: "casa",
+    loja: "mercadolivre",
+    img: "https://http2.mlstatic.com/D_NQ_NP_821376-MLA99531591486_122025-O.webp",
+    link: "https://meli.la/2y29Km9"
+},
+{
     id: "p78",
     nome: "Sapateiras 8 Pares Sapatos Pequena Para Entrada Da Porta",
     desc: "Este modelo é ideal para organizar seus sapatos de maneira prática e elegante, Com uma cor preta sofisticada, esta sapateira se encaixa perfeitamente em qualquer decoração, proporcionando um toque de estilo ao seu hall de entrada.",
