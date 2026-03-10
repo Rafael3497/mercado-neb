@@ -3,36 +3,6 @@
    ========================================== */
 export const meusProdutos = [
 {
-    id: "p78",
-    nome: "Sapateiras 8 Pares Sapatos Pequena Para Entrada Da Porta",
-    desc: "Este modelo é ideal para organizar seus sapatos de maneira prática e elegante, Com uma cor preta sofisticada, esta sapateira se encaixa perfeitamente em qualquer decoração, proporcionando um toque de estilo ao seu hall de entrada.",
-    preco: "20,74",
-    categoria: "casa",
-    loja: "mercadolivre",
-    img: "https://http2.mlstatic.com/D_NQ_NP_2X_953403-MLB84331501949_052025-F.webp",
-    link: "https://meli.la/1QbxQKn"
-},
-{
-    id: "p77",
-    nome: "Grill Sanduicheira Cadence SAN400 Elétrica Chapa Misteira Tostex Tostequeira Hambúrguer Click",
-    desc: "A Sanduicheira Click tem um design único e formato inovador. É a companheira bancada para fazer de tudo um pouco!.",
-    preco: "99,65",
-    categoria: "casa",
-    loja: "mercadolivre",
-    img: "https://http2.mlstatic.com/D_NQ_NP_2X_972220-MLA87640539357_072025-F.webp",
-    link: "https://meli.la/1kb99zA"
-},
-{
-    id: "p76",
-    nome: "Lixeira Pia Cozinha Ou Trium sem Pedal Saco Invisível 2.5L preto 16x17cm",
-    desc: "A Lixeira Para Pia De Cozinha Trium 2,5 Litros é perfeita para quem procura funcionalidade e beleza sobre a pia, pois permite a organização de forma versátil além de otimizar o espaço do ambiente.",
-    preco: "29,60",
-    categoria: "casa",
-    loja: "mercadolivre",
-    img: "https://http2.mlstatic.com/D_NQ_NP_635607-MLA99833663779_112025-O.webp",
-    link: "https://meli.la/1FXwCnS"
-},
-{
     id: "p75",
     nome: "Varal De Chão Grande De Roupas 3 Andares Dobrável Cor Azul Kontuz 1.70 cm",
     desc: "Dimensões Comprimento (Aberto): 76cm Largura (Aberto): 64cm Altura (Aberto): 1.7m.",
