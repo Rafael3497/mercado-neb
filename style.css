@@ -76,6 +76,29 @@ nav ul li a::after {
     transition: width 0.3s;
 }
 
+/* Botão Início (NOVO ESTILO) */
+.nav-inicio {
+    background-color: #eff6ff;
+    color: var(--primary) !important;
+    padding: 8px 16px !important;
+    border-radius: 20px;
+    font-weight: 700 !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+    border: 1px solid #bfdbfe;
+}
+
+.nav-inicio:hover {
+    background-color: var(--primary);
+    color: white !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(29, 78, 216, 0.2);
+}
+
+.nav-inicio::after { display: none; } /* Remove o sublinhado padrão */
+
 /* Botão Mais Vendidos */
 .nav-link-destaque {
     background-color: var(--accent);
@@ -270,7 +293,30 @@ nav ul li a::after {
     display: grid;
     gap: 30px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    margin-bottom: 60px;
+    margin-bottom: 25px; /* Reduzi a margem para caber o alerta logo abaixo */
+}
+
+/* Alerta de Variação de Preço (NOVO) */
+.price-alert {
+    background-color: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+    padding: 12px 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0 auto 40px auto;
+    max-width: fit-content;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.price-alert i {
+    font-size: 1.2rem;
+    color: #f59e0b;
 }
 
 .card {
@@ -770,6 +816,8 @@ footer {
     .ml-filtros { width: 100%; }
     .ml-filtros input { width: 100% !important; }
     .ml-filtros select { width: 100%; }
+    
+    .price-alert { font-size: 0.8rem; padding: 10px 16px; text-align: center; }
 }
 
 @media (max-width: 480px) {

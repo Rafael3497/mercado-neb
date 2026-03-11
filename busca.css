@@ -41,6 +41,7 @@
 /* ── CAMPO DE BUSCA HERO ── */
 .hero-search-wrap {
     position: relative;
+    width: calc(100% - 40px); /* Garante que nunca vai tocar as bordas no mobile */
     max-width: 640px;
     margin: 0 auto;
     display: flex;
@@ -59,6 +60,7 @@
     font-weight: 500;
     color: #0f172a;
     background: #fff;
+    width: 100%; /* Garante que o input preencha o espaço sem empurrar o botão */
 }
 
 .hero-search-wrap input::placeholder { color: #94a3b8; }
@@ -77,6 +79,7 @@
     align-items: center;
     gap: 8px;
     white-space: nowrap;
+    flex-shrink: 0; /* REGRA DE OURO: Impede que o botão seja esmagado no mobile */
 }
 
 .hero-search-wrap button:hover { background: #f59e0b; }
@@ -153,3 +156,33 @@
 .estado-inicial .icone { font-size: 3.5rem; opacity: 0.4; }
 .estado-inicial p { color: #94a3b8; font-size: 1rem; font-weight: 600; }
 .estado-inicial small { color: #cbd5e1; font-size: 0.85rem; }
+
+/* ── RESPONSIVIDADE MOBILE (Novo Bloco) ── */
+@media (max-width: 600px) {
+    .busca-hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .busca-hero p {
+        font-size: 0.85rem;
+        padding: 0 10px;
+    }
+
+    .hero-search-wrap {
+        width: calc(100% - 32px); /* Respira melhor nas bordas laterais */
+    }
+
+    .hero-search-wrap input {
+        padding: 15px 16px; /* Ajusta espaço interno do input */
+        font-size: 0.95rem;
+    }
+
+    .hero-search-wrap button {
+        padding: 0 16px; /* Reduz a largura do botão levemente */
+        font-size: 0.95rem;
+    }
+    
+    .hero-search-wrap button span {
+        display: none; /* Opcional: Se a tela for muito pequena, esconde o texto e deixa só a lupa. Se quiser manter o texto, pode remover esta linha */
+    }
+}
