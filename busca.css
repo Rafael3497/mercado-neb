@@ -41,10 +41,7 @@
 /* ── CAMPO DE BUSCA HERO ── */
 .hero-search-wrap {
     position: relative;
-<<<<<<< HEAD
-=======
     width: calc(100% - 40px); /* Garante que nunca vai tocar as bordas no mobile */
->>>>>>> caad060
     max-width: 640px;
     margin: 0 auto;
     display: flex;
@@ -63,10 +60,7 @@
     font-weight: 500;
     color: #0f172a;
     background: #fff;
-<<<<<<< HEAD
-=======
     width: 100%; /* Garante que o input preencha o espaço sem empurrar o botão */
->>>>>>> caad060
 }
 
 .hero-search-wrap input::placeholder { color: #94a3b8; }
@@ -85,10 +79,7 @@
     align-items: center;
     gap: 8px;
     white-space: nowrap;
-<<<<<<< HEAD
-=======
     flex-shrink: 0; /* REGRA DE OURO: Impede que o botão seja esmagado no mobile */
->>>>>>> caad060
 }
 
 .hero-search-wrap button:hover { background: #f59e0b; }
@@ -165,8 +156,6 @@
 .estado-inicial .icone { font-size: 3.5rem; opacity: 0.4; }
 .estado-inicial p { color: #94a3b8; font-size: 1rem; font-weight: 600; }
 .estado-inicial small { color: #cbd5e1; font-size: 0.85rem; }
-<<<<<<< HEAD
-=======
 
 /* ── RESPONSIVIDADE MOBILE (Novo Bloco) ── */
 @media (max-width: 600px) {
@@ -197,4 +186,3 @@
         display: none; /* Opcional: Se a tela for muito pequena, esconde o texto e deixa só a lupa. Se quiser manter o texto, pode remover esta linha */
     }
 }
->>>>>>> caad060
