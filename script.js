@@ -34,20 +34,26 @@ window.registrarClique = function(produto, loja) {
     }
 };
 
-window.compartilharOferta = function(id, titulo, precoAtual, precoAntigo) {
+// Nova função BLINDADA: Recebe apenas o ID e constrói o texto em memória
+window.compartilharOferta = function(id) {
+    // Busca os dados originais do produto na memória
+    const produto = meusProdutos.find(p => String(p.id) === String(id));
+    if (!produto) return;
+
     const urlBase = window.location.href.split('#')[0];
-    const urlComAncora = `${urlBase}#${id}`;
+    const urlComAncora = `${urlBase}#${produto.id}`;
     
-    const precoFormatado = formatarMoeda(precoAtual);
+    const precoFormatado = formatarMoeda(produto.preco);
     let textoPreco = `*R$ ${precoFormatado}*`;
     
-    if (precoAntigo && precoAntigo !== 'undefined' && precoAntigo.trim() !== '') {
-        textoPreco = `~R$ ${formatarMoeda(precoAntigo)}~ *R$ ${precoFormatado}*`;
+    if (produto.precoAntigo && produto.precoAntigo !== 'undefined' && produto.precoAntigo.trim() !== '') {
+        textoPreco = `~R$ ${formatarMoeda(produto.precoAntigo)}~ *R$ ${precoFormatado}*`;
     }
 
-    const texto = `🌟 *OFERTA NO MERCADO NEB*\n\n*${titulo}* 📦\n\nPor apenas: ${textoPreco} 😯\n\nFrete Grátis 🚚\n\n🛒 *Link da Oferta:* ${urlComAncora}`;
+    const texto = `🌟 *OFERTA NO MERCADO NEB*\n\n*${produto.nome}* 📦\n\nPor apenas: ${textoPreco} 😯\n\nFrete Grátis 🚚\n\n🛒 *Link da Oferta:* ${urlComAncora}`;
     
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`, '_blank');
+    // Usando o wa.me que é a rota oficial e mais estável do WhatsApp para mobile
+    window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
 };
 
 
@@ -120,10 +126,9 @@ function renderizarPagina(lista, pagina) {
         const iconeBotao = eAmazon ? 'fab fa-amazon' : 'fas fa-shopping-cart';
         const isFav      = verificarStatusFavorito(p.id);
         
+        // Removemos o envio direto do texto pro botão, agora mandamos só o ID
         const tituloEscapado = p.nome.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-        const precoAntigoArg = p.precoAntigo ? p.precoAntigo : '';
 
-        // O alerta global agora não está mais aqui dentro, os cards estão limpos.
         return `
         <div class="card" id="${p.id}" data-name="${p.nome}" data-category="${p.categoria}">
             <div class="card-img">
@@ -146,7 +151,7 @@ function renderizarPagina(lista, pagina) {
                     <a href="${p.link}" target="_blank" class="btn-buy" onclick="registrarClique('${tituloEscapado}', '${lojaNome}')">
                         <i class="${iconeBotao}"></i> ${textoBotao}
                     </a>
-                    <button class="btn-share" onclick="compartilharOferta('${p.id}', '${tituloEscapado}', '${p.preco}', '${precoAntigoArg}')">
+                    <button class="btn-share" onclick="compartilharOferta('${p.id}')">
                         <i class="fas fa-share-alt"></i>
                     </button>
                 </div>
