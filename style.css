@@ -76,7 +76,7 @@ nav ul li a::after {
     transition: width 0.3s;
 }
 
-/* Botão Início (NOVO ESTILO) */
+/* Botão Início */
 .nav-inicio {
     background-color: #eff6ff;
     color: var(--primary) !important;
@@ -97,7 +97,7 @@ nav ul li a::after {
     box-shadow: 0 4px 10px rgba(29, 78, 216, 0.2);
 }
 
-.nav-inicio::after { display: none; } /* Remove o sublinhado padrão */
+.nav-inicio::after { display: none; }
 
 /* Botão Mais Vendidos */
 .nav-link-destaque {
@@ -293,30 +293,7 @@ nav ul li a::after {
     display: grid;
     gap: 30px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    margin-bottom: 25px; /* Reduzi a margem para caber o alerta logo abaixo */
-}
-
-/* Alerta de Variação de Preço (NOVO) */
-.price-alert {
-    background-color: #fffbeb;
-    color: #b45309;
-    border: 1px solid #fde68a;
-    padding: 12px 24px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin: 0 auto 40px auto;
-    max-width: fit-content;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-}
-
-.price-alert i {
-    font-size: 1.2rem;
-    color: #f59e0b;
+    margin-bottom: 25px;
 }
 
 .card {
@@ -389,7 +366,7 @@ nav ul li a::after {
     overflow: hidden;
 }
 
-.card-info p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px; flex-grow: 1; }
+.card-info p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 8px; flex-grow: 1; }
 
 /* Preço */
 .price-container {
@@ -404,6 +381,26 @@ nav ul li a::after {
 
 .price-label { font-size: 0.9rem; }
 .price-value { font-size: 1.5rem; transition: all 0.3s ease; }
+
+/* Alerta de Preço DENTRO do Card (NOVO) */
+.card-alert {
+    background-color: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+    padding: 6px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.card-alert i {
+    font-size: 0.85rem;
+    color: #f59e0b;
+}
 
 /* Botões de ação */
 .card-actions { display: flex; gap: 10px; align-items: center; margin-top: auto; }
@@ -816,8 +813,6 @@ footer {
     .ml-filtros { width: 100%; }
     .ml-filtros input { width: 100% !important; }
     .ml-filtros select { width: 100%; }
-    
-    .price-alert { font-size: 0.8rem; padding: 10px 16px; text-align: center; }
 }
 
 @media (max-width: 480px) {
