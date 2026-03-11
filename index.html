@@ -3,18 +3,17 @@
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTCN9HXRNL"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-QTCN9HXRNL');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QTCN9HXRNL');
     </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mercado NEB | As Melhores Ofertas</title>
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧺</text></svg>">
 
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧺</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -22,7 +21,8 @@
 <body>
 
     <div id="toast-container"></div>
-    
+
+    <!-- HEADER -->
     <header>
         <div class="container header-content">
             <div class="logo">
@@ -32,10 +32,14 @@
             <nav>
                 <ul>
                     <li><a href="#">Início</a></li>
-                    <li><a href="#ofertas">Ofertas</a></li>
                     <li>
-                        <a href="https://wa.me/558532344277?text=Olá,%20vim%20pelo%20site%20Mercado%20NEB" target="_blank" class="nav-whatsapp">
-                            <i class="fab fa-whatsapp"></i> Contato
+                        <a href="mais_vendidos.html" class="nav-link-destaque">
+                            <i class="fas fa-bolt"></i> Mais Vendidos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="busca.html" class="nav-busca-ml">
+                            <i class="fas fa-search"></i> Buscar no ML
                         </a>
                     </li>
                 </ul>
@@ -43,21 +47,22 @@
         </div>
     </header>
 
+    <!-- CARROSSEL -->
     <section class="carousel">
         <div class="carousel-inner">
-            <div class="slide active" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6);">
+            <div class="slide active slide-1">
                 <div class="slide-content">
                     <h1>As melhores ofertas do dia</h1>
                     <p>Economize mais, compre melhor no Mercado NEB.</p>
                 </div>
             </div>
-            <div class="slide" style="background: linear-gradient(135deg, #059669, #10b981);">
+            <div class="slide slide-2">
                 <div class="slide-content">
                     <h1>Apoie nosso projeto</h1>
-                    <p style="font-size: 1.5rem; font-weight: 600;">Comprando pelo link você auxilia o núcleo</p>
+                    <p class="slide-2-texto">Comprando pelo link você auxilia o núcleo</p>
                 </div>
             </div>
-            <div class="slide" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">
+            <div class="slide slide-3">
                 <div class="slide-content">
                     <h1>Promoções em Tecnologia</h1>
                     <p>Eletrônicos e acessórios com preços imbatíveis.</p>
@@ -66,6 +71,7 @@
         </div>
     </section>
 
+    <!-- BUSCA E FILTROS -->
     <section class="search-section container">
         <div class="search-box">
             <i class="fas fa-search"></i>
@@ -89,6 +95,7 @@
             </button>
             <button class="filter-btn" data-categoria="eletronicos">Eletrônicos</button>
             <button class="filter-btn" data-categoria="casa">Casa</button>
+            <button class="filter-btn" data-categoria="eletrodomesticos">Eletrodomésticos</button>
             <button class="filter-btn" data-categoria="saude">Saúde</button>
             <button class="filter-btn" data-categoria="beleza">Beleza</button>
             <button class="filter-btn" data-categoria="moda">Moda</button>
@@ -98,19 +105,32 @@
         </div>
     </section>
 
-    <main id="ofertas" class="container">
-        <div class="grid-offers" id="offersGrid">
+    <!-- GRID DE PRODUTOS -->
+    <main class="container">
+        <div id="ofertas">
+            <div class="grid-offers" id="offersGrid"></div>
+
+            <div id="paginacao-produtos">
+                <button id="btn-pag-anterior" class="btn-pag" onclick="mudarPagina(-1)">← Anterior</button>
+                <div id="paginas-numeradas"></div>
+                <button id="btn-pag-proximo" class="btn-pag" onclick="mudarPagina(1)">Próximo →</button>
             </div>
+        </div>
     </main>
 
+    <!-- FOOTER -->
     <footer>
         <div class="container">
             <p>&copy; 2026 Mercado NEB - Todos os direitos reservados.</p>
             <small>Ao comprar através de nossos links, podemos receber uma comissão sem custo adicional para você.</small>
-            <p style="font-weight: 800; margin-top: 10px; color: var(--primary);">Compre com moderação. 🛒</p>
+            <p class="footer-destaque">Compre com moderação. 🛒</p>
+            <a href="https://wa.me/558532344277?text=Ol%C3%A1,%20vim%20pelo%20site%20Mercado%20NEB" target="_blank" class="nav-whatsapp" aria-label="Fale conosco no WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
         </div>
     </footer>
 
-    <script type="module" src="script.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>

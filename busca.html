@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTCN9HXRNL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QTCN9HXRNL');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Produtos | Mercado NEB</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧺</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="busca.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo" style="text-decoration:none;">
+                <i class="fas fa-shopping-basket"></i>
+                <span>Mercado NEB</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li>
+                        <a href="mais_vendidos.html" class="nav-link-destaque">
+                            <i class="fas fa-trophy"></i> Mais Vendidos
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO COM BUSCA -->
+    <section class="busca-hero">
+        <div class="container">
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Voltar ao início
+            </a>
+            <h1>🔍 Buscar no <span>Mercado Livre</span></h1>
+            <p>Selecione uma categoria ou digite o produto que você quer encontrar</p>
+
+            <div class="hero-search-wrap">
+                <input
+                    type="text"
+                    id="campoBusca"
+                    placeholder="Ex: Tênis Nike, Fone Bluetooth, Kindle..."
+                    onkeydown="if(event.key==='Enter') executarBusca()"
+                    autocomplete="off"
+                />
+                <button onclick="executarBusca()">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- BARRA DE CATEGORIAS -->
+    <nav class="categoria-bar">
+        <div class="container">
+            <button class="cat-btn" data-termo="Celulares Smartphones" onclick="buscaRapida(this)">
+                <span>📱</span> Celulares
+            </button>
+            <button class="cat-btn" data-termo="Eletrônicos" onclick="buscaRapida(this)">
+                <span>📻</span> Eletrônicos
+            </button>
+            <button class="cat-btn" data-termo="Notebook Computador" onclick="buscaRapida(this)">
+                <span>💻</span> Informática
+            </button>
+            <button class="cat-btn" data-termo="Eletrodomésticos" onclick="buscaRapida(this)">
+                <span>🔌</span> Eletrodomésticos
+            </button>
+            <button class="cat-btn" data-termo="Casa Decoração" onclick="buscaRapida(this)">
+                <span>🏠</span> Casa
+            </button>
+            <button class="cat-btn" data-termo="Moda Roupas" onclick="buscaRapida(this)">
+                <span>👗</span> Moda
+            </button>
+            <button class="cat-btn" data-termo="Esportes Fitness" onclick="buscaRapida(this)">
+                <span>⚽</span> Esportes
+            </button>
+            <button class="cat-btn" data-termo="Video Games" onclick="buscaRapida(this)">
+                <span>🎮</span> Video Games
+            </button>
+            <button class="cat-btn" data-termo="Brinquedos" onclick="buscaRapida(this)">
+                <span>🧸</span> Brinquedos
+            </button>
+            <button class="cat-btn" data-termo="Ferramentas" onclick="buscaRapida(this)">
+                <span>🛠️</span> Ferramentas
+            </button>
+            <button class="cat-btn" data-termo="Livros" onclick="buscaRapida(this)">
+                <span>📚</span> Livros
+            </button>
+            <button class="cat-btn" data-termo="Beleza Cosméticos" onclick="buscaRapida(this)">
+                <span>💄</span> Beleza
+            </button>
+        </div>
+    </nav>
+
+    <!-- RESULTADOS -->
+    <main class="resultados-section container">
+
+        <div class="resultados-header" id="resultados-header" style="display:none;">
+            <div>
+                <div class="resultados-title">Resultados para: <span id="termo-exibido"></span></div>
+                <div class="resultados-count" id="resultados-count" style="margin-top:6px;display:inline-block;"></div>
+            </div>
+            <div class="sort-wrap">
+                <label for="ordenacao">Ordenar:</label>
+                <select id="ordenacao" onchange="reordenar()">
+                    <option value="relevance">Mais relevantes</option>
+                    <option value="price_asc">Menor preço</option>
+                    <option value="price_desc">Maior preço</option>
+                    <option value="sold_quantity_desc">Mais vendidos</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="resultados-conteudo">
+            <div class="estado-inicial">
+                <div class="icone">🛒</div>
+                <p>Selecione uma categoria ou busque um produto</p>
+                <small>Buscamos direto no Mercado Livre para você</small>
+            </div>
+        </div>
+
+        <div class="ml-paginacao" id="ml-paginacao" style="display:none;">
+            <button id="ml-btn-anterior" onclick="paginar(-1)">← Anterior</button>
+            <span id="ml-info-pagina"></span>
+            <button id="ml-btn-proximo" onclick="paginar(1)">Próximo →</button>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Mercado NEB - Todos os direitos reservados.</p>
+            <small>Ao comprar através de nossos links, podemos receber uma comissão sem custo adicional para você.</small>
+            <p class="footer-destaque">Compre com moderação. 🛒</p>
+            <a href="https://wa.me/558532344277?text=Ol%C3%A1,%20vim%20pelo%20site%20Mercado%20NEB" target="_blank" class="nav-whatsapp" aria-label="Fale conosco no WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script src="busca.js"></script>
+
+</body>
+</html>
