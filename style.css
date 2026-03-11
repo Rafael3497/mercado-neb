@@ -200,7 +200,7 @@ nav ul li a::after {
 .slide-2-texto { font-size: 1.5rem; font-weight: 600; }
 
 /* =====================================================
-   BUSCA E FILTROS (index.html)
+   BUSCA E FILTROS
    ===================================================== */
 .search-section { margin: 40px auto 20px; }
 
@@ -287,7 +287,7 @@ nav ul li a::after {
 .price-panel.hidden { display: none !important; }
 
 /* =====================================================
-   GRID E CARDS (index.html)
+   GRID E CARDS
    ===================================================== */
 .grid-offers {
     display: grid;
@@ -469,7 +469,7 @@ nav ul li a::after {
 }
 
 /* =====================================================
-   PAGINAÇÃO (index.html)
+   PAGINAÇÃO
    ===================================================== */
 #paginacao-produtos {
     display: none;
@@ -559,7 +559,7 @@ nav ul li a::after {
 }
 
 /* =====================================================
-   CARDS ML (busca.html / mais_vendidos.html)
+   CARDS ML
    ===================================================== */
 .ml-grid {
     display: grid;
@@ -704,7 +704,7 @@ nav ul li a::after {
 .ml-paginacao span { font-size: 0.88rem; color: #64748b; font-weight: 600; }
 
 /* =====================================================
-   BARRA DE CATEGORIAS (busca.html / mais_vendidos.html)
+   BARRA DE CATEGORIAS
    ===================================================== */
 .categoria-bar {
     background: #fff;
@@ -765,7 +765,7 @@ footer {
 .footer-destaque { font-weight: 800; margin-top: 10px; color: var(--primary); }
 
 /* =====================================================
-   RESPONSIVIDADE
+   RESPONSIVIDADE (Ajustes de Celular)
    ===================================================== */
 @media (max-width: 768px) {
     .grid-offers { grid-template-columns: repeat(2, 1fr); gap: 15px; }
@@ -809,20 +809,48 @@ footer {
     .ml-filtros input { width: 100% !important; }
     .ml-filtros select { width: 100%; }
     
-    .price-alert-global { font-size: 0.85rem; padding: 10px 16px; }
+    /* Início do ajuste do alerta global para celular */
+    .price-alert-global { 
+        font-size: 0.85rem; 
+        padding: 10px 16px; 
+        width: 90%; /* Evita que encoste na tela */
+        border-radius: 10px;
+    }
 }
 
 @media (max-width: 480px) {
     .header-content { justify-content: center; flex-direction: column; gap: 15px; }
     .logo { font-size: 1.3rem; }
-    nav ul { gap: 8px; }
+    
+    /* Ajuste essencial do Menu (Wrap para não espremer os botões) */
+    nav ul { 
+        gap: 8px; 
+        flex-wrap: wrap; 
+        justify-content: center; 
+    }
+    
     nav ul li a { font-size: 0.8rem; padding: 5px 8px; }
+    
     .carousel { height: 200px !important; }
     .slide-content h1 { font-size: 1.6rem !important; margin-bottom: 8px; line-height: 1.2; }
     .slide-content p { font-size: 0.9rem !important; line-height: 1.3; }
     .grid-offers { grid-template-columns: 1fr; padding: 0 10px; }
     .filter-btn { font-size: 0.8rem; padding: 6px 14px; }
-    .nav-link-destaque { padding: 6px 12px !important; font-size: 0.85rem !important; }
+    
+    /* Padronização COMPLETA dos botões do topo no Mobile */
+    .nav-inicio, .nav-link-destaque, .nav-busca-ml { 
+        padding: 6px 12px !important; 
+        font-size: 0.85rem !important; 
+    }
+
+    /* Refinamento extremo do Alerta de Preço em telas muito pequenas */
+    .price-alert-global {
+        font-size: 0.8rem;
+        padding: 10px 12px;
+        width: 92%;
+        line-height: 1.4;
+    }
+
     .toast { padding: 10px 20px; font-size: 0.8rem; gap: 8px; }
     .toast i { font-size: 0.9rem; }
 }
