@@ -76,28 +76,28 @@ nav ul li a::after {
     transition: width 0.3s;
 }
 
-/* Botão Início (NOVO ESTILO) */
+/* Botão Início */
 .nav-inicio {
-    background-color: #eff6ff;
-    color: var(--primary) !important;
+    background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+    color: white !important;
     padding: 8px 16px !important;
     border-radius: 20px;
     font-weight: 700 !important;
     display: flex;
     align-items: center;
     gap: 6px;
-    transition: var(--transition);
-    border: 1px solid #bfdbfe;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+    border: none;
+    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
 }
 
 .nav-inicio:hover {
-    background-color: var(--primary);
+    background: linear-gradient(135deg, #1e40af, #2563eb);
     color: white !important;
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(29, 78, 216, 0.2);
+    box-shadow: 0 6px 18px rgba(29, 78, 216, 0.45);
 }
 
-.nav-inicio::after { display: none; } /* Remove o sublinhado padrão */
+.nav-inicio::after { display: none; }
 
 /* Botão Mais Vendidos */
 .nav-link-destaque {
