@@ -8,51 +8,6 @@ let meusProdutos = [];
 let produtosFiltrados = [];
 
 /* =====================================================
-   UTILITÁRIOS E FORMATAÇÃO (NOVO)
-   ===================================================== */
-
-// Converte qualquer formato de preço da planilha para um número matemático real
-function converterParaNumero(valor) {
-    if (!valor) return 0;
-    let str = String(valor).trim();
-    if (str.includes(',')) {
-        str = str.replace(/\./g, '').replace(',', '.'); // Ex: 1.200,50 -> 1200.50
-    }
-    let num = parseFloat(str);
-    return isNaN(num) ? 0 : num;
-}
-
-// Garante que o número sempre terá 2 casas decimais (ex: 19,9 vira 19,90)
-function formatarMoeda(valor) {
-    const num = converterParaNumero(valor);
-    return num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-
-window.registrarClique = function(produto, loja) {
-    if (typeof gtag === 'function') {
-        gtag('event', 'clique_produto', { event_label: produto, loja_destino: loja });
-    }
-};
-
-window.compartilharOferta = function(id, titulo, precoAtual, precoAntigo) {
-    const urlBase = window.location.href.split('#')[0];
-    const urlComAncora = `${urlBase}#${id}`;
-    
-    const precoFormatado = formatarMoeda(precoAtual);
-    let textoPreco = `*R$ ${precoFormatado}*`;
-    
-    // Se o produto tiver um precoAntigo cadastrado, aplica o efeito de riscado (~) do WhatsApp
-    if (precoAntigo && precoAntigo !== 'undefined' && precoAntigo.trim() !== '') {
-        textoPreco = `~R$ ${formatarMoeda(precoAntigo)}~ *R$ ${precoFormatado}*`;
-    }
-
-    const texto = `🌟 *OFERTA NO MERCADO NEB*\n\n*${titulo}* 📦\n\nPor apenas: ${textoPreco} 😯\n\nFrete Grátis 🚚\n\n🛒 *Link da Oferta:* ${urlComAncora}`;
-    
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`, '_blank');
-};
-
-
-/* =====================================================
    FAVORITOS
    ===================================================== */
 let listaFavoritosNEB = [];
@@ -103,15 +58,15 @@ window.toggleFavorito = function(event, produtoId) {
 };
 
 /* =====================================================
-   PAGINAÇÃO E RENDERIZAÇÃO
+   PAGINAÇÃO
    ===================================================== */
 function renderizarPagina(lista, pagina) {
-    const grid        = document.getElementById('offersGrid');
+    const grid       = document.getElementById('offersGrid');
     const paginacaoEl = document.getElementById('paginacao-produtos');
     if (!grid) return;
 
-    const totalPaginas   = Math.ceil(lista.length / PRODUTOS_POR_PAGINA);
-    const inicio         = (pagina - 1) * PRODUTOS_POR_PAGINA;
+    const totalPaginas    = Math.ceil(lista.length / PRODUTOS_POR_PAGINA);
+    const inicio          = (pagina - 1) * PRODUTOS_POR_PAGINA;
     const produtosDaPagina = lista.slice(inicio, inicio + PRODUTOS_POR_PAGINA);
 
     grid.innerHTML = produtosDaPagina.map(p => {
@@ -120,10 +75,6 @@ function renderizarPagina(lista, pagina) {
         const textoBotao = eAmazon ? 'Comprar na Amazon' : 'Comprar no Mercado Livre';
         const iconeBotao = eAmazon ? 'fab fa-amazon' : 'fas fa-shopping-cart';
         const isFav      = verificarStatusFavorito(p.id);
-        
-        // Blindagem de aspas no nome do produto para não quebrar o botão
-        const tituloEscapado = p.nome.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-        const precoAntigoArg = p.precoAntigo ? p.precoAntigo : '';
 
         return `
         <div class="card" id="${p.id}" data-name="${p.nome}" data-category="${p.categoria}">
@@ -139,13 +90,13 @@ function renderizarPagina(lista, pagina) {
                 <p>${p.desc || 'Oferta selecionada do dia!'}</p>
                 <div class="price-container">
                     <span class="price-label">R$</span>
-                    <span class="price-value">${formatarMoeda(p.preco)}</span>
+                    <span class="price-value">${p.preco}</span>
                 </div>
                 <div class="card-actions">
-                    <a href="${p.link}" target="_blank" class="btn-buy" onclick="registrarClique('${tituloEscapado}', '${lojaNome}')">
+                    <a href="${p.link}" target="_blank" class="btn-buy" onclick="registrarClique('${p.nome}', '${lojaNome}')">
                         <i class="${iconeBotao}"></i> ${textoBotao}
                     </a>
-                    <button class="btn-share" onclick="compartilharOferta('${p.id}', '${tituloEscapado}', '${p.preco}', '${precoAntigoArg}')">
+                    <button class="btn-share" onclick="compartilharOferta('${p.id}', '${p.nome}', '${p.preco}')">
                         <i class="fas fa-share-alt"></i>
                     </button>
                 </div>
@@ -240,7 +191,7 @@ async function carregarProdutos() {
 }
 
 /* =====================================================
-   FILTROS E BUSCA
+   FILTROS
    ===================================================== */
 function inicializarFiltros() {
     const botoes = document.querySelectorAll('.filter-btn');
@@ -279,15 +230,6 @@ function filtrarFavoritos() {
     renderizarPagina(produtosFiltrados, paginaAtual);
 }
 
-window.filterOffers = function() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
-    produtosFiltrados = meusProdutos.filter(p =>
-        p.nome.toLowerCase().includes(input)
-    );
-    paginaAtual = 1;
-    renderizarPagina(produtosFiltrados, paginaAtual);
-};
-
 /* =====================================================
    FILTRO DE PREÇO DINÂMICO
    ===================================================== */
@@ -299,8 +241,9 @@ function configurarFiltroPrecoDinamico() {
 
     if (!priceRange || !meusProdutos.length) return;
 
-    // Usando a nova função robusta para extrair os preços matemáticos
-    const precosNumericos = meusProdutos.map(p => converterParaNumero(p.preco));
+    const precosNumericos = meusProdutos.map(p =>
+        parseFloat(p.preco.replace(/\./g, '').replace(',', '.'))
+    );
     const maiorPreco = Math.ceil(Math.max(...precosNumericos));
 
     priceRange.max   = maiorPreco;
@@ -311,7 +254,7 @@ function configurarFiltroPrecoDinamico() {
         const maxPrice = parseFloat(priceRange.value);
         priceValue.textContent = maxPrice.toLocaleString('pt-BR');
         produtosFiltrados = meusProdutos.filter(p => {
-            const price = converterParaNumero(p.preco);
+            const price = parseFloat(p.preco.replace(/\./g, '').replace(',', '.'));
             return price <= maxPrice;
         });
         paginaAtual = 1;
@@ -332,7 +275,19 @@ function configurarFiltroPrecoDinamico() {
 }
 
 /* =====================================================
-   CARROSSEL E INICIALIZAÇÃO
+   BUSCA POR TEXTO
+   ===================================================== */
+window.filterOffers = function() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    produtosFiltrados = meusProdutos.filter(p =>
+        p.nome.toLowerCase().includes(input)
+    );
+    paginaAtual = 1;
+    renderizarPagina(produtosFiltrados, paginaAtual);
+};
+
+/* =====================================================
+   CARROSSEL
    ===================================================== */
 let slideIndex = 0;
 
@@ -346,6 +301,25 @@ function showSlides() {
     setTimeout(showSlides, 6000);
 }
 
+/* =====================================================
+   UTILITÁRIOS
+   ===================================================== */
+window.registrarClique = function(produto, loja) {
+    if (typeof gtag === 'function') {
+        gtag('event', 'clique_produto', { event_label: produto, loja_destino: loja });
+    }
+};
+
+window.compartilharOferta = function(id, titulo, preco) {
+    const urlBase     = window.location.href.split('#')[0];
+    const urlComAncora = `${urlBase}#${id}`;
+    const texto = `🌟 *OFERTA NO MERCADO NEB*\n\n*${titulo}*\n*R$ ${preco}*\n\n🛒 *Link da Oferta:* ${urlComAncora}`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`, '_blank');
+};
+
+/* =====================================================
+   INICIALIZAÇÃO
+   ===================================================== */
 window.onload = function() {
     carregarProdutos();
     inicializarFiltros();
