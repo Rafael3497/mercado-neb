@@ -21,7 +21,6 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header>
         <div class="container header-content">
             <a href="index.html" class="logo" style="text-decoration:none;">
@@ -30,7 +29,7 @@
             </a>
             <nav>
                 <ul>
-                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html" class="nav-inicio"><i class="fas fa-home"></i> Início</a></li>
                     <li>
                         <a href="mais_vendidos.html" class="nav-link-destaque">
                             <i class="fas fa-trophy"></i> Mais Vendidos
@@ -41,7 +40,6 @@
         </div>
     </header>
 
-    <!-- HERO COM BUSCA -->
     <section class="busca-hero">
         <div class="container">
             <a href="index.html" class="back-link">
@@ -65,7 +63,6 @@
         </div>
     </section>
 
-    <!-- BARRA DE CATEGORIAS -->
     <nav class="categoria-bar">
         <div class="container">
             <button class="cat-btn" data-termo="Celulares Smartphones" onclick="buscaRapida(this)">
@@ -107,7 +104,6 @@
         </div>
     </nav>
 
-    <!-- RESULTADOS -->
     <main class="resultados-section container">
 
         <div class="resultados-header" id="resultados-header" style="display:none;">
@@ -134,6 +130,10 @@
             </div>
         </div>
 
+        <div class="price-alert-global" id="alerta-preco" style="display:none; margin-top: 30px;">
+            ⚠️ Os valores poderam ser alterados a qualquer momento
+        </div>
+
         <div class="ml-paginacao" id="ml-paginacao" style="display:none;">
             <button id="ml-btn-anterior" onclick="paginar(-1)">← Anterior</button>
             <span id="ml-info-pagina"></span>
@@ -142,7 +142,6 @@
 
     </main>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
             <p>&copy; 2026 Mercado NEB - Todos os direitos reservados.</p>
@@ -154,6 +153,25 @@
         </div>
     </footer>
 
+    <script>
+        // Observador simples para mostrar o alerta apenas quando houver resultados de busca na tela
+        const observador = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'childList') {
+                    const temResultados = document.querySelector('#resultados-conteudo .ml-card');
+                    document.getElementById('alerta-preco').style.display = temResultados ? 'block' : 'none';
+                }
+            });
+        });
+
+        // Inicia a observação no container de resultados
+        window.addEventListener('DOMContentLoaded', () => {
+            const containerResultados = document.getElementById('resultados-conteudo');
+            if (containerResultados) {
+                observador.observe(containerResultados, { childList: true });
+            }
+        });
+    </script>
     <script src="busca.js"></script>
 
 </body>
