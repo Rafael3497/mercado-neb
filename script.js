@@ -6,6 +6,7 @@ const PRODUTOS_POR_PAGINA = 20;
 let paginaAtual = 1;
 let meusProdutos = [];
 let produtosFiltrados = [];
+let hashScrollRealizado = false; // Controle para rolar até a âncora apenas uma vez no carregamento
 
 /* =====================================================
    UTILITÁRIOS E FORMATAÇÃO
@@ -159,17 +160,23 @@ function renderizarPagina(lista, pagina) {
         </div>`;
     }).join('');
 
-    if (pagina > 1) {
+    // Verifica se estamos no meio do processo de rolar para um hash no primeiro carregamento
+    const rolandoParaHash = window.location.hash && !hashScrollRealizado;
+
+    // Só rola para o topo das ofertas se não estivermos buscando o elemento do hash
+    if (pagina > 1 && !rolandoParaHash) {
         const ofertasEl = document.getElementById('ofertas');
         if (ofertasEl) ofertasEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    if (window.location.hash && pagina === 1) {
+    // Lida com o scroll do hash independente da página (apenas 1x por sessão para não travar navegação futura)
+    if (window.location.hash && !hashScrollRealizado) {
         setTimeout(() => {
             const target = document.querySelector(window.location.hash);
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 target.classList.add('highlight-card');
+                hashScrollRealizado = true; // Flag ativada, o código não repetirá esse scroll
                 setTimeout(() => target.classList.remove('highlight-card'), 2000);
             }
         }, 500);
@@ -231,7 +238,19 @@ async function carregarProdutos() {
         const data = await res.json();
         meusProdutos     = (data.produtos || []).slice().reverse(); // p78 primeiro
         produtosFiltrados = [...meusProdutos];
+        
+        // CÁLCULO INTELIGENTE DA PÁGINA INICIAL BASEADO NO HASH
         paginaAtual = 1;
+        if (window.location.hash) {
+            const idAlvo = window.location.hash.substring(1); // Remove o '#'
+            const indexAlvo = produtosFiltrados.findIndex(p => String(p.id) === idAlvo);
+            
+            if (indexAlvo !== -1) {
+                // Calcula a página exata onde o item está localizado
+                paginaAtual = Math.floor(indexAlvo / PRODUTOS_POR_PAGINA) + 1;
+            }
+        }
+
         renderizarPagina(produtosFiltrados, paginaAtual);
         configurarFiltroPrecoDinamico();
     } catch (err) {
