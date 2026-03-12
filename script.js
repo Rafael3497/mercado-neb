@@ -111,6 +111,25 @@ window.toggleFavorito = function(event, produtoId) {
 /* =====================================================
    PAGINAÇÃO E RENDERIZAÇÃO
    ===================================================== */
+
+// Algoritmo para calcular os números e reticências da paginação
+function gerarArrayPaginacao(atual, total) {
+    if (total <= 7) {
+        return Array.from({ length: total }, (_, i) => i + 1);
+    }
+
+    const paginas = [];
+    if (atual <= 4) {
+        paginas.push(1, 2, 3, 4, 5, '...', total);
+    } else if (atual >= total - 3) {
+        paginas.push(1, '...', total - 4, total - 3, total - 2, total - 1, total);
+    } else {
+        paginas.push(1, '...', atual - 1, atual, atual + 1, '...', total);
+    }
+
+    return paginas;
+}
+
 function renderizarPagina(lista, pagina) {
     const grid        = document.getElementById('offersGrid');
     const paginacaoEl = document.getElementById('paginacao-produtos');
@@ -200,16 +219,35 @@ function renderizarPagina(lista, pagina) {
 
     const numerados = document.getElementById('paginas-numeradas');
     numerados.innerHTML = '';
-    for (let i = 1; i <= totalPaginas; i++) {
-        const btn = document.createElement('button');
-        btn.textContent = i;
-        btn.className   = 'btn-pag-numero' + (i === pagina ? ' ativo' : '');
-        btn.onclick     = i === pagina ? null : () => {
-            paginaAtual = i;
-            renderizarPagina(produtosFiltrados, paginaAtual);
-        };
-        numerados.appendChild(btn);
-    }
+    
+    // Nova lógica de renderização dinâmica da paginação
+    const arrayPaginacao = gerarArrayPaginacao(pagina, totalPaginas);
+
+    arrayPaginacao.forEach(item => {
+        if (item === '...') {
+            const span = document.createElement('span');
+            span.textContent = '...';
+            // Estilos embutidos para garantir alinhamento sem precisar mexer no CSS
+            span.style.display = 'flex';
+            span.style.alignItems = 'flex-end';
+            span.style.justifyContent = 'center';
+            span.style.width = '30px';
+            span.style.fontWeight = 'bold';
+            span.style.color = '#1a42b9'; // Usando o azul padrão do seu layout
+            span.style.userSelect = 'none';
+            span.style.paddingBottom = '8px';
+            numerados.appendChild(span);
+        } else {
+            const btn = document.createElement('button');
+            btn.textContent = item;
+            btn.className   = 'btn-pag-numero' + (item === pagina ? ' ativo' : '');
+            btn.onclick     = item === pagina ? null : () => {
+                paginaAtual = item;
+                renderizarPagina(produtosFiltrados, paginaAtual);
+            };
+            numerados.appendChild(btn);
+        }
+    });
 }
 
 window.mudarPagina = function(direcao) {
