@@ -412,4 +412,19 @@ window.onload = function() {
     carregarProdutos();
     inicializarFiltros();
     showSlides();
+    
+    // Esconder o banner de informação automaticamente após 15 segundos
+    const infoBanner = document.querySelector('.info-database');
+    if (infoBanner) {
+        setTimeout(() => {
+            // Adiciona transição para desaparecer de forma suave
+            infoBanner.style.transition = 'opacity 0.6s ease';
+            infoBanner.style.opacity = '0';
+            
+            // Remove o elemento do ecrã depois da transição terminar
+            setTimeout(() => {
+                infoBanner.style.display = 'none';
+            }, 600);
+        }, 15000); // 15000 milissegundos = 15 segundos
+    }
 };
