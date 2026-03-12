@@ -289,6 +289,30 @@ nav ul li a::after {
 /* =====================================================
    GRID E CARDS
    ===================================================== */
+
+/* Banner de Informação do Banco de Dados */
+.info-database {
+    background-color: #e0f2fe; /* Fundo azul claro suave */
+    color: #0369a1; /* Texto azul escuro para contraste */
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #bae6fd;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    line-height: 1.5;
+}
+
+.info-database i {
+    font-size: 1.4rem;
+    color: #0284c7;
+    flex-shrink: 0;
+}
+
 .grid-offers {
     display: grid;
     gap: 30px;
@@ -815,6 +839,17 @@ footer {
         padding: 10px 16px; 
         width: 90%; /* Evita que encoste na tela */
         border-radius: 10px;
+    }
+
+    /* Ajustes responsivos do Banner de Informação do Banco de Dados */
+    .info-database {
+        font-size: 0.85rem;
+        padding: 12px;
+        align-items: flex-start;
+    }
+    .info-database i {
+        font-size: 1.2rem;
+        margin-top: 2px;
     }
 }
 
