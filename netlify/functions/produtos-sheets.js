@@ -37,7 +37,7 @@ function aplicarAfiliadoML(link) {
       urlObj.searchParams.delete('forceInApp');
       urlObj.searchParams.delete('affiliate_id');
       
-      // Injeta os dados do Rafael
+      // Injeta os teus dados
       urlObj.searchParams.set('matt_word', MATT_WORD);
       urlObj.searchParams.set('matt_tool', AFILIADO_ID);
       urlObj.searchParams.set('forceInApp', 'true');
@@ -70,7 +70,8 @@ exports.handler = async (event) => {
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "GET, OPTIONS",
     "Content-Type": "application/json",
-    "Cache-Control": "public, max-age=300",
+    // Removido cache para o servidor e navegador atualizarem imediatamente
+    "Cache-Control": "no-cache", 
   };
 
   if (event.httpMethod === "OPTIONS") {
@@ -88,8 +89,11 @@ exports.handler = async (event) => {
   }
 
   try {
-    const res = await fetch(SHEET_URL);
-    if (!res.ok) throw new Error(`Erro ao buscar planilha: ${res.status}`);
+    // Burlar o cache da própria folha de cálculo do Google Sheets adicionando um timestamp
+    const timestamp = new Date().getTime();
+    const res = await fetch(`${SHEET_URL}&t=${timestamp}`);
+    
+    if (!res.ok) throw new Error(`Erro ao buscar a folha de cálculo: ${res.status}`);
 
     const csv = await res.text();
     const linhas = csv.trim().split("\n");
@@ -129,7 +133,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: "Erro ao carregar produtos da planilha", details: err.message }),
+      body: JSON.stringify({ error: "Erro ao carregar produtos da folha de cálculo", details: err.message }),
     };
   }
 };

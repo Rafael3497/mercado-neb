@@ -3,7 +3,7 @@
 const AFILIADO_ID = "23098063";
 const MATT_WORD = "mercadoneb";
 
-// Cache do token de usuário
+// Cache do token de utilizador
 let cachedToken = null;
 let tokenExpiraEm = 0;
 
@@ -31,7 +31,7 @@ exports.handler = async (event, context) => {
     };
   }
 
-  // ── TOKEN DE USUÁRIO ─────────────────────────────────────────────────────
+  // ── TOKEN DE UTILIZADOR ─────────────────────────────────────────────────────
   const agora = Date.now();
   if (!cachedToken || agora >= tokenExpiraEm) {
     try {
