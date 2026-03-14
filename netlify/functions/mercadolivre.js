@@ -95,11 +95,19 @@ exports.handler = async (event, context) => {
         const info     = itemData.results?.[0];
         if (!info || !info.price) return null;
 
-        const permalink    = info.permalink
-          || `https://produto.mercadolivre.com.br/MLB-${info.item_id.replace("MLB", "")}`;
+        // Padroniza o domínio para www.mercadolivre.com.br/p/
+        let permalink = info.permalink
+          || `https://www.mercadolivre.com.br/p/MLB${info.item_id.replace("MLB", "")}`;
+
+        permalink = permalink.replace(
+          /https?:\/\/produto\.mercadolivre\.com\.br\/MLB-/gi,
+          "https://www.mercadolivre.com.br/p/MLB"
+        );
+
         const sep          = permalink.includes("?") ? "&" : "?";
         const linkAfiliado = `${permalink}${sep}matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
-        const imagem       = prodData.pictures?.[0]?.url
+
+        const imagem = prodData.pictures?.[0]?.url
           || prodData.pictures?.[0]?.thumbnail
           || null;
 

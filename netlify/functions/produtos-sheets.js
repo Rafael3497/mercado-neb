@@ -7,10 +7,16 @@ const AFILIADO_ID = "23098063";
 function aplicarAfiliadoML(link) {
   if (!link || link === "#") return link;
 
-  // Links Amazon (amzn.to, amazon.com.br) — não mexe
+  // Links Amazon — não mexe
   if (link.includes("amzn.to") || link.includes("amazon.com")) return link;
 
-  // Links Mercado Livre (meli.la ou mercadolivre.com.br)
+  // Troca domínio "produto.mercadolivre.com.br/MLB-XXXXXXX" 
+  // por "www.mercadolivre.com.br/p/MLB-XXXXXXX"
+  link = link.replace(
+    /https?:\/\/produto\.mercadolivre\.com\.br\/MLB-/gi,
+    "https://www.mercadolivre.com.br/p/MLB"
+  );
+
   const sep = link.includes("?") ? "&" : "?";
   return `${link}${sep}matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
 }
