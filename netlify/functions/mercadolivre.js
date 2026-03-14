@@ -107,10 +107,13 @@ exports.handler = async (event, context) => {
           if (matchCat) {
             linkAfiliado = `https://www.mercadolivre.com.br/p/${matchCat[1]}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
           } else {
-            // 2. Padrão Anúncio Comum: procura por /MLB-123456...
-            const matchItem = pathname.match(/\/(MLB\-?\d+)/i);
+            // 2. Padrão Anúncio Comum: procura por /MLB-123456... ou /MLB123456...
+            const matchItem = pathname.match(/(MLB[\-]?\d+)/i);
             if (matchItem) {
-              linkAfiliado = `https://produto.mercadolivre.com.br/${matchItem[1]}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+              // Força a existência do hífen para o link ficar válido: MLB-XXXXXX
+              let itemId = matchItem[1].replace("-", ""); 
+              itemId = `MLB-${itemId.substring(3)}`;
+              linkAfiliado = `https://produto.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
             } else {
               // 3. Fallback de segurança limpando parâmetros
               const urlBase = rawLink.split("?")[0];
