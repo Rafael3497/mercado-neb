@@ -2,6 +2,7 @@
 // Lê o Google Sheets publicado como CSV e retorna os produtos formatados
 
 const AFILIADO_ID = "23098063";
+const MATT_WORD = "mercadoneb";
 
 function aplicarAfiliadoML(link) {
   if (!link || link === "#") return link;
@@ -11,37 +12,43 @@ function aplicarAfiliadoML(link) {
 
   try {
     const urlObj = new URL(link);
-    const pathname = urlObj.pathname; // Pega apenas o caminho do link, ignorando os parâmetros que causam erro
+    const pathname = urlObj.pathname;
 
-    // 1. Padrão Catálogo: procura especificamente por /p/MLB...
+    // 1. É um link de Catálogo? (Contém /p/MLB...)
+    // Ex: /aspirador-de-po.../p/MLB18238728
     const matchCat = pathname.match(/\/p\/(MLB\d+)/i);
     if (matchCat) {
-      // Retorna o link curto, limpo e exatamente no formato solicitado
-      return `https://www.mercadolivre.com.br/p/${matchCat[1]}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+      // Retorna a URL curta de catálogo, ignorando textos de SEO e filtros antigos
+      return `https://www.mercadolivre.com.br/p/${matchCat[1]}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
     }
 
-    // 2. Padrão Anúncio Comum: procura por /MLB-123456...
-    const matchItem = pathname.match(/\/(MLB\-?\d+)/i);
+    // 2. É um link de Anúncio Comum? (Contém MLB-123456 ou MLB123456)
+    // Ex: /MLB-6054409560-produto...
+    const matchItem = pathname.match(/(MLB[\-]?\d+)/i);
     if (matchItem) {
-      // Retorna o link curto para anúncios comuns
-      return `https://produto.mercadolivre.com.br/${matchItem[1]}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+      // Garante que tenha o hífen para formatar corretamente (MLB-XXXXX)
+      let itemId = matchItem[1].replace("-", ""); 
+      itemId = `MLB-${itemId.substring(3)}`;
+      // Retorna a URL curta de anúncio
+      return `https://produto.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
     }
 
-    // 3. Fallback: Se não achar os padrões acima, limpa a URL base atual e adiciona os parâmetros
+    // 3. Fallback: Se não achar nenhum padrão reconhecido, limpa e injeta as tags
     urlObj.searchParams.delete('matt_tool');
     urlObj.searchParams.delete('matt_word');
     urlObj.searchParams.delete('forceInApp');
     urlObj.searchParams.delete('affiliate_id');
+    urlObj.searchParams.delete('pdp_filters'); 
     
-    urlObj.searchParams.set('matt_word', 'mercadoneb');
+    urlObj.searchParams.set('matt_word', MATT_WORD);
     urlObj.searchParams.set('matt_tool', AFILIADO_ID);
     urlObj.searchParams.set('forceInApp', 'true');
     
     return urlObj.toString();
   } catch (e) {
-    // Fallback de segurança se a URL for inválida ou não conseguir fazer o parse
+    // Fallback de segurança se a URL for inválida (ex: copiada incompleta)
     const urlBase = link.split("?")[0];
-    return `${urlBase}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+    return `${urlBase}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
   }
 }
 
