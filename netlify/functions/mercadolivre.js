@@ -79,8 +79,6 @@ exports.handler = async (event, context) => {
   const ordenacao  = params.ordenacao || "relevance";
 
   // ── HELPER: busca detalhes de uma lista de IDs ────────────────────────────
-  // Pede até (limite * 2) IDs para compensar os que retornam null
-  // e corta no limite certo no final
   async function buscarProdutosPorIds(ids, campanha) {
     const promises = ids.map(async (productId) => {
       try {
@@ -95,17 +93,14 @@ exports.handler = async (event, context) => {
         const info     = itemData.results?.[0];
         if (!info || !info.price) return null;
 
-        // Padroniza o domínio para www.mercadolivre.com.br/p/
-        let permalink = info.permalink
-        || `https://www.mercadolivre.com.br/p/MLB${info.item_id.replace("MLB", "")}`;
+        // Usa o permalink original da API sem trocar o domínio,
+        // pois ele já vem no formato correto (/p/MLB... ou /MLB-...)
+        // Remove apenas os parâmetros antigos e adiciona os novos
+        const urlBase = (
+          info.permalink ||
+          `https://www.mercadolivre.com.br/MLB-${info.item_id.replace("MLB", "")}`
+        ).split("?")[0];
 
-        permalink = permalink.replace(
-          /https?:\/\/produto\.mercadolivre\.com\.br\/MLB-/gi,
-          "https://www.mercadolivre.com.br/p/MLB"
-);
-
-// Remove parâmetros antigos de afiliado antes de adicionar os novos
-        const urlBase = permalink.split("?")[0];
         const linkAfiliado = `${urlBase}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
 
         const imagem = prodData.pictures?.[0]?.url
@@ -145,11 +140,11 @@ exports.handler = async (event, context) => {
     if (termoBusca) {
       console.log("[BUSCA] termo:", termoBusca, "| offset:", offset, "| ordenacao:", ordenacao);
 
-      let items      = [];
-      let total      = 0;
+      let items       = [];
+      let total       = 0;
       let buscaOffset = offset;
-      const LOTE     = 50; // máximo que a API aceita por vez
-      const MAX_ITER = 4;  // no máximo 4 tentativas = 200 IDs vasculhados
+      const LOTE      = 50;
+      const MAX_ITER  = 4;
 
       for (let iter = 0; iter < MAX_ITER && items.length < limite; iter++) {
         const searchUrl = `https://api.mercadolibre.com/products/search`
@@ -172,31 +167,27 @@ exports.handler = async (event, context) => {
         const ids = (searchData.results || []).map(p => p.id);
         console.log(`[BUSCA] iter ${iter + 1} | ids recebidos: ${ids.length} | total ML: ${total}`);
 
-        if (ids.length === 0) break; // sem mais resultados
+        if (ids.length === 0) break;
 
         const loteItems = await buscarProdutosPorIds(ids, "busca_ml");
         console.log(`[BUSCA] iter ${iter + 1} | itens válidos neste lote: ${loteItems.length}`);
 
-        // Evita duplicatas
         const existentes = new Set(items.map(i => i.id));
         const novos = loteItems.filter(i => !existentes.has(i.id));
         items = [...items, ...novos];
 
         buscaOffset += LOTE;
 
-        // Se a API não tem mais resultados, para
         if (buscaOffset >= total) break;
       }
 
       console.log("[BUSCA] total itens válidos acumulados:", items.length);
 
-      // Corta exatamente no limite solicitado
       items = items.slice(0, limite);
 
-      // Ordenação
-      if (ordenacao === "price_asc")               items.sort((a, b) => a.preco - b.preco);
-      else if (ordenacao === "price_desc")          items.sort((a, b) => b.preco - a.preco);
-      else if (ordenacao === "sold_quantity_desc")  items.sort((a, b) => b.vendidos - a.vendidos);
+      if (ordenacao === "price_asc")              items.sort((a, b) => a.preco - b.preco);
+      else if (ordenacao === "price_desc")         items.sort((a, b) => b.preco - a.preco);
+      else if (ordenacao === "sold_quantity_desc") items.sort((a, b) => b.vendidos - a.vendidos);
 
       return {
         statusCode: 200,
@@ -204,7 +195,6 @@ exports.handler = async (event, context) => {
         body: JSON.stringify({ total, items }),
       };
     }
-
 
     // ── FLUXO 2: MAIS VENDIDOS POR CATEGORIA ─────────────────────────────
     let items      = [];
@@ -219,13 +209,12 @@ exports.handler = async (event, context) => {
       const allIds         = (highlightsData.content || []).map(p => p.id);
       totalItems           = allIds.length;
 
-      // Pega o dobro do limite para compensar nulls, depois corta em limite
       const pageIds = allIds.slice(offset, offset + limite * 2);
       console.log("[HIGHLIGHTS] total ids:", totalItems, "| ids buscados:", pageIds.length);
 
       if (pageIds.length > 0) {
         items = await buscarProdutosPorIds(pageIds, "mais_vendidos");
-        items = items.slice(0, limite); // garante exatamente o limite
+        items = items.slice(0, limite);
       }
 
     } else {
