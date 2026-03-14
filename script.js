@@ -272,7 +272,11 @@ async function carregarProdutos() {
     }
 
     try {
-        const res  = await fetch('/.netlify/functions/produtos-sheets');
+        // TÉCNICA ANTI-CACHE APLICADA AQUI: 
+        // Adicionamos ?t=TIMESTAMP para obrigar o navegador a descarregar os links atualizados
+        const timestamp = new Date().getTime();
+        const res  = await fetch(`/.netlify/functions/produtos-sheets?t=${timestamp}`);
+        
         const data = await res.json();
         meusProdutos     = (data.produtos || []).slice().reverse(); // p78 primeiro
         produtosFiltrados = [...meusProdutos];
