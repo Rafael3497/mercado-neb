@@ -5,14 +5,18 @@ const AFILIADO_ID = "23098063";
 
 function aplicarAfiliadoML(link) {
   if (!link || link === "#") return link;
+
+  // Links Amazon — não mexe
   if (link.includes("amzn.to") || link.includes("amazon.com")) return link;
 
-  link = link.replace(
-    /https?:\/\/produto\.mercadolivre\.com\.br\/MLB-/gi,
-    "https://www.mercadolivre.com.br/p/MLB"
-  );
+  // Extrai o ID MLB de qualquer formato de URL do ML
+  const match = link.match(/MLB[\-]?(\d+)/i);
+  if (match) {
+    const mlbId = `MLB${match[1]}`;
+    return `https://www.mercadolivre.com.br/p/${mlbId}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+  }
 
-  // Remove qualquer parâmetro existente antes de adicionar os novos
+  // Se não achou ID MLB, remove parâmetros antigos e adiciona os novos
   const urlBase = link.split("?")[0];
   return `${urlBase}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
 }
