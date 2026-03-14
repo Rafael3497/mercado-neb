@@ -98,7 +98,7 @@ exports.handler = async (event, context) => {
         const permalink    = info.permalink
           || `https://produto.mercadolivre.com.br/MLB-${info.item_id.replace("MLB", "")}`;
         const sep          = permalink.includes("?") ? "&" : "?";
-        const linkAfiliado = `${permalink}${sep}matt_tool=${AFILIADO_ID}&matt_word=&matt_source=mercadoneb&matt_campaign=${campanha}`;
+        const linkAfiliado = `${permalink}${sep}matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
         const imagem       = prodData.pictures?.[0]?.url
           || prodData.pictures?.[0]?.thumbnail
           || null;

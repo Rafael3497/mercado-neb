@@ -1,13 +1,27 @@
 // netlify/functions/produtos-sheets.js
 // Lê o Google Sheets publicado como CSV e retorna os produtos formatados
 
+const AFILIADO_ID = "23098063";
+
+// Adiciona parâmetros de afiliado apenas em links do Mercado Livre
+function aplicarAfiliadoML(link) {
+  if (!link || link === "#") return link;
+
+  // Links Amazon (amzn.to, amazon.com.br) — não mexe
+  if (link.includes("amzn.to") || link.includes("amazon.com")) return link;
+
+  // Links Mercado Livre (meli.la ou mercadolivre.com.br)
+  const sep = link.includes("?") ? "&" : "?";
+  return `${link}${sep}matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+}
+
 exports.handler = async (event) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "GET, OPTIONS",
     "Content-Type": "application/json",
-    "Cache-Control": "public, max-age=300", // cache de 5 minutos
+    "Cache-Control": "public, max-age=300",
   };
 
   if (event.httpMethod === "OPTIONS") {
@@ -25,30 +39,27 @@ exports.handler = async (event) => {
   }
 
   try {
-    // Busca o CSV público da planilha
     const res = await fetch(SHEET_URL);
     if (!res.ok) throw new Error(`Erro ao buscar planilha: ${res.status}`);
 
     const csv = await res.text();
     const linhas = csv.trim().split("\n");
 
-    // Primeira linha = cabeçalho, ignora
     const produtos = linhas.slice(1)
       .map((linha, index) => {
-        // Faz parse do CSV respeitando campos com vírgula entre aspas
         const colunas = parseCsvLinha(linha);
-
         const [id, nome, preco, img, link, categoria, loja, desc] = colunas;
 
-        // Ignora linhas vazias ou sem nome
         if (!nome || !nome.trim()) return null;
+
+        const linkBruto = link?.trim() || "#";
 
         return {
           id:        id?.trim()        || `p${index + 1}`,
           nome:      nome?.trim()      || "",
           preco:     preco?.trim()     || "0",
           img:       img?.trim()       || "",
-          link:      link?.trim()      || "#",
+          link:      aplicarAfiliadoML(linkBruto),
           categoria: categoria?.trim() || "outros",
           loja:      loja?.trim()      || "mercadolivre",
           desc:      desc?.trim()      || "",
@@ -74,7 +85,6 @@ exports.handler = async (event) => {
   }
 };
 
-// Parser simples de linha CSV (respeita aspas duplas)
 function parseCsvLinha(linha) {
   const resultado = [];
   let campo = "";
@@ -91,6 +101,6 @@ function parseCsvLinha(linha) {
       campo += char;
     }
   }
-  resultado.push(campo); // último campo
+  resultado.push(campo);
   return resultado;
 }
