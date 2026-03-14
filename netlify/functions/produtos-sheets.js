@@ -14,26 +14,38 @@ function aplicarAfiliadoML(link) {
     const urlObj = new URL(link);
     const pathname = urlObj.pathname;
 
-    // 1. É um link de Catálogo? (Contém /p/MLB...)
-    // Ex: /aspirador-de-po.../p/MLB18238728
+    // 1. Padrão Catálogo: (Contém /p/MLB...)
     const matchCat = pathname.match(/\/p\/(MLB\d+)/i);
     if (matchCat) {
-      // Retorna a URL curta de catálogo, ignorando textos de SEO e filtros antigos
       return `https://www.mercadolivre.com.br/p/${matchCat[1]}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
     }
 
-    // 2. É um link de Anúncio Comum? (Contém MLB-123456 ou MLB123456)
-    // Ex: /MLB-6054409560-produto...
+    // 2. Padrão Anúncio Comum: (Contém MLB-123456 ou MLB123456)
     const matchItem = pathname.match(/(MLB[\-]?\d+)/i);
-    if (matchItem) {
-      // Garante que tenha o hífen para formatar corretamente (MLB-XXXXX)
+    // Mas garante que NÃO é um link social disfarçado antes de aplicar
+    if (matchItem && !pathname.includes('/social/')) {
       let itemId = matchItem[1].replace("-", ""); 
       itemId = `MLB-${itemId.substring(3)}`;
-      // Retorna a URL curta de anúncio
       return `https://produto.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
     }
 
-    // 3. Fallback: Se não achar nenhum padrão reconhecido, limpa e injeta as tags
+    // 3. Padrão Link Social: (Contém /social/...)
+    if (pathname.includes('/social/')) {
+      // Limpa chaves antigas caso venham sujas, mas PRESERVA o parâmetro "ref=" que é vital
+      urlObj.searchParams.delete('matt_tool');
+      urlObj.searchParams.delete('matt_word');
+      urlObj.searchParams.delete('forceInApp');
+      urlObj.searchParams.delete('affiliate_id');
+      
+      // Injeta os dados do Rafael
+      urlObj.searchParams.set('matt_word', MATT_WORD);
+      urlObj.searchParams.set('matt_tool', AFILIADO_ID);
+      urlObj.searchParams.set('forceInApp', 'true');
+      
+      return urlObj.toString();
+    }
+
+    // 4. Fallback Global: Limpa e injeta as tags para URLs desconhecidas
     urlObj.searchParams.delete('matt_tool');
     urlObj.searchParams.delete('matt_word');
     urlObj.searchParams.delete('forceInApp');
@@ -46,7 +58,7 @@ function aplicarAfiliadoML(link) {
     
     return urlObj.toString();
   } catch (e) {
-    // Fallback de segurança se a URL for inválida (ex: copiada incompleta)
+    // Fallback de segurança extremo se a URL for textualmente inválida
     const urlBase = link.split("?")[0];
     return `${urlBase}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
   }
