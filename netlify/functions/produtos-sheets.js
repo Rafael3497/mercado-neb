@@ -9,16 +9,40 @@ function aplicarAfiliadoML(link) {
   // Links Amazon — não mexe
   if (link.includes("amzn.to") || link.includes("amazon.com")) return link;
 
-  // Extrai o ID MLB de qualquer formato de URL do ML
-  const match = link.match(/MLB[\-]?(\d+)/i);
-  if (match) {
-    const mlbId = `MLB${match[1]}`;
-    return `https://www.mercadolivre.com.br/p/${mlbId}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
-  }
+  try {
+    const urlObj = new URL(link);
+    const pathname = urlObj.pathname; // Pega apenas o caminho do link, ignorando os parâmetros que causam erro
 
-  // Se não achou ID MLB, remove parâmetros antigos e adiciona os novos
-  const urlBase = link.split("?")[0];
-  return `${urlBase}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+    // 1. Padrão Catálogo: procura especificamente por /p/MLB...
+    const matchCat = pathname.match(/\/p\/(MLB\d+)/i);
+    if (matchCat) {
+      // Retorna o link curto, limpo e exatamente no formato solicitado
+      return `https://www.mercadolivre.com.br/p/${matchCat[1]}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+    }
+
+    // 2. Padrão Anúncio Comum: procura por /MLB-123456...
+    const matchItem = pathname.match(/\/(MLB\-?\d+)/i);
+    if (matchItem) {
+      // Retorna o link curto para anúncios comuns
+      return `https://produto.mercadolivre.com.br/${matchItem[1]}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+    }
+
+    // 3. Fallback: Se não achar os padrões acima, limpa a URL base atual e adiciona os parâmetros
+    urlObj.searchParams.delete('matt_tool');
+    urlObj.searchParams.delete('matt_word');
+    urlObj.searchParams.delete('forceInApp');
+    urlObj.searchParams.delete('affiliate_id');
+    
+    urlObj.searchParams.set('matt_word', 'mercadoneb');
+    urlObj.searchParams.set('matt_tool', AFILIADO_ID);
+    urlObj.searchParams.set('forceInApp', 'true');
+    
+    return urlObj.toString();
+  } catch (e) {
+    // Fallback de segurança se a URL for inválida ou não conseguir fazer o parse
+    const urlBase = link.split("?")[0];
+    return `${urlBase}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+  }
 }
 
 exports.handler = async (event) => {

@@ -1,6 +1,7 @@
 // netlify/functions/mercadolivre.js
 
 const AFILIADO_ID = "23098063";
+const MATT_WORD = "mercadoneb";
 
 // Cache do token de usuário
 let cachedToken = null;
@@ -93,15 +94,34 @@ exports.handler = async (event, context) => {
         const info     = itemData.results?.[0];
         if (!info || !info.price) return null;
 
-        // Usa o permalink original da API sem trocar o domínio,
-        // pois ele já vem no formato correto (/p/MLB... ou /MLB-...)
-        // Remove apenas os parâmetros antigos e adiciona os novos
-        const urlBase = (
-          info.permalink ||
-          `https://www.mercadolivre.com.br/MLB-${info.item_id.replace("MLB", "")}`
-        ).split("?")[0];
+        // Limpeza e formatação padronizada do link de afiliado
+        const rawLink = info.permalink || `https://produto.mercadolivre.com.br/${info.item_id}`;
+        let linkAfiliado = "";
 
-        const linkAfiliado = `${urlBase}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+        try {
+          const urlObj = new URL(rawLink);
+          const pathname = urlObj.pathname;
+
+          // 1. Padrão Catálogo: procura especificamente por /p/MLB...
+          const matchCat = pathname.match(/\/p\/(MLB\d+)/i);
+          if (matchCat) {
+            linkAfiliado = `https://www.mercadolivre.com.br/p/${matchCat[1]}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+          } else {
+            // 2. Padrão Anúncio Comum: procura por /MLB-123456...
+            const matchItem = pathname.match(/\/(MLB\-?\d+)/i);
+            if (matchItem) {
+              linkAfiliado = `https://produto.mercadolivre.com.br/${matchItem[1]}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+            } else {
+              // 3. Fallback de segurança limpando parâmetros
+              const urlBase = rawLink.split("?")[0];
+              linkAfiliado = `${urlBase}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+            }
+          }
+        } catch (e) {
+          // Fallback caso a URL venha totalmente inválida
+          const urlBase = rawLink.split("?")[0];
+          linkAfiliado = `${urlBase}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+        }
 
         const imagem = prodData.pictures?.[0]?.url
           || prodData.pictures?.[0]?.thumbnail
