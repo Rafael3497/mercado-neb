@@ -3,22 +3,18 @@
 
 const AFILIADO_ID = "23098063";
 
-// Adiciona parâmetros de afiliado apenas em links do Mercado Livre
 function aplicarAfiliadoML(link) {
   if (!link || link === "#") return link;
-
-  // Links Amazon — não mexe
   if (link.includes("amzn.to") || link.includes("amazon.com")) return link;
 
-  // Troca domínio "produto.mercadolivre.com.br/MLB-XXXXXXX" 
-  // por "www.mercadolivre.com.br/p/MLB-XXXXXXX"
   link = link.replace(
     /https?:\/\/produto\.mercadolivre\.com\.br\/MLB-/gi,
     "https://www.mercadolivre.com.br/p/MLB"
   );
 
-  const sep = link.includes("?") ? "&" : "?";
-  return `${link}${sep}matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+  // Remove qualquer parâmetro existente antes de adicionar os novos
+  const urlBase = link.split("?")[0];
+  return `${urlBase}?matt_word=mercadoneb&matt_tool=${AFILIADO_ID}&forceInApp=true`;
 }
 
 exports.handler = async (event) => {
