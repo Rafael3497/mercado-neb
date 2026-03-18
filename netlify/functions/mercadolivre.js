@@ -115,19 +115,19 @@ exports.handler = async (event, context) => {
           const urlObj = new URL(rawLink);
           const pathname = urlObj.pathname;
 
-          // 1. Padrão Catálogo Original: Se já vier com /p/MLB... preserva
+          // 1. Padrão Catálogo Original: Se já vier com /p/MLB...
           const matchCat = pathname.match(/\/p\/(MLB\d+)/i);
           if (matchCat) {
              const cleanId = matchCat[1];
              const slug = createSlug(productTitle);
              linkAfiliado = `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
           } else {
-            // 2. Padrão Anúncio Comum: Transforma em Catálogo SEO
+            // 2. Padrão Anúncio Comum: Mantém na rota de produto com o ID correto
             const matchItem = pathname.match(/(MLB[\-]?\d+)/i);
             if (matchItem) {
-              const cleanId = matchItem[1].replace("-", ""); // Remove hífen
-              const slug = createSlug(productTitle);
-              linkAfiliado = `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+              let itemId = matchItem[1].replace("-", ""); 
+              itemId = `MLB-${itemId.substring(3)}`;
+              linkAfiliado = `https://produto.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
             } else {
               // 3. Fallback
               const urlBase = rawLink.split("?")[0];
@@ -135,7 +135,6 @@ exports.handler = async (event, context) => {
             }
           }
         } catch (e) {
-          // Fallback de erro
           const urlBase = rawLink.split("?")[0];
           linkAfiliado = `${urlBase}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
         }
