@@ -38,13 +38,13 @@ function aplicarAfiliadoML(link, nomeProduto) {
       return `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
     }
 
-    // 2. Padrão Anúncio Comum: NÃO podemos usar /p/. Mantemos na rota original "produto"
+    // 2. Padrão Anúncio Comum: Removido o "produto." da URL base
     const matchItem = pathname.match(/(MLB[\-]?\d+)/i);
     if (matchItem && !pathname.includes('/social/')) {
       let itemId = matchItem[1].replace("-", ""); 
       itemId = `MLB-${itemId.substring(3)}`;
-      // Retorna para o subdomínio correto do ML para anúncios comuns
-      return `https://produto.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+      // Retorna para o domínio principal (mais limpo)
+      return `https://www.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
     }
 
     // 3. Padrão Link Social: (Contém /social/...)
