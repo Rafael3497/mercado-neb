@@ -115,19 +115,19 @@ exports.handler = async (event, context) => {
           const urlObj = new URL(rawLink);
           const pathname = urlObj.pathname;
 
-          // 1. Padrão Catálogo Original: Se já vier com /p/MLB...
+          // 1. Padrão Catálogo Original
           const matchCat = pathname.match(/\/p\/(MLB\d+)/i);
           if (matchCat) {
              const cleanId = matchCat[1];
              const slug = createSlug(productTitle);
              linkAfiliado = `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
           } else {
-            // 2. Padrão Anúncio Comum: Mantém na rota de produto com o ID correto
+            // 2. Padrão Anúncio Comum: Removido o "produto." da URL base
             const matchItem = pathname.match(/(MLB[\-]?\d+)/i);
             if (matchItem) {
               let itemId = matchItem[1].replace("-", ""); 
               itemId = `MLB-${itemId.substring(3)}`;
-              linkAfiliado = `https://produto.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+              linkAfiliado = `https://www.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
             } else {
               // 3. Fallback
               const urlBase = rawLink.split("?")[0];
