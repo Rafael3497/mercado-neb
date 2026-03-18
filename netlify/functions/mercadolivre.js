@@ -7,6 +7,19 @@ const MATT_WORD = "mercadoneb";
 let cachedToken = null;
 let tokenExpiraEm = 0;
 
+/**
+ * Converte um título em slug para a URL.
+ */
+function createSlug(title) {
+  if (!title || typeof title !== 'string') return 'produto';
+  return title
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 exports.handler = async (event, context) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -94,7 +107,7 @@ exports.handler = async (event, context) => {
         const info     = itemData.results?.[0];
         if (!info || !info.price) return null;
 
-        // Limpeza e formatação padronizada do link de afiliado
+        const productTitle = prodData.name || prodData.family_name || info.item_id;
         const rawLink = info.permalink || `https://produto.mercadolivre.com.br/${info.item_id}`;
         let linkAfiliado = "";
 
@@ -102,26 +115,27 @@ exports.handler = async (event, context) => {
           const urlObj = new URL(rawLink);
           const pathname = urlObj.pathname;
 
-          // 1. Padrão Catálogo: procura especificamente por /p/MLB...
+          // 1. Padrão Catálogo Original: Se já vier com /p/MLB... preserva
           const matchCat = pathname.match(/\/p\/(MLB\d+)/i);
           if (matchCat) {
-            linkAfiliado = `https://www.mercadolivre.com.br/p/${matchCat[1]}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+             const cleanId = matchCat[1];
+             const slug = createSlug(productTitle);
+             linkAfiliado = `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
           } else {
-            // 2. Padrão Anúncio Comum: procura por /MLB-123456... ou /MLB123456...
+            // 2. Padrão Anúncio Comum: Transforma em Catálogo SEO
             const matchItem = pathname.match(/(MLB[\-]?\d+)/i);
             if (matchItem) {
-              // Força a existência do hífen para o link ficar válido: MLB-XXXXXX
-              let itemId = matchItem[1].replace("-", ""); 
-              itemId = `MLB-${itemId.substring(3)}`;
-              linkAfiliado = `https://produto.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+              const cleanId = matchItem[1].replace("-", ""); // Remove hífen
+              const slug = createSlug(productTitle);
+              linkAfiliado = `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
             } else {
-              // 3. Fallback de segurança limpando parâmetros
+              // 3. Fallback
               const urlBase = rawLink.split("?")[0];
               linkAfiliado = `${urlBase}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
             }
           }
         } catch (e) {
-          // Fallback caso a URL venha totalmente inválida
+          // Fallback de erro
           const urlBase = rawLink.split("?")[0];
           linkAfiliado = `${urlBase}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
         }
@@ -132,7 +146,7 @@ exports.handler = async (event, context) => {
 
         return {
           id:             info.item_id,
-          titulo:         prodData.name || prodData.family_name || info.item_id,
+          titulo:         productTitle,
           preco:          info.price,
           preco_original: info.original_price || null,
           desconto:       info.original_price
