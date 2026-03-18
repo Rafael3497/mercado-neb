@@ -4,7 +4,24 @@
 const AFILIADO_ID = "23098063";
 const MATT_WORD = "mercadoneb";
 
-function aplicarAfiliadoML(link) {
+/**
+ * Converte um título em slug para a URL.
+ */
+function createSlug(title) {
+  if (!title || typeof title !== 'string') return 'produto';
+  return title
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+/**
+ * Aplica os parâmetros de afiliado e converte URLs para o padrão catálogo SEO.
+ * Passamos o nome do produto para gerar o slug.
+ */
+function aplicarAfiliadoML(link, nomeProduto) {
   if (!link || link === "#") return link;
 
   // Links Amazon — não mexe
@@ -13,20 +30,21 @@ function aplicarAfiliadoML(link) {
   try {
     const urlObj = new URL(link);
     const pathname = urlObj.pathname;
+    const slug = createSlug(nomeProduto);
 
     // 1. Padrão Catálogo: (Contém /p/MLB...)
     const matchCat = pathname.match(/\/p\/(MLB\d+)/i);
     if (matchCat) {
-      return `https://www.mercadolivre.com.br/p/${matchCat[1]}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+      const cleanId = matchCat[1];
+      return `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
     }
 
     // 2. Padrão Anúncio Comum: (Contém MLB-123456 ou MLB123456)
     const matchItem = pathname.match(/(MLB[\-]?\d+)/i);
     // Mas garante que NÃO é um link social disfarçado antes de aplicar
     if (matchItem && !pathname.includes('/social/')) {
-      let itemId = matchItem[1].replace("-", ""); 
-      itemId = `MLB-${itemId.substring(3)}`;
-      return `https://produto.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+      const cleanId = matchItem[1].replace("-", ""); 
+      return `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
     }
 
     // 3. Padrão Link Social: (Contém /social/...)
@@ -112,7 +130,8 @@ exports.handler = async (event) => {
           nome:      nome?.trim()      || "",
           preco:     preco?.trim()     || "0",
           img:       img?.trim()       || "",
-          link:      aplicarAfiliadoML(linkBruto),
+          // Agora passamos o NOME do produto para a função gerar o slug
+          link:      aplicarAfiliadoML(linkBruto, nome?.trim()), 
           categoria: categoria?.trim() || "outros",
           loja:      loja?.trim()      || "mercadolivre",
           desc:      desc?.trim()      || "",
