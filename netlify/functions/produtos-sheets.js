@@ -18,8 +18,7 @@ function createSlug(title) {
 }
 
 /**
- * Aplica os parâmetros de afiliado e converte URLs para o padrão catálogo SEO.
- * Passamos o nome do produto para gerar o slug.
+ * Aplica os parâmetros de afiliado e converte URLs garantindo compatibilidade com o app.
  */
 function aplicarAfiliadoML(link, nomeProduto) {
   if (!link || link === "#") return link;
@@ -32,30 +31,29 @@ function aplicarAfiliadoML(link, nomeProduto) {
     const pathname = urlObj.pathname;
     const slug = createSlug(nomeProduto);
 
-    // 1. Padrão Catálogo: (Contém /p/MLB...)
+    // 1. Padrão Catálogo: Se a URL original já for catálogo, montamos o link SEO-friendly
     const matchCat = pathname.match(/\/p\/(MLB\d+)/i);
     if (matchCat) {
       const cleanId = matchCat[1];
       return `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
     }
 
-    // 2. Padrão Anúncio Comum: (Contém MLB-123456 ou MLB123456)
+    // 2. Padrão Anúncio Comum: NÃO podemos usar /p/. Mantemos na rota original "produto"
     const matchItem = pathname.match(/(MLB[\-]?\d+)/i);
-    // Mas garante que NÃO é um link social disfarçado antes de aplicar
     if (matchItem && !pathname.includes('/social/')) {
-      const cleanId = matchItem[1].replace("-", ""); 
-      return `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
+      let itemId = matchItem[1].replace("-", ""); 
+      itemId = `MLB-${itemId.substring(3)}`;
+      // Retorna para o subdomínio correto do ML para anúncios comuns
+      return `https://produto.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
     }
 
     // 3. Padrão Link Social: (Contém /social/...)
     if (pathname.includes('/social/')) {
-      // Limpa chaves antigas caso venham sujas, mas PRESERVA o parâmetro "ref=" que é vital
       urlObj.searchParams.delete('matt_tool');
       urlObj.searchParams.delete('matt_word');
       urlObj.searchParams.delete('forceInApp');
       urlObj.searchParams.delete('affiliate_id');
       
-      // Injeta os teus dados
       urlObj.searchParams.set('matt_word', MATT_WORD);
       urlObj.searchParams.set('matt_tool', AFILIADO_ID);
       urlObj.searchParams.set('forceInApp', 'true');
@@ -130,7 +128,6 @@ exports.handler = async (event) => {
           nome:      nome?.trim()      || "",
           preco:     preco?.trim()     || "0",
           img:       img?.trim()       || "",
-          // Agora passamos o NOME do produto para a função gerar o slug
           link:      aplicarAfiliadoML(linkBruto, nome?.trim()), 
           categoria: categoria?.trim() || "outros",
           loja:      loja?.trim()      || "mercadolivre",
