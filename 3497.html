@@ -50,7 +50,7 @@
             outline: none;
         }
 
-        textarea { height: 80px; resize: vertical; }
+        textarea { height: 60px; resize: vertical; background-color: #f8fafc; color: #475569; }
 
         .preview {
             text-align: center;
@@ -112,7 +112,6 @@
             margin-top: 3px;
         }
 
-        /* Indicador de carregamento no input de link */
         .loading-input {
             background: url('https://i.gifer.com/ZZ5H.gif') no-repeat right 10px center;
             background-size: 20px;
@@ -122,19 +121,18 @@
 <body>
 
 <div class="container">
-    <h2>🛒 Cadastro de Produto</h2>
+    <h2>🛒 Cadastro de Produto Automatizado</h2>
 
     <label>Link afiliado *</label>
     <input id="link" placeholder="Cole o link aqui (https://amzn.to/... ou https://meli.la/...)" oninput="aoDigitarLink()">
-    <div class="preco-dica">Cole o link para auto-preencher os dados disponíveis.</div>
+    <div class="preco-dica">Cole o link para buscar o Nome, Imagem e Loja automaticamente. O Preço será capturado pelo Back-end.</div>
 
     <label>Nome do produto *</label>
     <input id="nome" placeholder="Ex: Fone Bluetooth JBL Tune 510BT">
 
-    <label>Preço *</label>
-    <input id="preco" placeholder="Ex: 189,90">
-    <div class="preco-dica">Use vírgula como decimal: 189,90 — não use R$</div>
-
+    <label>Preço (Opcional - O sistema tentará capturar sozinho)</label>
+    <input id="preco" placeholder="Deixe em branco ou digite como fallback (Ex: 189,90)">
+    
     <label>URL da imagem *</label>
     <input id="img" placeholder="https://..." oninput="atualizarPreview()">
 
@@ -166,38 +164,35 @@
     </select>
 
     <label>Descrição</label>
-    <textarea id="desc" placeholder="Breve descrição do produto (opcional)"></textarea>
+    <textarea id="desc" readonly>Oferta do Dia</textarea>
+    <div class="preco-dica">Texto padrão enviado automaticamente.</div>
 
-    <button id="btn-salvar" onclick="salvarProduto()">Salvar Produto</button>
+    <button id="btn-salvar" onclick="salvarProduto()">Salvar Produto na Planilha</button>
 
     <div class="msg" id="msg"></div>
 </div>
 
 <script>
-    // URL do seu Google Apps Script
+    // Lembre-se de usar a URL atualizada do seu Google Apps Script!
     const API = "https://script.google.com/macros/s/AKfycbwnsSaW3Nc91CIohgmBeWz56Uk-NkfPPCgWFP7BAG26VDsyrys2eOlr8a7QaMlBlU7G/exec";
 
     let debounceTimeout;
 
-    // Função acionada ao digitar/colar o link com padrão Debounce
     function aoDigitarLink() {
         clearTimeout(debounceTimeout);
         const linkStr = document.getElementById('link').value.trim();
         
         if (!linkStr.startsWith('http')) return;
 
-        // Aguarda 800ms após o usuário parar de digitar para processar
         debounceTimeout = setTimeout(() => {
             processarLink(linkStr);
         }, 800);
     }
 
-    // Função que extrai dados baseados no link
     async function processarLink(url) {
         const inputLink = document.getElementById('link');
         const lojaSelect = document.getElementById('loja');
 
-        // 1. Auto-detectar a Loja
         const urlLower = url.toLowerCase();
         if (urlLower.includes('meli.la') || urlLower.includes('mercadolivre')) {
             lojaSelect.value = 'mercadolivre';
@@ -205,9 +200,8 @@
             lojaSelect.value = 'amazon';
         }
 
-        // 2. Buscar Meta-Tags via API Microlink
         inputLink.classList.add('loading-input');
-        mostrarMsg('Analisando o link e buscando dados...', 'info');
+        mostrarMsg('Analisando o link e buscando dados primários...', 'info');
 
         try {
             const resposta = await fetch(`https://api.microlink.io?url=${encodeURIComponent(url)}`);
@@ -216,37 +210,28 @@
             if (dados.status === 'success') {
                 const info = dados.data;
 
-                // Preenche o nome apenas se estiver vazio
                 if (info.title && !document.getElementById('nome').value) {
-                    // Limpa um pouco o título padrão do ML/Amazon
                     let tituloLimpo = info.title.split('|')[0].trim();
                     document.getElementById('nome').value = tituloLimpo;
                 }
 
-                // Preenche a imagem
                 if (info.image && info.image.url && !document.getElementById('img').value) {
                     document.getElementById('img').value = info.image.url;
                     atualizarPreview();
                 }
 
-                // Preenche descrição
-                if (info.description && !document.getElementById('desc').value) {
-                    document.getElementById('desc').value = info.description;
-                }
-
-                mostrarMsg('✅ Dados carregados! Informe o preço e a categoria.', 'sucesso');
+                mostrarMsg('✅ Dados básicos carregados! Selecione a categoria para salvar.', 'sucesso');
             } else {
                 throw new Error('Falha na extração');
             }
         } catch (erro) {
-            console.error('Erro ao buscar metadados:', erro);
-            mostrarMsg('Link processado. Preencha os dados restantes manualmente.', 'info');
+            console.error('Erro ao buscar metadados front-end:', erro);
+            mostrarMsg('Link processado. Preencha os dados manualmente se necessário.', 'info');
         } finally {
             inputLink.classList.remove('loading-input');
         }
     }
 
-    // Função para atualizar o preview da Imagem
     function atualizarPreview() {
         const url = document.getElementById('img').value.trim();
         const img = document.getElementById('preview-img');
@@ -261,32 +246,26 @@
         }
     }
 
-    // Função utilitária para exibir mensagens na tela
     function mostrarMsg(texto, tipo) {
         const el = document.getElementById('msg');
         el.textContent = texto;
         el.className = 'msg ' + tipo;
         el.style.display = 'block';
         
-        // Se for sucesso ou erro no final, esconde depois de 5 segundos. 
-        // Se for "info" de carregamento, deixa na tela até ser substituída.
         if (tipo !== 'info') {
             setTimeout(() => el.style.display = 'none', 5000);
         }
     }
 
-    // Validador de dados antes do envio
     function validar(produto) {
         if (!produto.link)       return 'Preencha o link afiliado.';
         if (!produto.nome)       return 'Preencha o nome do produto.';
-        if (!produto.preco)      return 'Preencha o preço.';
         if (!produto.img)        return 'Preencha a URL da imagem.';
         if (!produto.categoria)  return 'Selecione uma categoria.';
         if (!produto.loja)       return 'Selecione a loja.';
         return null;
     }
 
-    // Salvar no backend
     async function salvarProduto() {
         const btn = document.getElementById('btn-salvar');
 
@@ -297,26 +276,26 @@
             link:      document.getElementById('link').value.trim(),
             categoria: document.getElementById('categoria').value,
             loja:      document.getElementById('loja').value,
-            desc:      document.getElementById('desc').value.trim(),
+            desc:      document.getElementById('desc').value.trim()
         };
 
         const erro = validar(produto);
         if (erro) { mostrarMsg(erro, 'erro'); return; }
 
         btn.disabled = true;
-        btn.textContent = 'Salvando...';
+        btn.textContent = 'Raspando preço e salvando...';
 
         try {
             await fetch(API, {
                 method: 'POST',
-                mode: 'no-cors', // Necessário para evitar bloqueio de CORS no Google Apps Script
+                mode: 'no-cors',
                 body: JSON.stringify(produto),
             });
 
-            mostrarMsg('✅ Produto salvo com sucesso na planilha!', 'sucesso');
+            mostrarMsg('✅ Produto salvo na planilha!', 'sucesso');
 
-            // Limpa o formulário
-            ['nome','preco','img','link','desc'].forEach(id => document.getElementById(id).value = '');
+            // Limpa o formulário, mas preserva o texto padrão da descrição
+            ['nome','preco','img','link'].forEach(id => document.getElementById(id).value = '');
             document.getElementById('categoria').value = '';
             document.getElementById('loja').value = '';
             document.getElementById('preview-img').style.display = 'none';
@@ -324,10 +303,10 @@
 
         } catch (err) {
             console.error('Erro de envio:', err);
-            mostrarMsg('❌ Erro ao salvar. Verifique a URL do Apps Script ou sua conexão.', 'erro');
+            mostrarMsg('❌ Erro de comunicação com a Planilha.', 'erro');
         } finally {
             btn.disabled = false;
-            btn.textContent = 'Salvar Produto';
+            btn.textContent = 'Salvar Produto na Planilha';
         }
     }
 </script>
