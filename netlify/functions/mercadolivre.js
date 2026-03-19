@@ -1,24 +1,8 @@
 // netlify/functions/mercadolivre.js
 
-const AFILIADO_ID = "23098063";
-const MATT_WORD = "mercadoneb";
-
 // Cache do token de utilizador
 let cachedToken = null;
 let tokenExpiraEm = 0;
-
-/**
- * Converte um título em slug para a URL.
- */
-function createSlug(title) {
-  if (!title || typeof title !== 'string') return 'produto';
-  return title
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
 
 exports.handler = async (event, context) => {
   const headers = {
@@ -108,36 +92,9 @@ exports.handler = async (event, context) => {
         if (!info || !info.price) return null;
 
         const productTitle = prodData.name || prodData.family_name || info.item_id;
+        
+        // Pega a URL pura diretamente da API do Mercado Livre
         const rawLink = info.permalink || `https://produto.mercadolivre.com.br/${info.item_id}`;
-        let linkAfiliado = "";
-
-        try {
-          const urlObj = new URL(rawLink);
-          const pathname = urlObj.pathname;
-
-          // 1. Padrão Catálogo Original
-          const matchCat = pathname.match(/\/p\/(MLB\d+)/i);
-          if (matchCat) {
-             const cleanId = matchCat[1];
-             const slug = createSlug(productTitle);
-             linkAfiliado = `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
-          } else {
-            // 2. Padrão Anúncio Comum: Removido o "produto." da URL base
-            const matchItem = pathname.match(/(MLB[\-]?\d+)/i);
-            if (matchItem) {
-              let itemId = matchItem[1].replace("-", ""); 
-              itemId = `MLB-${itemId.substring(3)}`;
-              linkAfiliado = `https://www.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
-            } else {
-              // 3. Fallback
-              const urlBase = rawLink.split("?")[0];
-              linkAfiliado = `${urlBase}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
-            }
-          }
-        } catch (e) {
-          const urlBase = rawLink.split("?")[0];
-          linkAfiliado = `${urlBase}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
-        }
 
         const imagem = prodData.pictures?.[0]?.url
           || prodData.pictures?.[0]?.thumbnail
@@ -152,7 +109,7 @@ exports.handler = async (event, context) => {
             ? Math.round((1 - info.price / info.original_price) * 100)
             : null,
           moeda:          info.currency_id,
-          link:           linkAfiliado,
+          link:           rawLink, // Retorna a URL limpa e sem tags
           imagem,
           vendedor:       "",
           condicao:       info.condition === "new" ? "Novo" : "Usado",
