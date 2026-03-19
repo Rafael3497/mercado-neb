@@ -1,84 +1,5 @@
 // netlify/functions/produtos-sheets.js
-// Lê o Google Sheets publicado como CSV e retorna os produtos formatados
-
-const AFILIADO_ID = "23098063";
-const MATT_WORD = "mercadoneb";
-
-/**
- * Converte um título em slug para a URL.
- */
-function createSlug(title) {
-  if (!title || typeof title !== 'string') return 'produto';
-  return title
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
-/**
- * Aplica os parâmetros de afiliado e converte URLs garantindo compatibilidade com o app.
- */
-function aplicarAfiliadoML(link, nomeProduto) {
-  if (!link || link === "#") return link;
-
-  // Links Amazon — não mexe
-  if (link.includes("amzn.to") || link.includes("amazon.com")) return link;
-
-  try {
-    const urlObj = new URL(link);
-    const pathname = urlObj.pathname;
-    const slug = createSlug(nomeProduto);
-
-    // 1. Padrão Catálogo: Se a URL original já for catálogo, montamos o link SEO-friendly
-    const matchCat = pathname.match(/\/p\/(MLB\d+)/i);
-    if (matchCat) {
-      const cleanId = matchCat[1];
-      return `https://www.mercadolivre.com.br/${slug}/p/${cleanId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
-    }
-
-    // 2. Padrão Anúncio Comum: Removido o "produto." da URL base
-    const matchItem = pathname.match(/(MLB[\-]?\d+)/i);
-    if (matchItem && !pathname.includes('/social/')) {
-      let itemId = matchItem[1].replace("-", ""); 
-      itemId = `MLB-${itemId.substring(3)}`;
-      // Retorna para o domínio principal (mais limpo)
-      return `https://www.mercadolivre.com.br/${itemId}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
-    }
-
-    // 3. Padrão Link Social: (Contém /social/...)
-    if (pathname.includes('/social/')) {
-      urlObj.searchParams.delete('matt_tool');
-      urlObj.searchParams.delete('matt_word');
-      urlObj.searchParams.delete('forceInApp');
-      urlObj.searchParams.delete('affiliate_id');
-      
-      urlObj.searchParams.set('matt_word', MATT_WORD);
-      urlObj.searchParams.set('matt_tool', AFILIADO_ID);
-      urlObj.searchParams.set('forceInApp', 'true');
-      
-      return urlObj.toString();
-    }
-
-    // 4. Fallback Global: Limpa e injeta as tags para URLs desconhecidas
-    urlObj.searchParams.delete('matt_tool');
-    urlObj.searchParams.delete('matt_word');
-    urlObj.searchParams.delete('forceInApp');
-    urlObj.searchParams.delete('affiliate_id');
-    urlObj.searchParams.delete('pdp_filters'); 
-    
-    urlObj.searchParams.set('matt_word', MATT_WORD);
-    urlObj.searchParams.set('matt_tool', AFILIADO_ID);
-    urlObj.searchParams.set('forceInApp', 'true');
-    
-    return urlObj.toString();
-  } catch (e) {
-    // Fallback de segurança extremo se a URL for textualmente inválida
-    const urlBase = link.split("?")[0];
-    return `${urlBase}?matt_word=${MATT_WORD}&matt_tool=${AFILIADO_ID}&forceInApp=true`;
-  }
-}
+// Lê o Google Sheets publicado como CSV e retorna os produtos formatados exatamente como estão na planilha
 
 exports.handler = async (event) => {
   const headers = {
@@ -121,14 +42,15 @@ exports.handler = async (event) => {
 
         if (!nome || !nome.trim()) return null;
 
-        const linkBruto = link?.trim() || "#";
+        // Pega o link exatamente como foi digitado na planilha, sem nenhuma alteração
+        const linkPuro = link?.trim() || "#";
 
         return {
           id:        id?.trim()        || `p${index + 1}`,
           nome:      nome?.trim()      || "",
           preco:     preco?.trim()     || "0",
           img:       img?.trim()       || "",
-          link:      aplicarAfiliadoML(linkBruto, nome?.trim()), 
+          link:      linkPuro, 
           categoria: categoria?.trim() || "outros",
           loja:      loja?.trim()      || "mercadolivre",
           desc:      desc?.trim()      || "",
