@@ -124,7 +124,7 @@
     <h2>🛒 Cadastro de Produto Automatizado</h2>
 
     <label>Link afiliado *</label>
-    <input id="link" placeholder="Cole o link aqui (https://meli.la/... ou amzn.to/...)" oninput="aoDigitarLink()">
+    <input id="link" placeholder="Cole o link aqui (https://amzn.to/... ou https://meli.la/...)" oninput="aoDigitarLink()">
     <div class="preco-dica">Cole o link para buscar o Nome, Imagem e Loja automaticamente. O Preço será capturado pelo Back-end.</div>
 
     <label>Nome do produto *</label>
@@ -173,7 +173,7 @@
 </div>
 
 <script>
-    // Lembre-se de usar a URL atualizada do seu Google Apps Script!
+    // Cole a URL do seu Google Apps Script aqui:
     const API = "https://script.google.com/macros/s/AKfycbwnsSaW3Nc91CIohgmBeWz56Uk-NkfPPCgWFP7BAG26VDsyrys2eOlr8a7QaMlBlU7G/exec";
 
     let debounceTimeout;
@@ -194,39 +194,89 @@
         const lojaSelect = document.getElementById('loja');
 
         const urlLower = url.toLowerCase();
+        let loja = '';
+        
         if (urlLower.includes('meli.la') || urlLower.includes('mercadolivre')) {
+            loja = 'mercadolivre';
             lojaSelect.value = 'mercadolivre';
         } else if (urlLower.includes('amzn.to') || urlLower.includes('amazon')) {
+            loja = 'amazon';
             lojaSelect.value = 'amazon';
         }
 
         inputLink.classList.add('loading-input');
-        mostrarMsg('Analisando o link e buscando dados primários...', 'info');
+        mostrarMsg('Analisando o link e buscando dados...', 'info');
 
         try {
-            const resposta = await fetch(`https://api.microlink.io?url=${encodeURIComponent(url)}`);
-            const dados = await resposta.json();
+            let tituloLimpo = '';
+            let imgUrl = '';
 
-            if (dados.status === 'success') {
-                const info = dados.data;
+            // 1. Rota Mercado Livre (Usa Microlink)
+            if (loja === 'mercadolivre') {
+                const resposta = await fetch(`https://api.microlink.io?url=${encodeURIComponent(url)}`);
+                const dados = await resposta.json();
+                if (dados.status === 'success') {
+                    tituloLimpo = dados.data.title ? dados.data.title.split('|')[0].trim() : '';
+                    imgUrl = dados.data.image ? dados.data.image.url : '';
+                }
+            }
 
-                if (info.title && !document.getElementById('nome').value) {
-                    let tituloLimpo = info.title.split('|')[0].trim();
-                    document.getElementById('nome').value = tituloLimpo;
+            // 2. Rota Amazon (Usa Proxy de HTML + DOMParser nativo para evitar bloqueios)
+            if (loja === 'amazon' || (!tituloLimpo && !imgUrl && loja !== '')) {
+                mostrarMsg('Extraindo dados do servidor da Amazon...', 'info');
+                
+                // Baixa o HTML bruto contornando o CORS
+                const respostaOrigin = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+                const dadosOrigin = await respostaOrigin.json();
+                
+                // Converte o texto recebido em um documento HTML invisível para varredura
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(dadosOrigin.contents, "text/html");
+
+                // Caça a tag oficial do Título na Amazon
+                const titleEl = doc.querySelector('#productTitle');
+                if (titleEl) {
+                    tituloLimpo = titleEl.textContent.trim();
+                } else {
+                    const metaTitle = doc.querySelector('meta[name="title"]') || doc.querySelector('meta[property="og:title"]');
+                    if (metaTitle) tituloLimpo = metaTitle.getAttribute('content').trim();
                 }
 
-                if (info.image && info.image.url && !document.getElementById('img').value) {
-                    document.getElementById('img').value = info.image.url;
-                    atualizarPreview();
+                // Caça a tag oficial da Imagem na Amazon
+                const imgEl = doc.querySelector('#landingImage') || doc.querySelector('#imgBlkFront');
+                if (imgEl) {
+                    imgUrl = imgEl.getAttribute('src');
+                } else {
+                    const metaImg = doc.querySelector('meta[property="og:image"]');
+                    if (metaImg) imgUrl = metaImg.getAttribute('content');
                 }
+                
+                // Limpeza fina: Remove o texto extra padrão da Amazon no título
+                if (tituloLimpo && tituloLimpo.includes(': Amazon.com.br')) {
+                    tituloLimpo = tituloLimpo.split(': Amazon.com.br')[0].trim();
+                }
+            }
 
+            // Atualiza o Formulário
+            if (tituloLimpo && !document.getElementById('nome').value) {
+                document.getElementById('nome').value = tituloLimpo;
+            }
+
+            if (imgUrl && !document.getElementById('img').value) {
+                document.getElementById('img').value = imgUrl;
+                atualizarPreview();
+            }
+
+            // Valida se encontrou algo
+            if (tituloLimpo || imgUrl) {
                 mostrarMsg('✅ Dados básicos carregados! Selecione a categoria para salvar.', 'sucesso');
             } else {
-                throw new Error('Falha na extração');
+                throw new Error('A loja acionou o sistema anti-robô.');
             }
+
         } catch (erro) {
-            console.error('Erro ao buscar metadados front-end:', erro);
-            mostrarMsg('Link processado. Preencha os dados manualmente se necessário.', 'info');
+            console.error('Erro de extração:', erro);
+            mostrarMsg('A loja bloqueou a auto-leitura. Preencha o nome e a foto manualmente.', 'erro');
         } finally {
             inputLink.classList.remove('loading-input');
         }
