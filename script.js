@@ -8,6 +8,14 @@ let meusProdutos = [];
 let produtosFiltrados = [];
 let hashScrollRealizado = false; // Controle para rolar até a âncora apenas uma vez no carregamento
 
+// Estado centralizado para garantir que os filtros funcionem em conjunto (Cruzamento de dados)
+const EstadoFiltros = {
+    categoria: 'todos',
+    busca: '',
+    favoritos: false,
+    precoMax: Infinity
+};
+
 /* =====================================================
    UTILITÁRIOS E FORMATAÇÃO
    ===================================================== */
@@ -47,6 +55,7 @@ window.compartilharOferta = function(id) {
     const precoFormatado = formatarMoeda(produto.preco);
     let textoPreco = `*R$ ${precoFormatado}*`;
     
+    // Suporte a preço antigo, caso adicione essa coluna no futuro
     if (produto.precoAntigo && produto.precoAntigo !== 'undefined' && produto.precoAntigo.trim() !== '') {
         textoPreco = `~R$ ${formatarMoeda(produto.precoAntigo)}~ *R$ ${precoFormatado}*`;
     }
@@ -103,8 +112,9 @@ window.toggleFavorito = function(event, produtoId) {
 
     localStorage.setItem('mercado_neb_favs', JSON.stringify(listaFavoritosNEB));
 
-    if (document.querySelector('.btn-fav-filter.active')) {
-        filtrarFavoritos();
+    // Se estiver na aba de favoritos, atualiza a lista em tempo real
+    if (EstadoFiltros.favoritos) {
+        aplicarFiltrosGerais();
     }
 };
 
@@ -133,7 +143,18 @@ function gerarArrayPaginacao(atual, total) {
 function renderizarPagina(lista, pagina) {
     const grid        = document.getElementById('offersGrid');
     const paginacaoEl = document.getElementById('paginacao-produtos');
+    
     if (!grid) return;
+
+    if (lista.length === 0) {
+        grid.innerHTML = `
+            <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#64748b;">
+                <i class="fas fa-box-open" style="font-size:2rem;margin-bottom:12px;display:block;"></i>
+                Nenhum produto encontrado para estes filtros.
+            </div>`;
+        if (paginacaoEl) paginacaoEl.style.display = 'none';
+        return;
+    }
 
     const totalPaginas   = Math.ceil(lista.length / PRODUTOS_POR_PAGINA);
     const inicio         = (pagina - 1) * PRODUTOS_POR_PAGINA;
@@ -146,7 +167,6 @@ function renderizarPagina(lista, pagina) {
         const iconeBotao = eAmazon ? 'fab fa-amazon' : 'fas fa-shopping-cart';
         const isFav      = verificarStatusFavorito(p.id);
         
-        // Removemos o envio direto do texto pro botão, agora mandamos só o ID
         const tituloEscapado = p.nome.replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
         return `
@@ -202,52 +222,53 @@ function renderizarPagina(lista, pagina) {
     }
 
     if (totalPaginas <= 1) {
-        paginacaoEl.style.display = 'none';
+        if (paginacaoEl) paginacaoEl.style.display = 'none';
         return;
     }
 
-    paginacaoEl.style.display = 'flex';
+    if (paginacaoEl) paginacaoEl.style.display = 'flex';
 
     const btnAnterior = document.getElementById('btn-pag-anterior');
     const btnProximo  = document.getElementById('btn-pag-proximo');
-    btnAnterior.disabled      = pagina === 1;
-    btnProximo.disabled       = pagina === totalPaginas;
-    btnAnterior.style.opacity = pagina === 1 ? '0.35' : '1';
-    btnProximo.style.opacity  = pagina === totalPaginas ? '0.35' : '1';
-    btnAnterior.style.cursor  = pagina === 1 ? 'default' : 'pointer';
-    btnProximo.style.cursor   = pagina === totalPaginas ? 'default' : 'pointer';
+    if (btnAnterior && btnProximo) {
+        btnAnterior.disabled      = pagina === 1;
+        btnProximo.disabled       = pagina === totalPaginas;
+        btnAnterior.style.opacity = pagina === 1 ? '0.35' : '1';
+        btnProximo.style.opacity  = pagina === totalPaginas ? '0.35' : '1';
+        btnAnterior.style.cursor  = pagina === 1 ? 'default' : 'pointer';
+        btnProximo.style.cursor   = pagina === totalPaginas ? 'default' : 'pointer';
+    }
 
     const numerados = document.getElementById('paginas-numeradas');
-    numerados.innerHTML = '';
-    
-    // Nova lógica de renderização dinâmica da paginação
-    const arrayPaginacao = gerarArrayPaginacao(pagina, totalPaginas);
+    if (numerados) {
+        numerados.innerHTML = '';
+        const arrayPaginacao = gerarArrayPaginacao(pagina, totalPaginas);
 
-    arrayPaginacao.forEach(item => {
-        if (item === '...') {
-            const span = document.createElement('span');
-            span.textContent = '...';
-            // Estilos embutidos para garantir alinhamento sem precisar mexer no CSS
-            span.style.display = 'flex';
-            span.style.alignItems = 'flex-end';
-            span.style.justifyContent = 'center';
-            span.style.width = '30px';
-            span.style.fontWeight = 'bold';
-            span.style.color = '#1a42b9'; // Usando o azul padrão do seu layout
-            span.style.userSelect = 'none';
-            span.style.paddingBottom = '8px';
-            numerados.appendChild(span);
-        } else {
-            const btn = document.createElement('button');
-            btn.textContent = item;
-            btn.className   = 'btn-pag-numero' + (item === pagina ? ' ativo' : '');
-            btn.onclick     = item === pagina ? null : () => {
-                paginaAtual = item;
-                renderizarPagina(produtosFiltrados, paginaAtual);
-            };
-            numerados.appendChild(btn);
-        }
-    });
+        arrayPaginacao.forEach(item => {
+            if (item === '...') {
+                const span = document.createElement('span');
+                span.textContent = '...';
+                span.style.display = 'flex';
+                span.style.alignItems = 'flex-end';
+                span.style.justifyContent = 'center';
+                span.style.width = '30px';
+                span.style.fontWeight = 'bold';
+                span.style.color = '#1a42b9';
+                span.style.userSelect = 'none';
+                span.style.paddingBottom = '8px';
+                numerados.appendChild(span);
+            } else {
+                const btn = document.createElement('button');
+                btn.textContent = item;
+                btn.className   = 'btn-pag-numero' + (item === pagina ? ' ativo' : '');
+                btn.onclick     = item === pagina ? null : () => {
+                    paginaAtual = item;
+                    renderizarPagina(produtosFiltrados, paginaAtual);
+                };
+                numerados.appendChild(btn);
+            }
+        });
+    }
 }
 
 window.mudarPagina = function(direcao) {
@@ -259,7 +280,7 @@ window.mudarPagina = function(direcao) {
 };
 
 /* =====================================================
-   CARREGAMENTO VIA GOOGLE SHEETS
+   CARREGAMENTO VIA GOOGLE SHEETS E NETLIFY
    ===================================================== */
 async function carregarProdutos() {
     const grid = document.getElementById('offersGrid');
@@ -272,23 +293,22 @@ async function carregarProdutos() {
     }
 
     try {
-        // TÉCNICA ANTI-CACHE APLICADA AQUI: 
-        // Adicionamos ?t=TIMESTAMP para obrigar o navegador a descarregar os links atualizados
         const timestamp = new Date().getTime();
         const res  = await fetch(`/.netlify/functions/produtos-sheets?t=${timestamp}`);
         
+        if (!res.ok) throw new Error("Falha na resposta da API");
+        
         const data = await res.json();
-        meusProdutos     = (data.produtos || []).slice().reverse(); // p78 primeiro
+        meusProdutos      = (data.produtos || []).slice().reverse();
         produtosFiltrados = [...meusProdutos];
         
-        // CÁLCULO INTELIGENTE DA PÁGINA INICIAL BASEADO NO HASH
         paginaAtual = 1;
+        
+        // Verifica se há âncora na URL para abrir a página correta
         if (window.location.hash) {
-            const idAlvo = window.location.hash.substring(1); // Remove o '#'
+            const idAlvo = window.location.hash.substring(1);
             const indexAlvo = produtosFiltrados.findIndex(p => String(p.id) === idAlvo);
-            
             if (indexAlvo !== -1) {
-                // Calcula a página exata onde o item está localizado
                 paginaAtual = Math.floor(indexAlvo / PRODUTOS_POR_PAGINA) + 1;
             }
         }
@@ -296,63 +316,88 @@ async function carregarProdutos() {
         renderizarPagina(produtosFiltrados, paginaAtual);
         configurarFiltroPrecoDinamico();
     } catch (err) {
+        console.error("[Erro de Carregamento]", err);
         if (grid) {
             grid.innerHTML = `
                 <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#ef4444;">
                     <i class="fas fa-exclamation-circle" style="font-size:2rem;margin-bottom:12px;display:block;"></i>
-                    Erro ao carregar produtos. Tente novamente.
+                    Erro ao carregar produtos. Tente recarregar a página.
                 </div>`;
         }
     }
 }
 
 /* =====================================================
-   FILTROS E BUSCA
+   SISTEMA CENTRALIZADO DE FILTROS E BUSCA
    ===================================================== */
+
+function aplicarFiltrosGerais() {
+    let baseFiltro = meusProdutos;
+
+    // 1. Filtro de Favoritos
+    if (EstadoFiltros.favoritos) {
+        baseFiltro = baseFiltro.filter(p => listaFavoritosNEB.includes(String(p.id)));
+        
+        // Se estiver nos favoritos mas não tiver nenhum, reseta para mostrar todos
+        if (baseFiltro.length === 0) {
+            mostrarNotificacao('Nenhum favorito salvo ainda! ❤️');
+            EstadoFiltros.favoritos = false;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('[data-categoria="todos"]')?.classList.add('active');
+            baseFiltro = meusProdutos; // Retorna à lista completa
+        }
+    }
+
+    // 2. Filtro de Categoria (Aplica apenas se não estiver nos favoritos)
+    if (!EstadoFiltros.favoritos && EstadoFiltros.categoria !== 'todos') {
+        baseFiltro = baseFiltro.filter(p => p.categoria === EstadoFiltros.categoria);
+    }
+
+    // 3. Filtro de Busca por Texto
+    if (EstadoFiltros.busca) {
+        const termo = EstadoFiltros.busca.toLowerCase();
+        baseFiltro = baseFiltro.filter(p => p.nome.toLowerCase().includes(termo));
+    }
+
+    // 4. Filtro de Preço Máximo
+    if (EstadoFiltros.precoMax !== Infinity) {
+        baseFiltro = baseFiltro.filter(p => converterParaNumero(p.preco) <= EstadoFiltros.precoMax);
+    }
+
+    produtosFiltrados = baseFiltro;
+    paginaAtual = 1;
+    renderizarPagina(produtosFiltrados, paginaAtual);
+}
+
 function inicializarFiltros() {
     const botoes = document.querySelectorAll('.filter-btn');
     botoes.forEach(btn => {
         btn.addEventListener('click', (e) => {
             botoes.forEach(b => b.classList.remove('active'));
-            e.currentTarget.classList.add('active');
-            paginaAtual = 1;
-            if (e.currentTarget.id === 'btn-filtrar-favoritos') {
-                filtrarFavoritos();
+            const target = e.currentTarget;
+            target.classList.add('active');
+            
+            if (target.id === 'btn-filtrar-favoritos') {
+                EstadoFiltros.favoritos = true;
+                EstadoFiltros.categoria = 'todos'; // Ignora a categoria se quiser ver os favoritos
             } else {
-                aplicarFiltroCategoria(e.currentTarget.dataset.categoria);
+                EstadoFiltros.favoritos = false;
+                EstadoFiltros.categoria = target.dataset.categoria;
             }
+            aplicarFiltrosGerais();
         });
     });
 }
 
-function aplicarFiltroCategoria(cat) {
-    produtosFiltrados = cat === 'todos'
-        ? [...meusProdutos]
-        : meusProdutos.filter(p => p.categoria === cat);
-    paginaAtual = 1;
-    renderizarPagina(produtosFiltrados, paginaAtual);
-}
-
-function filtrarFavoritos() {
-    produtosFiltrados = meusProdutos.filter(p => listaFavoritosNEB.includes(String(p.id)));
-    paginaAtual = 1;
-
-    if (produtosFiltrados.length === 0) {
-        mostrarNotificacao('Nenhum favorito salvo ainda! ❤️');
-        produtosFiltrados = [...meusProdutos];
-        document.querySelector('[data-categoria="todos"]')?.classList.add('active');
-        document.getElementById('btn-filtrar-favoritos')?.classList.remove('active');
-    }
-    renderizarPagina(produtosFiltrados, paginaAtual);
-}
-
+// O uso de debounce evita que a página renderize a cada tecla digitada (melhora performance)
+let debounceTimeout;
 window.filterOffers = function() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
-    produtosFiltrados = meusProdutos.filter(p =>
-        p.nome.toLowerCase().includes(input)
-    );
-    paginaAtual = 1;
-    renderizarPagina(produtosFiltrados, paginaAtual);
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        const input = document.getElementById('searchInput');
+        EstadoFiltros.busca = input ? input.value.trim() : '';
+        aplicarFiltrosGerais();
+    }, 300); // Aguarda 300ms após o usuário parar de digitar
 };
 
 /* =====================================================
@@ -366,22 +411,22 @@ function configurarFiltroPrecoDinamico() {
 
     if (!priceRange || !meusProdutos.length) return;
 
+    // Calcula o maior preço da loja para definir o limite do Range Slider
     const precosNumericos = meusProdutos.map(p => converterParaNumero(p.preco));
     const maiorPreco = Math.ceil(Math.max(...precosNumericos));
 
     priceRange.max   = maiorPreco;
     priceRange.value = maiorPreco;
     priceValue.textContent = maiorPreco.toLocaleString('pt-BR');
+    
+    // Reseta o estado inicial do filtro de preço
+    EstadoFiltros.precoMax = Infinity;
 
     priceRange.addEventListener('input', () => {
         const maxPrice = parseFloat(priceRange.value);
         priceValue.textContent = maxPrice.toLocaleString('pt-BR');
-        produtosFiltrados = meusProdutos.filter(p => {
-            const price = converterParaNumero(p.preco);
-            return price <= maxPrice;
-        });
-        paginaAtual = 1;
-        renderizarPagina(produtosFiltrados, paginaAtual);
+        EstadoFiltros.precoMax = maxPrice;
+        aplicarFiltrosGerais();
     });
 
     if (btnToggle) {
@@ -405,7 +450,10 @@ let slideIndex = 0;
 function showSlides() {
     const slides = document.getElementsByClassName('slide');
     if (!slides.length) return;
-    Array.from(slides).forEach(s => { s.style.opacity = '0'; s.classList.remove('active'); });
+    Array.from(slides).forEach(s => { 
+        s.style.opacity = '0'; 
+        s.classList.remove('active'); 
+    });
     slideIndex = (slideIndex % slides.length) + 1;
     slides[slideIndex - 1].style.opacity = '1';
     slides[slideIndex - 1].classList.add('active');
@@ -421,14 +469,12 @@ window.onload = function() {
     const infoBanner = document.querySelector('.info-database');
     if (infoBanner) {
         setTimeout(() => {
-            // Adiciona transição para desaparecer de forma suave
             infoBanner.style.transition = 'opacity 0.6s ease';
             infoBanner.style.opacity = '0';
             
-            // Remove o elemento do ecrã depois da transição terminar
             setTimeout(() => {
                 infoBanner.style.display = 'none';
             }, 600);
-        }, 15000); // 15000 milissegundos = 15 segundos
+        }, 15000);
     }
 };
