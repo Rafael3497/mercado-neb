@@ -38,13 +38,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        .prime-nav-btn {
-            background-color: #00A8E1 !important; /* Azul oficial Amazon Prime */
-            color: #ffffff !important;
+        .prime-video-redondo {
+            display: inline-block;
+            width: 44px; /* Tamanho do botão */
+            height: 44px;
+            background-color: #151e28; /* Cor de fundo baseada na imagem para preencher as bordas */
+            background-image: url('1000196027.jpg'); /* O nome do ficheiro que enviou */
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 50%; /* Torna o botão perfeitamente redondo */
+            margin-left: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s ease;
+            text-decoration: none;
+            cursor: pointer;
         }
-        .prime-nav-btn:hover {
-            background-color: #0087B5 !important;
-            transform: scale(1.05);
+
+        .prime-video-redondo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+
+        /* Ajustes responsivos para telemóvel */
+        @media (max-width: 768px) {
+            .prime-video-redondo {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 48px; /* Ligeiramente maior no telemóvel para facilitar o toque */
+                height: 48px;
+            }
         }
     </style>
 </head>
@@ -64,14 +87,13 @@
                     <li><a href="#" class="nav-inicio"><i class="fas fa-home"></i> Início</a></li>
                     
                     <li>
-                        <a href="https://amzn.to/47kubdS" target="_blank" class="amazon-nav-btn prime-nav-btn">
-                            <i class="fas fa-crown"></i> Assinar Prime
-                        </a>
-                    </li>
-                    
-                    <li>
                         <a href="https://amzn.to/4brsIVx" target="_blank" class="amazon-nav-btn">
                             <i class="fa-brands fa-amazon"></i> Buscar na Amazon
+                        </a>
+                    </li>
+
+                    <li id="container-prime-video">
+                        <a href="https://amzn.to/47kubdS" target="_blank" class="prime-video-redondo" title="Assinar Prime Video" aria-label="Assinar Prime Video">
                         </a>
                     </li>
                 </ul>
@@ -139,14 +161,14 @@
     <main class="container">
         <div class="info-database">
             <i class="fas fa-info-circle"></i>
-            <span>Nesta página você encontra apenas produtos selecionados e cadastrados manualmente por nossa equipe.</span>
+            <span>Nesta página encontra apenas produtos selecionados e cadastrados manualmente por nossa equipa.</span>
         </div>
 
         <div id="ofertas">
             <div class="grid-offers" id="offersGrid"></div>
 
             <div class="price-alert-global">
-                ⚠️ Os valores poderam ser alterados a qualquer momento
+                ⚠️ Os valores poderão ser alterados a qualquer momento
             </div>
 
             <div id="paginacao-produtos">
@@ -160,15 +182,33 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 Mercado NEB - Todos os direitos reservados.</p>
-            <small>Ao comprar através de nossos links, podemos receber uma comissão sem custo adicional para você.</small>
+            <small>Ao comprar através dos nossos links, podemos receber uma comissão sem custo adicional para si.</small>
             <p class="footer-destaque">Compre com moderação. 🛒</p>
-            <a href="https://wa.me/558532344277?text=Ol%C3%A1,%20vim%20pelo%20site%20Mercado%20NEB" target="_blank" class="nav-whatsapp" aria-label="Fale conosco no WhatsApp">
+            <a href="https://wa.me/558532344277?text=Ol%C3%A1,%20vim%20pelo%20site%20Mercado%20NEB" target="_blank" class="nav-whatsapp" aria-label="Fale connosco no WhatsApp">
                 <i class="fab fa-whatsapp"></i>
             </a>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const primeBtnItem = document.getElementById('container-prime-video');
+                if (primeBtnItem) {
+                    // Efeito de transição suave (fade out)
+                    primeBtnItem.style.transition = 'opacity 0.8s ease';
+                    primeBtnItem.style.opacity = '0';
+                    
+                    // Remove completamente do espaço após a transição terminar
+                    setTimeout(() => {
+                        primeBtnItem.style.display = 'none';
+                    }, 800);
+                }
+            }, 40000); // 40.000 milissegundos = 40 segundos
+        });
+    </script>
 
 </body>
 </html>
