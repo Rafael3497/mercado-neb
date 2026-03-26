@@ -312,33 +312,26 @@ nav ul li a::after {
 .price-panel.hidden { display: none !important; }
 
 /* =====================================================
-   GRID E CARDS
+   GRID E CARDS - RESPONSIVO E CENTRALIZADO
    ===================================================== */
 
 .info-database {
     background-color: #e0f2fe;
     color: #0369a1;
-    padding: 14px 18px;
+    padding: 10px 15px; /* Menor padding para mobile */
     border-radius: 8px;
     margin-bottom: 24px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px; /* Menor gap para mobile */
     border: 1px solid #bae6fd;
     font-weight: 500;
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     line-height: 1.5;
 }
 
-.info-database i { font-size: 1.4rem; color: #0284c7; flex-shrink: 0; }
-
-.grid-offers {
-    display: grid;
-    gap: 30px;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    margin-bottom: 25px;
-}
+.info-database i { font-size: 1.2rem; color: #0284c7; flex-shrink: 0; }
 
 .price-alert-global {
     background-color: #fffbeb;
@@ -352,6 +345,16 @@ nav ul li a::after {
     max-width: fit-content;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     text-align: center;
+}
+
+/* BASE GRID (Mobile First)
+   Foco: Impor 2 colunas como no exemplo
+*/
+.grid-offers {
+    display: grid;
+    gap: 15px; /* Menor espaçamento para mobile */
+    grid-template-columns: repeat(2, 1fr); /* FORÇA 2 COLUNAS */
+    margin-bottom: 25px;
 }
 
 .card {
@@ -375,8 +378,8 @@ nav ul li a::after {
 
 .card-img {
     width: 100%;
-    height: 220px;
-    padding: 20px;
+    height: 180px; /* Reduzido para base/mobile */
+    padding: 15px; /* Menor padding para mobile */
     background: #fff;
     display: flex;
     justify-content: center;
@@ -399,7 +402,7 @@ nav ul li a::after {
     top: 10px; left: 10px;
     padding: 4px 10px;
     border-radius: 20px;
-    font-size: 0.7rem;
+    font-size: 0.65rem; /* Levemente menor para mobile */
     font-weight: 800;
     text-transform: uppercase;
     color: white;
@@ -410,23 +413,23 @@ nav ul li a::after {
 .badge-loja.amazon { background: #ff9900; color: #000; }
 .badge-loja.mercadolivre { background: #fff159; color: #333; }
 
-.card-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+.card-info { padding: 15px; /* Menor padding para mobile */ display: flex; flex-direction: column; flex-grow: 1; }
 
 .card-info h3 {
-    font-size: 1.1rem;
+    font-size: 1rem; /* Levemente menor para mobile */
     margin-bottom: 8px;
     font-weight: 700;
-    min-height: 2.8rem;
+    min-height: 2.4rem; /* Menor altura para mobile */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-.card-info p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px; flex-grow: 1; }
+.card-info p { font-size: 0.8rem; /* Levemente menor para mobile */ color: var(--text-light); margin-bottom: 12px; flex-grow: 1; }
 
 .price-container {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     color: var(--success);
     font-weight: 800;
     display: inline-flex;
@@ -435,29 +438,30 @@ nav ul li a::after {
     transition: all 0.3s ease;
 }
 
-.price-label { font-size: 0.9rem; }
-.price-value { font-size: 1.5rem; transition: all 0.3s ease; }
+.price-label { font-size: 0.8rem; }
+.price-value { font-size: 1.3rem; /* Menor valor base para mobile */ transition: all 0.3s ease; }
 
-.card-actions { display: flex; gap: 10px; align-items: center; margin-top: auto; }
+.card-actions { display: flex; gap: 8px; /* Menor gap para mobile */ align-items: center; margin-top: auto; }
 
 .btn-buy {
     flex-grow: 1;
     background: var(--primary);
     color: white;
     text-decoration: none;
-    padding: 14px;
+    padding: 12px; /* Menor padding para mobile */
     border-radius: 12px;
     text-align: center;
     font-weight: 700;
+    font-size: 0.9rem; /* Levemente menor para mobile */
     transition: var(--transition);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px; /* Menor gap para mobile */
 }
 
 .btn-buy:hover { background: var(--primary-dark); transform: scale(1.02); }
-.btn-buy i { font-size: 1rem; }
+.btn-buy i { font-size: 0.9rem; }
 
 .btn-buy-mercadolivre { background: #3483fa; color: white !important; }
 .btn-buy-mercadolivre:hover { background: #2968c8 !important; }
@@ -469,7 +473,7 @@ nav ul li a::after {
     background: #f1f5f9;
     color: #64748b;
     border: none;
-    padding: 14px;
+    padding: 12px; /* Menor padding para mobile */
     border-radius: 12px;
     cursor: pointer;
     transition: var(--transition);
@@ -483,7 +487,8 @@ nav ul li a::after {
     top: 15px; right: 15px;
     background: rgba(255,255,255,0.9);
     border: none;
-    width: 38px; height: 38px;
+    width: 32px; /* Menor para mobile */
+    height: 32px; /* Menor para mobile */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -493,6 +498,7 @@ nav ul li a::after {
     transition: var(--transition);
     z-index: 10;
     color: #cbd5e1;
+    font-size: 0.9rem; /* Menor para mobile */
 }
 
 .btn-favorite.active i,
@@ -708,14 +714,13 @@ footer {
 .footer-destaque { font-weight: 800; margin-top: 10px; color: var(--primary); }
 
 /* =====================================================
-   RESPONSIVIDADE (Ajustes Mobile Centralizados)
+   RESPONSIVIDADE (Ajustes de Celular)
    ===================================================== */
 @media (max-width: 768px) {
     .header-content { flex-direction: column; gap: 15px; }
     .amazon-nav-btn { margin-left: 0; margin-top: 10px; }
     
-    .grid-offers { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-    .ml-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    /* Grid Mobile já definido na base como 2 colunas * /
 
     .categoria-bar { top: 58px; }
     .cat-btn { padding: 12px 13px; font-size: 0.8rem; gap: 5px; }
@@ -729,17 +734,51 @@ footer {
     .vitrine-header { flex-direction: column; align-items: flex-start; }
 }
 
+/* RESPONSIVIDADE (Escala Ascendente - Adiciona Colunas)
+   Tablet, Desktop Pequeno, Desktop Grande
+*/
+
+/* Tablet (e.g., min-width: 769px) */
+@media (min-width: 769px) {
+     .info-database { padding: 14px 18px; gap: 12px; font-size: 0.95rem; }
+     .info-database i { font-size: 1.4rem; }
+
+     .grid-offers {
+        grid-template-columns: repeat(3, 1fr); /* 3 COLUNAS PARA TABLET */
+        gap: 20px; /* Aumenta gap */
+    }
+     .card-img { height: 200px; padding: 20px; } /* Restaura card image height */
+     .card-info { padding: 20px; }
+     .card-info h3 { font-size: 1.1rem; min-height: 2.8rem; }
+     .card-info p { font-size: 0.85rem; margin-bottom: 15px; }
+     .price-container { margin-bottom: 15px; }
+     .price-label { font-size: 0.9rem; }
+     .price-value { font-size: 1.5rem; }
+     .card-actions { gap: 10px; }
+     .btn-buy { padding: 14px; gap: 8px; font-size: 0.95rem; }
+     .btn-buy i { font-size: 1rem; }
+     .btn-share { padding: 14px; }
+     .btn-favorite { width: 38px; height: 38px; font-size: 1rem; }
+}
+
+/* Desktop Pequeno (e.g., min-width: 1025px) */
+@media (min-width: 1025px) {
+     .grid-offers {
+        grid-template-columns: repeat(4, 1fr); /* 4 COLUNAS PARA DESKTOP PEQUENO */
+        gap: 25px; /* Aumenta gap */
+    }
+}
+
+/* Desktop Grande (e.g., min-width: 1281px) */
+@media (min-width: 1281px) {
+     .grid-offers {
+        grid-template-columns: repeat(5, 1fr); /* 5 COLUNAS PARA DESKTOP GRANDE */
+        gap: 30px; /* Gap padrão */
+    }
+}
+
+/* Mantém os ajustes finos para telas muito pequenas */
 @media (max-width: 600px) {
-    .ml-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .ml-card-img { height: 120px; }
-    .ml-card-body { padding: 10px; }
-    .ml-card-titulo { font-size: 0.8rem; }
-    .ml-card-preco { font-size: 1.05rem; }
-
-    .categoria-bar { top: 56px; }
-    .cat-btn { padding: 11px 10px; font-size: 0.75rem; gap: 4px; }
-    .cat-btn span, .cat-btn .cat-emoji { font-size: 0.85rem; }
-
     .busca-hero { padding: 28px 0 24px; }
     .busca-hero h1 { font-size: 1.4rem; }
     .busca-hero p { font-size: 0.85rem; margin-bottom: 16px; }
@@ -747,43 +786,24 @@ footer {
     .hero-search-wrap input { padding: 14px 14px; font-size: 0.88rem; }
     .hero-search-wrap button { padding: 0 16px; font-size: 0.82rem; }
     .resultados-header { flex-direction: column; align-items: flex-start; gap: 6px; }
-
     .mais-vendidos-hero h1 { font-size: 1.5rem; }
-
-    .ml-header { flex-direction: column; align-items: flex-start; }
-    .ml-filtros { width: 100%; }
-    .ml-filtros input { width: 100% !important; }
-    .ml-filtros select { width: 100%; }
-    
-    .price-alert-global { 
-        font-size: 0.85rem; 
-        padding: 10px 16px; 
-        width: 90%; 
-        border-radius: 10px;
-    }
-
-    .info-database { font-size: 0.85rem; padding: 12px; align-items: flex-start; }
-    .info-database i { font-size: 1.2rem; margin-top: 2px; }
 }
 
 @media (max-width: 480px) {
-    .header-content { justify-content: center; flex-direction: column; gap: 15px; }
-    .logo { font-size: 1.3rem; }
-    
     nav ul { gap: 8px; flex-wrap: wrap; justify-content: center; }
     nav ul li a { font-size: 0.8rem; padding: 5px 8px; }
-    
     .carousel { height: 200px !important; }
     .slide-content h1 { font-size: 1.6rem !important; margin-bottom: 8px; line-height: 1.2; }
     .slide-content p { font-size: 0.9rem !important; line-height: 1.3; }
     
-    .grid-offers { grid-template-columns: 1fr; padding: 0 10px; }
-    .filter-btn { font-size: 0.8rem; padding: 6px 14px; }
+    /* Foco no Grid Mobile Extremo */
+    .grid-offers { padding: 0 10px; gap: 10px; } /* Ainda mais gap mobile extremo */
+    .card-img { height: 160px; padding: 10px; } /* Imagem menor mobile extremo * /
+    .card-info { padding: 10px; }
     
+    .filter-btn { font-size: 0.8rem; padding: 6px 14px; }
     .nav-inicio, .nav-link-destaque, .nav-busca-ml { padding: 6px 12px !important; font-size: 0.85rem !important; }
-
     .price-alert-global { font-size: 0.8rem; padding: 10px 12px; width: 92%; line-height: 1.4; }
-
     .toast { padding: 10px 20px; font-size: 0.8rem; gap: 8px; }
     .toast i { font-size: 0.9rem; }
 }
