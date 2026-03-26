@@ -469,17 +469,21 @@ nav ul li a::after {
 .btn-buy-amazon { background: #ff9900; color: #000 !important; }
 .btn-buy-amazon:hover { background: #e68900 !important; }
 
+/* Botão Share com tamanho fixo para não esmagar o botão comprar */
 .btn-share {
     background: #f1f5f9;
     color: #64748b;
     border: none;
-    padding: 12px; /* Menor padding para mobile */
+    width: 44px; /* Dimensão fixa em vez de padding flexível */
+    height: 44px; /* Dimensão fixa */
+    padding: 0;
     border-radius: 12px;
     cursor: pointer;
     transition: var(--transition);
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0; /* Impede que o botão share seja esmagado */
 }
 
 .btn-favorite {
@@ -720,8 +724,6 @@ footer {
     .header-content { flex-direction: column; gap: 15px; }
     .amazon-nav-btn { margin-left: 0; margin-top: 10px; }
     
-    /* Grid Mobile já definido na base como 2 colunas * /
-
     .categoria-bar { top: 58px; }
     .cat-btn { padding: 12px 13px; font-size: 0.8rem; gap: 5px; }
 
@@ -757,7 +759,9 @@ footer {
      .card-actions { gap: 10px; }
      .btn-buy { padding: 14px; gap: 8px; font-size: 0.95rem; }
      .btn-buy i { font-size: 1rem; }
-     .btn-share { padding: 14px; }
+     
+     .btn-share { padding: 0; width: 46px; height: 46px; } /* Botão share levemente maior no desktop */
+     
      .btn-favorite { width: 38px; height: 38px; font-size: 1rem; }
 }
 
@@ -787,6 +791,17 @@ footer {
     .hero-search-wrap button { padding: 0 16px; font-size: 0.82rem; }
     .resultados-header { flex-direction: column; align-items: flex-start; gap: 6px; }
     .mais-vendidos-hero h1 { font-size: 1.5rem; }
+    
+    /* Encolhimento específico dos botões para caber em telas mobile comuns */
+    .btn-buy {
+        padding: 10px 8px; /* Tira gordura horizontal */
+        font-size: 0.8rem; /* Fonte menor para caber "Comprar" */
+        gap: 4px;
+    }
+    .btn-share {
+        width: 38px; /* Força o botão a ser menor, dando mais espaço pro "Comprar" */
+        height: 38px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -806,6 +821,25 @@ footer {
     .price-alert-global { font-size: 0.8rem; padding: 10px 12px; width: 92%; line-height: 1.4; }
     .toast { padding: 10px 20px; font-size: 0.8rem; gap: 8px; }
     .toast i { font-size: 0.9rem; }
+    
+    /* Ajuste de sobrevivência para celulares pequenos (iPhone SE, Galaxy antigos) */
+    .card-actions {
+        gap: 5px; /* Espaço mínimo entre os botões */
+    }
+    .btn-buy {
+        padding: 8px 5px;
+        font-size: 0.75rem; 
+    }
+    .btn-buy i {
+        font-size: 0.8rem;
+    }
+    .btn-share {
+        width: 34px; /* Tamanho mínimo usável pro dedo */
+        height: 34px;
+    }
+    .btn-share i {
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 380px) {
