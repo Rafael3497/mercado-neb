@@ -163,7 +163,12 @@ function renderizarPagina(lista, pagina) {
     grid.innerHTML = produtosDaPagina.map(p => {
         const eAmazon    = p.loja === 'amazon';
         const lojaNome   = eAmazon ? 'Amazon' : 'Mercado Livre';
-        const textoBotao = eAmazon ? 'Comprar na Amazon' : 'Comprar no Mercado Livre';
+        
+        // --- MELHORIA DE RESPONSIVIDADE MOBILE ---
+        // Texto reduzido para "Comprar" para caber melhor ao lado do botão de compartilhar no mobile.
+        // O badge no topo do card já indica a loja.
+        const textoBotao = 'Comprar'; 
+        
         const iconeBotao = eAmazon ? 'fab fa-amazon' : 'fas fa-shopping-cart';
         const isFav      = verificarStatusFavorito(p.id);
         
