@@ -1,335 +1,809 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Admin — Mercado NEB</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f4f8;
-            padding: 40px 20px;
+
+        :root {
+
+            --primary: #1d4ed8;
+
+            --primary-hover: #1e40af;
+
+            --bg-color: #f1f5f9;
+
+            --surface: #ffffff;
+
+            --text-main: #0f172a;
+
+            --text-muted: #64748b;
+
+            --border: #cbd5e1;
+
+            --success-bg: #dcfce7;
+
+            --success-text: #166534;
+
+            --error-bg: #fef2f2;
+
+            --error-text: #991b1b;
+
+            --info-bg: #e0f2fe;
+
+            --info-text: #075985;
+
         }
+
+
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background: var(--bg-color);
+
+            color: var(--text-main);
+
+            padding: 40px 20px;
+
+            margin: 0;
+
+            display: flex;
+
+            justify-content: center;
+
+        }
+
+
 
         .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+
+            width: 100%;
+
+            max-width: 550px;
+
+            background: var(--surface);
+
+            padding: 35px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+
         }
+
+
 
         h2 {
+
             text-align: center;
-            margin-bottom: 20px;
-            color: #1d4ed8;
+
+            margin-top: 0;
+
+            margin-bottom: 25px;
+
+            color: var(--primary);
+
+            font-size: 1.5rem;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
         }
+
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
 
         label {
+
             display: block;
-            margin-top: 14px;
+
             font-size: 0.85rem;
-            font-weight: bold;
-            color: #444;
+
+            font-weight: 600;
+
+            color: var(--text-main);
+
+            margin-bottom: 6px;
+
         }
+
+
 
         input, select, textarea {
+
             width: 100%;
-            padding: 10px;
-            margin-top: 4px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+
+            padding: 12px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
             font-size: 0.95rem;
+
+            font-family: 'Inter', sans-serif;
+
             box-sizing: border-box;
-            transition: border-color 0.2s;
+
+            transition: all 0.2s ease;
+
+            background-color: #fff;
+
         }
+
+
 
         input:focus, select:focus, textarea:focus {
-            border-color: #1d4ed8;
+
+            border-color: var(--primary);
+
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+
             outline: none;
+
         }
 
-        textarea { height: 60px; resize: vertical; background-color: #f8fafc; color: #475569; }
+
+
+        textarea {
+
+            height: 80px;
+
+            resize: vertical;
+
+            background-color: #f8fafc;
+
+        }
+
+
 
         .preview {
+
             text-align: center;
-            margin: 14px 0 4px;
-            min-height: 130px;
+
+            margin-top: 10px;
+
+            min-height: 140px;
+
             background: #f8fafc;
+
             border-radius: 8px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
-            border: 1px dashed #cbd5e1;
+
+            border: 2px dashed var(--border);
+
+            overflow: hidden;
+
+            padding: 10px;
+
         }
+
+
 
         .preview img {
-            max-width: 120px;
+
+            max-width: 100%;
+
             max-height: 120px;
+
             object-fit: contain;
+
             display: none;
+
+            border-radius: 4px;
+
         }
+
+
 
         .preview span {
-            color: #94a3b8;
+
+            color: var(--text-muted);
+
             font-size: 0.85rem;
+
+            font-weight: 500;
+
         }
+
+
 
         button {
-            margin-top: 24px;
+
+            margin-top: 10px;
+
             width: 100%;
-            padding: 13px;
+
+            padding: 14px;
+
             border: none;
-            background: #1d4ed8;
+
+            background: var(--primary);
+
             color: white;
+
             font-size: 1rem;
-            font-weight: bold;
-            border-radius: 6px;
+
+            font-weight: 700;
+
+            border-radius: 8px;
+
             cursor: pointer;
-            transition: background 0.2s;
+
+            transition: background 0.2s, transform 0.1s;
+
         }
 
-        button:hover { background: #1b4f72; }
-        button:disabled { background: #94a3b8; cursor: not-allowed; }
+
+
+        button:hover:not(:disabled) {
+
+            background: var(--primary-hover);
+
+        }
+
+
+
+        button:active:not(:disabled) {
+
+            transform: scale(0.98);
+
+        }
+
+
+
+        button:disabled {
+
+            background: var(--text-muted);
+
+            cursor: not-allowed;
+
+            opacity: 0.8;
+
+        }
+
+
 
         .msg {
-            margin-top: 16px;
-            padding: 12px;
-            border-radius: 6px;
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border-radius: 8px;
+
             text-align: center;
-            font-weight: bold;
+
+            font-weight: 600;
+
+            font-size: 0.9rem;
+
             display: none;
+
+            animation: fadeIn 0.3s ease;
+
         }
 
-        .msg.sucesso { background: #dcfce7; color: #166534; }
-        .msg.erro    { background: #fef2f2; color: #991b1b; }
-        .msg.info    { background: #e0f2fe; color: #075985; }
+
+
+        @keyframes fadeIn {
+
+            from { opacity: 0; transform: translateY(-10px); }
+
+            to { opacity: 1; transform: translateY(0); }
+
+        }
+
+
+
+        .msg.sucesso { background: var(--success-bg); color: var(--success-text); border: 1px solid #bbf7d0; }
+
+        .msg.erro    { background: var(--error-bg); color: var(--error-text); border: 1px solid #fecaca; }
+
+        .msg.info    { background: var(--info-bg); color: var(--info-text); border: 1px solid #bae6fd; }
+
+
 
         .preco-dica {
+
             font-size: 0.75rem;
-            color: #94a3b8;
-            margin-top: 3px;
+
+            color: var(--text-muted);
+
+            margin-top: 6px;
+
+            line-height: 1.4;
+
         }
+
+
 
         .loading-input {
-            background: url('https://i.gifer.com/ZZ5H.gif') no-repeat right 10px center;
+
+            background-image: url('https://i.gifer.com/ZZ5H.gif');
+
+            background-repeat: no-repeat;
+
+            background-position: right 12px center;
+
             background-size: 20px;
+
+            padding-right: 40px;
+
         }
+
     </style>
+
 </head>
+
 <body>
 
+
+
 <div class="container">
-    <h2>🛒 Cadastro de Produto Automatizado</h2>
 
-    <label>Link afiliado *</label>
-    <input id="link" placeholder="Cole o link aqui (https://amzn.to/... ou https://meli.la/...)" oninput="aoDigitarLink()">
-    <div class="preco-dica">Cole o link para auto-preencher os dados disponíveis. O Preço será capturado pelo Back-end.</div>
+    <h2>🛒 Cadastro de Ofertas</h2>
 
-    <label>Nome do produto *</label>
-    <input id="nome" placeholder="Ex: Fone Bluetooth JBL Tune 510BT">
 
-    <label>Preço (Opcional - O sistema tentará capturar sozinho)</label>
-    <input id="preco" placeholder="Deixe em branco ou digite como fallback (Ex: 189,90)">
-    
-    <label>URL da imagem *</label>
-    <input id="img" placeholder="https://..." oninput="atualizarPreview()">
 
-    <div class="preview">
-        <img id="preview-img">
-        <span id="preview-txt">A imagem aparece aqui</span>
+    <div class="form-group">
+
+        <label for="link">Link afiliado *</label>
+
+        <input type="url" id="link" placeholder="Ex: https://amzn.to/... ou https://meli.la/..." oninput="aoDigitarLink()" required>
+
+        <div class="preco-dica">Cole o link para auto-preencher os dados primários. O Back-end cuidará do preço.</div>
+
     </div>
 
-    <label>Categoria *</label>
-    <select id="categoria">
-        <option value="">— Selecione —</option>
-        <option value="casa">Casa</option>
-        <option value="auto">Auto</option>
-        <option value="eletronicos">Eletrônicos</option>
-        <option value="eletrodomesticos">Eletrodomésticos</option>
-        <option value="fitness">Fitness</option>
-        <option value="escritorio">Escritório</option>
-        <option value="moda">Moda</option>
-        <option value="beleza">Beleza</option>
-        <option value="saude">Saúde</option>
-        <option value="livros">Livros</option>
-        <option value="outros">Outros</option>
-    </select>
 
-    <label>Loja *</label>
-    <select id="loja">
-        <option value="">— Selecione —</option>
-        <option value="amazon">Amazon</option>
-        <option value="mercadolivre">Mercado Livre</option>
-    </select>
 
-    <label>Descrição</label>
-    <textarea id="desc" readonly>Oferta do Dia</textarea>
-    <div class="preco-dica">Texto padrão enviado automaticamente.</div>
+    <div class="form-group">
+
+        <label for="nome">Nome do produto *</label>
+
+        <input type="text" id="nome" placeholder="Ex: Fone Bluetooth JBL Tune 510BT" required>
+
+    </div>
+
+
+
+    <div class="form-group">
+
+        <label for="preco">Preço *</label>
+
+        <input type="text" id="preco" placeholder="Ex: 189,90">
+
+    </div>
+
+   
+
+    <div class="form-group">
+
+        <label for="img">URL da imagem *</label>
+
+        <input type="url" id="img" placeholder="https://..." oninput="atualizarPreview()" required>
+
+       
+
+        <div class="preview">
+
+            <img id="preview-img" alt="Preview da imagem">
+
+            <span id="preview-txt">A pré-visualização da imagem aparecerá aqui</span>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="form-group">
+
+        <label for="categoria">Categoria *</label>
+
+        <select id="categoria" required>
+
+            <option value="">— Selecione —</option>
+
+            <option value="casa">Casa</option>
+
+            <option value="auto">Auto</option>
+
+            <option value="eletronicos">Eletrônicos</option>
+
+            <option value="eletrodomesticos">Eletrodomésticos</option>
+
+            <option value="fitness">Fitness</option>
+
+            <option value="escritorio">Escritório</option>
+
+            <option value="moda">Moda</option>
+
+            <option value="beleza">Beleza</option>
+
+            <option value="saude">Saúde</option>
+
+            <option value="livros">Livros</option>
+
+            <option value="outros">Outros</option>
+
+        </select>
+
+    </div>
+
+
+
+    <div class="form-group">
+
+        <label for="loja">Loja *</label>
+
+        <select id="loja" required>
+
+            <option value="">— Selecione —</option>
+
+            <option value="amazon">Amazon</option>
+
+            <option value="mercadolivre">Mercado Livre</option>
+
+        </select>
+
+    </div>
+
+
+
+    <div class="form-group">
+
+        <label for="desc">Descrição Padrão</label>
+
+        <textarea id="desc" readonly>Oferta do Dia</textarea>
+
+        <div class="preco-dica">Este é o texto padrão enviado como sub-título.</div>
+
+    </div>
+
+
 
     <button id="btn-salvar" onclick="salvarProduto()">Salvar Produto na Planilha</button>
 
+
+
     <div class="msg" id="msg"></div>
+
 </div>
 
+
+
 <script>
-    // Cole a URL do seu Google Apps Script aqui:
+
+    // Conexão com o Back-end (Google Apps Script)
+
     const API = "https://script.google.com/macros/s/AKfycbwnsSaW3Nc91CIohgmBeWz56Uk-NkfPPCgWFP7BAG26VDsyrys2eOlr8a7QaMlBlU7G/exec";
+
+
 
     let debounceTimeout;
 
+
+
     function aoDigitarLink() {
+
         clearTimeout(debounceTimeout);
+
         const linkStr = document.getElementById('link').value.trim();
-        
+
+       
+
         if (!linkStr.startsWith('http')) return;
 
+
+
         debounceTimeout = setTimeout(() => {
+
             processarLink(linkStr);
+
         }, 800);
+
     }
+
+
 
     async function processarLink(url) {
+
         const inputLink = document.getElementById('link');
+
         const lojaSelect = document.getElementById('loja');
 
-        // Auto-selecionar loja baseado no link
+
+
+        // Lógica de auto-seleção de loja melhorada
+
         const urlLower = url.toLowerCase();
-        if (urlLower.includes('meli.la') || urlLower.includes('mercadolivre')) {
+
+        if (urlLower.includes('meli.la') || urlLower.includes('mercadolivre.com')) {
+
             lojaSelect.value = 'mercadolivre';
-        } else if (urlLower.includes('amzn.to') || urlLower.includes('amazon')) {
+
+        } else if (urlLower.includes('amzn.to') || urlLower.includes('amazon.com')) {
+
             lojaSelect.value = 'amazon';
+
         }
+
+
 
         inputLink.classList.add('loading-input');
-        mostrarMsg('Analisando o link e buscando dados primários...', 'info');
+
+        mostrarMsg('Analisando link e extraindo metadados...', 'info');
+
+
 
         try {
-            // Usa apenas a API Microlink padrão
+
             const resposta = await fetch(`https://api.microlink.io?url=${encodeURIComponent(url)}`);
+
             const dados = await resposta.json();
 
+
+
             if (dados.status === 'success') {
+
                 const info = dados.data;
 
-                // Preenche o nome se disponível
+
+
                 if (info.title && !document.getElementById('nome').value) {
+
                     let tituloLimpo = info.title.split('|')[0].trim();
+
                     document.getElementById('nome').value = tituloLimpo;
+
                 }
 
-                // Preenche a imagem se disponível
+
+
                 if (info.image && info.image.url && !document.getElementById('img').value) {
+
                     document.getElementById('img').value = info.image.url;
+
                     atualizarPreview();
+
                 }
 
-                mostrarMsg('✅ Dados básicos processados! Selecione a categoria para salvar.', 'sucesso');
+
+
+                mostrarMsg('✅ Dados extraídos com sucesso! Revise e preencha o restante.', 'sucesso');
+
             } else {
-                throw new Error('Falha na extração');
+
+                throw new Error('Microlink não retornou sucesso.');
+
             }
+
         } catch (erro) {
-            console.error('Erro ao buscar metadados front-end:', erro);
-            // Mensagem amigável para quando for Amazon (e o Microlink falhar)
-            mostrarMsg('Link detectado. Preencha os dados manualmente se não carregarem.', 'info');
+
+            console.warn('Scrape falhou no front-end:', erro);
+
+            mostrarMsg('Preencha os dados manualmente. O scraping automático foi bloqueado pela loja.', 'info');
+
         } finally {
+
             inputLink.classList.remove('loading-input');
+
         }
+
     }
+
+
 
     function atualizarPreview() {
+
         const url = document.getElementById('img').value.trim();
+
         const img = document.getElementById('preview-img');
+
         const txt = document.getElementById('preview-txt');
+
+       
+
         if (url) {
+
             img.src = url;
+
             img.style.display = 'block';
+
             txt.style.display = 'none';
+
         } else {
+
             img.style.display = 'none';
+
             txt.style.display = 'block';
+
         }
+
     }
+
+
 
     function mostrarMsg(texto, tipo) {
+
         const el = document.getElementById('msg');
+
         el.textContent = texto;
+
         el.className = 'msg ' + tipo;
+
         el.style.display = 'block';
-        
+
+       
+
         if (tipo !== 'info') {
-            setTimeout(() => el.style.display = 'none', 5000);
+
+            setTimeout(() => {
+
+                el.style.animation = 'fadeIn 0.3s ease reverse forwards';
+
+                setTimeout(() => {
+
+                    el.style.display = 'none';
+
+                    el.style.animation = '';
+
+                }, 300);
+
+            }, 5000);
+
         }
+
     }
+
+
 
     function validar(produto) {
-        if (!produto.link)       return 'Preencha o link afiliado.';
-        if (!produto.nome)       return 'Preencha o nome do produto.';
-        if (!produto.img)        return 'Preencha a URL da imagem.';
-        if (!produto.categoria)  return 'Selecione uma categoria.';
-        if (!produto.loja)       return 'Selecione a loja.';
+
+        if (!produto.link)       return 'O Link Afiliado é obrigatório.';
+
+        if (!produto.nome)       return 'O Nome do produto é obrigatório.';
+
+        if (!produto.img)        return 'A URL da imagem é obrigatória.';
+
+        if (!produto.categoria)  return 'Selecione a categoria do produto.';
+
+        if (!produto.loja)       return 'Selecione a loja correspondente.';
+
         return null;
+
     }
+
+
 
     async function salvarProduto() {
+
         const btn = document.getElementById('btn-salvar');
 
+
+
         const produto = {
+
             nome:      document.getElementById('nome').value.trim(),
+
             preco:     document.getElementById('preco').value.trim(),
+
             img:       document.getElementById('img').value.trim(),
+
             link:      document.getElementById('link').value.trim(),
+
             categoria: document.getElementById('categoria').value,
+
             loja:      document.getElementById('loja').value,
-            desc:      document.getElementById('desc').value.trim() 
+
+            desc:      document.getElementById('desc').value.trim()
+
         };
 
+
+
         const erro = validar(produto);
-        if (erro) { mostrarMsg(erro, 'erro'); return; }
+
+        if (erro) {
+
+            mostrarMsg(erro, 'erro');
+
+            return;
+
+        }
+
+
+
+        // Estado de Loading no botão
 
         btn.disabled = true;
-        btn.textContent = 'Raspando preço e salvando...';
+
+        btn.textContent = 'Enviando...';
+
+
 
         try {
+
             await fetch(API, {
+
                 method: 'POST',
-                mode: 'no-cors',
+
+                mode: 'no-cors', // Necessário para evitar bloqueio de CORS do Google Apps Script
+
                 body: JSON.stringify(produto),
+
             });
 
-            mostrarMsg('✅ Produto salvo na planilha!', 'sucesso');
 
-            // Limpa o formulário, mas preserva a descrição e o preview padrão
+
+            mostrarMsg('✅ Produto cadastrado com sucesso!', 'sucesso');
+
+
+
+            // Limpeza do formulário
+
             ['nome','preco','img','link'].forEach(id => document.getElementById(id).value = '');
+
             document.getElementById('categoria').value = '';
+
             document.getElementById('loja').value = '';
-            document.getElementById('preview-img').style.display = 'none';
-            document.getElementById('preview-txt').style.display = 'block';
+
+            atualizarPreview(); // Reseta a imagem de preview
+
+
 
         } catch (err) {
-            console.error('Erro de envio:', err);
-            mostrarMsg('❌ Erro de comunicação com a Planilha.', 'erro');
+
+            console.error('Falha de rede:', err);
+
+            mostrarMsg('❌ Erro de conexão ao tentar salvar na planilha.', 'erro');
+
         } finally {
+
+            // Restaura o botão
+
             btn.disabled = false;
+
             btn.textContent = 'Salvar Produto na Planilha';
+
         }
+
     }
-</script>
 
-
-<script>
-  atOptions = {
-    'key' : '7178457ef6251fc73eb674cfbc6912c2',
-    'format' : 'iframe',
-    'height' : 250,
-    'width' : 300,
-    'params' : {}
-  };
 </script>
-<script src="https://www.highperformanceformat.com/7178457ef6251fc73eb674cfbc6912c2/invoke.js"></script>
 
 
 
 </body>
+
 </html>
